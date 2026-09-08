@@ -146,7 +146,7 @@ button {
   place-content: center;
   gap: 24px;
   padding: 28px;
-  background: #102429 url("/assets/bern-alpine-panorama-v2.png") center / cover;
+  background: #102429 center / cover;
 }
 
 .garageHeading span,

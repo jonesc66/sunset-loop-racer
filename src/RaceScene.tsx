@@ -32,6 +32,7 @@ import { BenchmarkAtmosphere, BenchmarkLandscape, RoadWear } from "./environment
 import { makeRoadMaterial } from "./environment/roadMaterial";
 import { qualityPresets, type EffectsQuality } from "./qualityPresets";
 import { GpuGround } from "./environment/GpuEnvironment";
+import { assetUrl } from "./assetUrl";
 
 const TOTAL_LAPS = 3;
 const COUNTDOWN_SECONDS = 3.35;
@@ -1271,21 +1272,21 @@ function ImportedGlbCar({ assetUrl, brakeLightOn, colorProfile }: { assetUrl: st
 
 function HighQualityPlayerCar({ brakeLightOn, vehicle }: { brakeLightOn: boolean; vehicle: PlayerVehicle }) {
   if (vehicle === "sportcar1") {
-    return <ImportedGlbCar assetUrl="/assets/mercedes-amg-gt.glb" brakeLightOn={brakeLightOn} />;
+    return <ImportedGlbCar assetUrl={assetUrl("assets/mercedes-amg-gt.glb")} brakeLightOn={brakeLightOn} />;
   }
 
   return (
     <ImportedGlbCar
       assetUrl={
         vehicle === "acuraNsx"
-          ? "/assets/acura-nsx.glb"
+          ? assetUrl("assets/acura-nsx.glb")
           : vehicle === "corvetteC7"
-              ? "/assets/corvette-c7-grand-sport.glb"
+              ? assetUrl("assets/corvette-c7-grand-sport.glb")
               : vehicle === "ferrariSf90"
-                ? "/assets/ferrari-sf90.glb"
+                ? assetUrl("assets/ferrari-sf90.glb")
           : vehicle === "sedan"
-            ? "/assets/sedan-cgtrader.glb"
-            : "/assets/sportcar2-cgtrader.glb"
+            ? assetUrl("assets/sedan-cgtrader.glb")
+            : assetUrl("assets/sportcar2-cgtrader.glb")
       }
       brakeLightOn={brakeLightOn}
       colorProfile={vehicle === "corvetteC7" ? "corvette" : vehicle === "acuraNsx" ? "acura" : undefined}

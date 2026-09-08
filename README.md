@@ -11,6 +11,8 @@ npm run dev
 
 Open the local Vite URL, usually `http://127.0.0.1:5173/`.
 
+The published game is available at https://jonesc66.github.io/sunset-loop-racer/ after the GitHub Pages workflow finishes.
+
 ## Build
 
 ```bash

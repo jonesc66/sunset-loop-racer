@@ -3,6 +3,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import RaceScene from "./RaceScene";
+import { assetUrl } from "./assetUrl";
 import { qualityOrder, qualityPresets } from "./qualityPresets";
 import { createRaceAudioEngine } from "./game/audio";
 import {
@@ -80,12 +81,12 @@ function addTopTime(records: TimeRecord[], time: number, vehicle: PlayerVehicle,
 }
 
 const garageVehicleAssets: Record<PlayerVehicle, string> = {
-  sportcar2: "/assets/sportcar2-cgtrader.glb",
-  sportcar1: "/assets/mercedes-amg-gt.glb",
-  sedan: "/assets/sedan-cgtrader.glb",
-  acuraNsx: "/assets/acura-nsx.glb",
-  corvetteC7: "/assets/corvette-c7-grand-sport.glb",
-  ferrariSf90: "/assets/ferrari-sf90.glb"
+  sportcar2: assetUrl("assets/sportcar2-cgtrader.glb"),
+  sportcar1: assetUrl("assets/mercedes-amg-gt.glb"),
+  sedan: assetUrl("assets/sedan-cgtrader.glb"),
+  acuraNsx: assetUrl("assets/acura-nsx.glb"),
+  corvetteC7: assetUrl("assets/corvette-c7-grand-sport.glb"),
+  ferrariSf90: assetUrl("assets/ferrari-sf90.glb")
 };
 
 function applyGarageColorProfile(model: THREE.Object3D, vehicle: "corvetteC7" | "acuraNsx") {
@@ -346,7 +347,7 @@ function VehicleGarage({
   ];
 
   return (
-    <section className="vehicleGarage" aria-label="Choose a car">
+    <section className="vehicleGarage" style={{ backgroundImage: `url("${assetUrl("assets/bern-alpine-panorama-v2.png")}")` }} aria-label="Choose a car">
       <div className="garageHeading">
         <span>Bern Circuit</span>
         <h1>Choose Your Car</h1>
