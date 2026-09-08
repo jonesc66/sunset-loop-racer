@@ -1,0 +1,120 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Preset order, initial High, opt-in GPU, original effects and High configuration preserved",
+    "Frozen car/physics/AI implementations, track geometry and High material/terrain sources unchanged",
+    "Blender GLB parsed by actual Three.js GLTFLoader; 12 finite, correctly scaled Y-up meshes; normals, vertex colours, decreasing LOD budgets, no texture requests"
+  ],
+  "glbBytes": 1078440,
+  "meshes": [
+    {
+      "name": "alpine_spruce_lod0",
+      "triangles": 9442,
+      "bounds": [
+        7.49460506439209,
+        15.15496026352048,
+        6.6476147174835205
+      ]
+    },
+    {
+      "name": "alpine_spruce_lod1",
+      "triangles": 984,
+      "bounds": [
+        8.177218198776245,
+        15.15496026352048,
+        7.2419915199279785
+      ]
+    },
+    {
+      "name": "alpine_spruce_lod2",
+      "triangles": 344,
+      "bounds": [
+        7.656243562698364,
+        15.15496026352048,
+        6.784886121749878
+      ]
+    },
+    {
+      "name": "scots_pine_lod0",
+      "triangles": 5410,
+      "bounds": [
+        8.986776351928711,
+        12.650557372020558,
+        9.748600959777832
+      ]
+    },
+    {
+      "name": "scots_pine_lod1",
+      "triangles": 536,
+      "bounds": [
+        12.054010391235352,
+        12.650526826968417,
+        10.068007469177246
+      ]
+    },
+    {
+      "name": "scots_pine_lod2",
+      "triangles": 280,
+      "bounds": [
+        10.154643535614014,
+        12.71094018756412,
+        8.972289085388184
+      ]
+    },
+    {
+      "name": "silver_fir_lod0",
+      "triangles": 11682,
+      "bounds": [
+        9.12281608581543,
+        17.65230905637145,
+        9.674518585205078
+      ]
+    },
+    {
+      "name": "silver_fir_lod1",
+      "triangles": 1176,
+      "bounds": [
+        10.460867404937744,
+        17.652457607910037,
+        9.901963710784912
+      ]
+    },
+    {
+      "name": "silver_fir_lod2",
+      "triangles": 408,
+      "bounds": [
+        8.991337299346924,
+        17.652457607910037,
+        9.237226009368896
+      ]
+    },
+    {
+      "name": "mountain_pine_lod0",
+      "triangles": 6306,
+      "bounds": [
+        9.156449317932129,
+        9.156641400419176,
+        7.2734215259552
+      ]
+    },
+    {
+      "name": "mountain_pine_lod1",
+      "triangles": 664,
+      "bounds": [
+        9.067495346069336,
+        9.155744585208595,
+        7.783590316772461
+      ]
+    },
+    {
+      "name": "mountain_pine_lod2",
+      "triangles": 344,
+      "bounds": [
+        9.468064308166504,
+        9.155744585208595,
+        8.603914022445679
+      ]
+    }
+  ],
+  "runtime": "Tracked separately in REPORT.md and final-console.json; automated checks alone do not establish runtime acceptance"
+}

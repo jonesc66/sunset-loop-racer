@@ -1,0 +1,103 @@
+{
+  "status": "PASS — no new runtime errors, warnings or failed requests in accepted runs",
+  "baseline": {
+    "file": "cdp-baseline-latest.json",
+    "warnings": 8,
+    "classification": "Existing AudioContext autoplay warnings reproduced with captured pre-Phase-2 App/RaceScene/environment modules on localhost:5174"
+  },
+  "captures": [
+    {
+      "file": "cdp-pair-0.07.json",
+      "capturedAt": "2026-09-08T04:57:03.292Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-pair-0.14.json",
+      "capturedAt": "2026-09-08T05:02:11.276Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-pair-0.43.json",
+      "capturedAt": "2026-09-08T05:02:57.782Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-pair-0.64.json",
+      "capturedAt": "2026-09-08T05:03:30.911Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-pair-0.85.json",
+      "capturedAt": "2026-09-08T05:04:16.026Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-tour-latest.json",
+      "capturedAt": "2026-09-08T05:08:15.352Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-manual-latest.json",
+      "capturedAt": "2026-09-08T05:09:22.964Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-controls-latest.json",
+      "capturedAt": "2026-09-08T05:17:53.885Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-race-latest.json",
+      "capturedAt": "2026-09-08T05:14:08.045Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-persistence-latest.json",
+      "capturedAt": "2026-09-08T05:16:58.976Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 16,
+      "failedRequests": 0
+    },
+    {
+      "file": "cdp-cycles-after-fix.json",
+      "capturedAt": "2026-09-08T11:07:23.060Z",
+      "errors": 0,
+      "newWarnings": 0,
+      "existingAudioWarnings": 8,
+      "failedRequests": 0
+    }
+  ],
+  "excludedDiagnostic": "cdp-cycles-before-fix.json and transcript-cycles-before-fix.txt preserve the failing instance-disposal regression; superseded by three passing cycles after fix",
+  "limitations": [
+    "Software-rendered Edge; no hardware GPU performance PASS",
+    "Sound UI and input exercised; subjective audible quality not assessed in headless browser"
+  ]
+}

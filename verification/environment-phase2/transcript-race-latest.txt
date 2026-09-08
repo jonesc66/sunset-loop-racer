@@ -1,0 +1,48 @@
+2026-09-08T05:09:54.000Z SPEED 72 KM/H LAP 1/3 CP 0/14 TIME 0:08.2 POSITION 3/6 BEST NONE LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 66 calls | 43k triangles
+2026-09-08T05:10:09.105Z SPEED 95 KM/H LAP 1/3 CP 0/14 TIME 0:23.5 POSITION 5/6 BEST NONE LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 7 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 59 calls | 47k triangles
+2026-09-08T05:10:24.497Z SPEED 162 KM/H LAP 1/3 CP 3/14 TIME 0:38.8 POSITION 5/6 BEST NONE LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 75 calls | 47k triangles
+2026-09-08T05:10:39.845Z SPEED 155 KM/H LAP 1/3 CP 6/14 TIME 0:54.0 POSITION 5/6 BEST NONE LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 57 calls | 33k triangles
+2026-09-08T05:10:55.146Z SPEED 164 KM/H LAP 1/3 CP 8/14 TIME 1:09.3 POSITION 5/6 BEST NONE LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 41 calls | 32k triangles
+2026-09-08T05:11:10.391Z SPEED 167 KM/H LAP 1/3 CP 12/14 TIME 1:24.6 POSITION 5/6 BEST NONE LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 9 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 61 calls | 36k triangles
+2026-09-08T05:11:25.534Z SPEED 156 KM/H LAP 2/3 CP 0/14 TIME 1:39.8 POSITION 5/6 BEST 1:35.1 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 47 calls | 48k triangles
+2026-09-08T05:11:40.717Z SPEED 207 KM/H LAP 2/3 CP 3/14 TIME 1:55.0 POSITION 5/6 BEST 1:35.1 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 73 calls | 41k triangles
+2026-09-08T05:11:56.006Z SPEED 169 KM/H LAP 2/3 CP 6/14 TIME 2:10.2 POSITION 5/6 BEST 1:35.1 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 9 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 51 calls | 33k triangles
+2026-09-08T05:12:11.152Z SPEED 166 KM/H LAP 2/3 CP 9/14 TIME 2:25.5 POSITION 5/6 BEST 1:35.1 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 9 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 61 calls | 36k triangles
+2026-09-08T05:12:26.219Z SPEED 164 KM/H LAP 2/3 CP 12/14 TIME 2:40.6 POSITION 5/6 BEST 1:35.1 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 61 calls | 37k triangles
+2026-09-08T05:12:41.430Z SPEED 166 KM/H LAP 3/3 CP 1/14 TIME 2:55.7 POSITION 5/6 BEST 1:11.9 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 48 calls | 47k triangles
+2026-09-08T05:12:56.555Z SPEED 169 KM/H LAP 3/3 CP 4/14 TIME 3:11.0 POSITION 5/6 BEST 1:11.9 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 65 calls | 34k triangles
+2026-09-08T05:13:11.731Z SPEED 165 KM/H LAP 3/3 CP 7/14 TIME 3:26.1 POSITION 5/6 BEST 1:11.9 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 9 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 43 calls | 32k triangles
+2026-09-08T05:13:26.871Z SPEED 164 KM/H LAP 3/3 CP 10/14 TIME 3:41.2 POSITION 5/6 BEST 1:11.9 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 9 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 58 calls | 35k triangles
+2026-09-08T05:13:42.008Z SPEED 169 KM/H LAP 3/3 CP 13/14 TIME 3:56.4 POSITION 5/6 BEST 1:11.9 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU 8 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 60 calls | 41k triangles
+2026-09-08T05:13:57.542Z SPEED 6 KM/H LAP 3/3 CP 14/14 TIME 3:58.9 POSITION 5/6 BEST 1:11.8 LAP TIME W/S accelerate/brake A/D steer Space handbrake R reset SOUND PERF LOW MEDIUM HIGH GPU Race Complete NEW TOP 5 RECORDS Driver · Full race · #1 · 3:58.9 Driver · Fastest lap · #1 · 1:11.8 1 Solar 3:37.2 / 1:09.5 2 Vega 3:42.9 / 1:10.3 3 Orion 3:48.6 / 1:11.1 4 Nova 3:54.4 / 1:11.7 5 You 3:58.9 / 1:11.8 6 Lyra 4:05.4 / 1:12.7 Personal Top 5 FULL RACE Driver 3:58.9 FASTEST LAP Driver 1:11.8 Race Again 7 FPS SOFTWARE ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11) 67 calls | 46k triangles
+RACE_AGAIN SPEED
+0
+KM/H
+LAP
+1/3
+CP 0/14
+TIME
+0:00.0
+POSITION 5/6
+BEST
+NONE
+LAP TIME
+W/S
+accelerate/brake
+A/D
+steer
+Space
+handbrake
+R
+reset
+SOUND
+PERF
+LOW
+MEDIUM
+HIGH
+GPU
+3
+7 FPS
+SOFTWARE
+ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11)
+59 calls | 45k triangles

@@ -1,0 +1,70 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import ts from 'typescript';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Box3, Vector3 } from 'three';
+
+const root=new URL('../',import.meta.url), output=new URL('verification/environment-phase2/',root);
+const read=path=>fs.readFile(new URL(path,root),'utf8');
+const normalize=s=>s.replace(/\r\n/g,'\n');
+const checks=[];
+const source=await read('src/qualityPresets.ts');
+const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.ESNext,target:ts.ScriptTarget.ES2022}}).outputText;
+await fs.writeFile(new URL('qualityPresets.mjs',output),compiled);
+const {qualityPresets:presets,qualityOrder}=await import(new URL('qualityPresets.mjs',output));
+assert.deepEqual(qualityOrder,['performance','low','medium','high','gpu']);
+const before=normalize(await read('verification/environment-phase2/baseline/RaceScene.tsx'));
+const after=normalize(await read('src/RaceScene.tsx'));
+const oldConfig=before.slice(before.indexOf('const QUALITY_CONFIG:'),before.indexOf('function PerformanceProbe('));
+const configCode=ts.transpileModule(oldConfig,{compilerOptions:{target:ts.ScriptTarget.ES2022}}).outputText;
+const oldPresets=Function(configCode+';return QUALITY_CONFIG;')();
+for(const key of Object.keys(oldPresets))assert.deepEqual(presets[key].effects,oldPresets[key]);
+assert.deepEqual(presets.gpu.effects,presets.high.effects);
+assert.deepEqual(presets.high.dpr,[1,1.35]);
+assert.deepEqual(presets.high.environment,{fogNear:210,fogFar:490,skyRadius:460,sun:[-88,112,-62],sunIntensity:2.7,hemisphere:1.35,shadowSize:2048,shadowExtent:75,mountainDetail:24,slicePlants:170,plantCutoff:300});
+assert.equal(presets.high.enhancedEnvironment,false);
+assert.equal(presets.gpu.enhancedEnvironment,true);
+assert(presets.gpu.dpr[1]<=2);
+assert.equal(presets.gpu.importedPlayer,true);
+const app=await read('src/App.tsx');
+assert(app.includes('useState<GraphicsQuality>("high")'));
+assert(!app.includes('setGraphicsQuality("gpu")'));
+checks.push('Preset order, initial High, opt-in GPU, original effects and High configuration preserved');
+const section=(s,a,b)=>{const start=s.indexOf(a),end=s.indexOf(b,start);assert(start>=0&&end>start,`Missing comparison boundary ${a}`);return s.slice(start,end);};
+assert.equal(section(after,'function createCar(','function TrackSurface('),section(before,'function createCar(','function TrackSurface('));
+assert.equal(section(after,'  useFrame((state, frameDelta) => {','      <PerformanceProbe'),section(before,'  useFrame((state, frameDelta) => {','      <PerformanceProbe'));
+for(const file of ['track.ts'])assert.equal(normalize(await read('src/game/'+file)),normalize(await read('verification/environment-phase2/baseline/'+file)));
+for(const file of ['benchmarkGeometry.ts','terrainMaterial.ts','roadMaterial.ts'])assert.equal(normalize(await read('src/environment/'+file)),normalize(await read('verification/environment-phase2/baseline/environment/'+file)));
+checks.push('Frozen car/physics/AI implementations, track geometry and High material/terrain sources unchanged');
+
+const bytes=await fs.readFile(new URL('public/assets/environment/forest-v1.glb',root));
+assert.equal(bytes.readUInt32LE(0),0x46546c67);
+const json=JSON.parse(bytes.subarray(20,20+bytes.readUInt32LE(12)).toString());
+assert.equal(json.meshes.length,12);
+assert.equal(json.images?.length??0,0,'Opaque vertex-colour library must not fetch textures');
+assert.equal(json.materials.length,1);
+assert.equal(json.materials[0].alphaMode??'OPAQUE','OPAQUE');
+const gltf=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+gltf.scene.updateMatrixWorld(true);
+const manifest=[];
+for(const species of ['alpine_spruce','scots_pine','silver_fir','mountain_pine']){
+  let previous=Infinity;
+  for(let lod=0;lod<3;lod++){
+    const mesh=gltf.scene.getObjectByName(`${species}_lod${lod}`);
+    assert(mesh?.isMesh,`${species} LOD ${lod}`);
+    const g=mesh.geometry;
+    for(const a of Object.values(g.attributes))for(const v of a.array)assert(Number.isFinite(v));
+    assert(g.getAttribute('normal'));assert(g.getAttribute('color'));
+    const count=(g.index?.count??g.getAttribute('position').count)/3;
+    assert(count<previous,'LOD triangle counts must decrease');previous=count;
+    const box=new Box3().setFromObject(mesh),size=box.getSize(new Vector3());
+    assert(size.y>7&&size.y<22,'glTF converted height must be Y-up metres');
+    assert(Math.abs(box.min.y)<.5,'Base remains close to origin');
+    assert(size.x>1&&size.x<15);
+    manifest.push({name:mesh.name,triangles:count,bounds:size.toArray()});
+  }
+}
+checks.push('Blender GLB parsed by actual Three.js GLTFLoader; 12 finite, correctly scaled Y-up meshes; normals, vertex colours, decreasing LOD budgets, no texture requests');
+const report={status:'PASS',checks,glbBytes:bytes.length,meshes:manifest,runtime:'Tracked separately in REPORT.md and final-console.json; automated checks alone do not establish runtime acceptance'};
+await fs.writeFile(new URL('automated-results.json',output),JSON.stringify(report,null,2));
+console.log(JSON.stringify(report,null,2));

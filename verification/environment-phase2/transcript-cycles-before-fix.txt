@@ -1,0 +1,2 @@
+GPU_RESOURCES 1 {"geometries":101,"textures":11}
+DISPOSED_FOREST_BATCHES 1 0

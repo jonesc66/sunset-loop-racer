@@ -1,0 +1,80 @@
+{
+  "blender": "4.5.9 LTS",
+  "seed": 48120,
+  "units": "metres",
+  "up": "Y",
+  "meshes": [
+    {
+      "name": "alpine_spruce_lod0",
+      "triangles": 9442,
+      "vertices": 6573,
+      "height": 14.5
+    },
+    {
+      "name": "alpine_spruce_lod1",
+      "triangles": 984,
+      "vertices": 736,
+      "height": 14.5
+    },
+    {
+      "name": "alpine_spruce_lod2",
+      "triangles": 344,
+      "vertices": 256,
+      "height": 14.5
+    },
+    {
+      "name": "scots_pine_lod0",
+      "triangles": 5410,
+      "vertices": 3765,
+      "height": 12.0
+    },
+    {
+      "name": "scots_pine_lod1",
+      "triangles": 536,
+      "vertices": 400,
+      "height": 12.0
+    },
+    {
+      "name": "scots_pine_lod2",
+      "triangles": 280,
+      "vertices": 208,
+      "height": 12.0
+    },
+    {
+      "name": "silver_fir_lod0",
+      "triangles": 11682,
+      "vertices": 8133,
+      "height": 17.0
+    },
+    {
+      "name": "silver_fir_lod1",
+      "triangles": 1176,
+      "vertices": 880,
+      "height": 17.0
+    },
+    {
+      "name": "silver_fir_lod2",
+      "triangles": 408,
+      "vertices": 304,
+      "height": 17.0
+    },
+    {
+      "name": "mountain_pine_lod0",
+      "triangles": 6306,
+      "vertices": 4389,
+      "height": 8.5
+    },
+    {
+      "name": "mountain_pine_lod1",
+      "triangles": 664,
+      "vertices": 496,
+      "height": 8.5
+    },
+    {
+      "name": "mountain_pine_lod2",
+      "triangles": 344,
+      "vertices": 256,
+      "height": 8.5
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+STORED_BEFORE_RELOAD {"bern-circuit-time-leaderboard-v1":"{\"race\":[{\"time\":238.96559999999627,\"vehicle\":\"sportcar2\",\"playerName\":\"Driver\",\"recordedAt\":1788844431100}],\"lap\":[{\"time\":71.88309999999694,\"vehicle\":\"sportcar2\",\"playerName\":\"Driver\",\"recordedAt\":1788844431100}]}"}
+STORED_AFTER_RELOAD {"bern-circuit-time-leaderboard-v1":"{\"race\":[{\"time\":238.96559999999627,\"vehicle\":\"sportcar2\",\"playerName\":\"Driver\",\"recordedAt\":1788844431100}],\"lap\":[{\"time\":71.88309999999694,\"vehicle\":\"sportcar2\",\"playerName\":\"Driver\",\"recordedAt\":1788844431100}]}"}
+DEFAULT_QUALITY ["Sound","high"]
+LOW SPEED
+0
+KM/H
+LAP
+1/3
+CP 0/14
+TIME
+0:05.9
+POSITION 4/6
+BEST
+NONE
+LAP TIME
+W/S
+accelerate/brake
+A/D
+steer
+Space
+handbrake
+R
+reset
+SOUND
+PERF
+LOW
+MEDIUM
+HIGH
+GPU
+3 FPS
+SOFTWARE
+ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11)
+571 calls | 185k triangles
+MEDIUM SPEED
+0
+KM/H
+LAP
+1/3
+CP 0/14
+TIME
+0:12.0
+POSITION 4/6
+BEST
+NONE
+LAP TIME
+W/S
+accelerate/brake
+A/D
+steer
+Space
+handbrake
+R
+reset
+SOUND
+PERF
+LOW
+MEDIUM
+HIGH
+GPU
+3 FPS
+SOFTWARE
+ANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11)
+607 calls | 212k triangles

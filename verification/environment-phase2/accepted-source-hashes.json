@@ -1,0 +1,6 @@
+{
+  "src/environment/GpuEnvironment.tsx": "b944bda18403a121da6062d6fd8493fc9303dd9336ac9a38aff4fa0afa67b8e7",
+  "src/environment/BenchmarkEnvironment.tsx": "2e217ca739d77736c712ba8b43e944af846f0036bb9214d8bb9abae5182fd51c",
+  "src/qualityPresets.ts": "975ad7fe8b4b85a163370ec378fbe157454ae305501b43f12f8accbe1191dadb",
+  "public/assets/environment/forest-v1.glb": "241a1a718eeea2dd1c94bc08747e7dd26fe34bc61a4dbe4221b374e866373796"
+}

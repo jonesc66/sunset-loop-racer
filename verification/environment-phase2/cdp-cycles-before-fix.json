@@ -1,0 +1,943 @@
+{
+  "capturedAt": "2026-09-08T10:55:30.501Z",
+  "mode": "cycles",
+  "logs": [
+    {
+      "source": "other",
+      "level": "warning",
+      "text": "The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. ",
+      "timestamp": 1788864903801.892,
+      "url": "http://127.0.0.1:5173/src/game/audio.ts",
+      "lineNumber": 54,
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "createRaceAudioEngine",
+            "scriptId": "21",
+            "url": "http://127.0.0.1:5173/src/game/audio.ts",
+            "lineNumber": 54,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "",
+            "scriptId": "11",
+            "url": "http://127.0.0.1:5173/src/App.tsx?t=1788843097815",
+            "lineNumber": 679,
+            "columnNumber": 23
+          },
+          {
+            "functionName": "react_stack_bottom_frame",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 18298,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "commitHookEffectListMount",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9142,
+            "columnNumber": 162
+          },
+          {
+            "functionName": "commitHookPassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9196,
+            "columnNumber": 59
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10771,
+            "columnNumber": 28
+          },
+          {
+            "functionName": "recursivelyTraversePassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10741,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10932,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "recursivelyTraversePassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10741,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10797,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "flushPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12881,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12507,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "performWorkUntilDeadline",
+            "scriptId": "23",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-PJMRTMRF.js?v=267e2fee",
+            "lineNumber": 29,
+            "columnNumber": 49
+          }
+        ]
+      }
+    },
+    {
+      "source": "other",
+      "level": "warning",
+      "text": "The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. ",
+      "timestamp": 1788864903802.032,
+      "url": "http://127.0.0.1:5173/src/game/audio.ts",
+      "lineNumber": 55,
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "createRaceAudioEngine",
+            "scriptId": "21",
+            "url": "http://127.0.0.1:5173/src/game/audio.ts",
+            "lineNumber": 55,
+            "columnNumber": 14
+          },
+          {
+            "functionName": "",
+            "scriptId": "11",
+            "url": "http://127.0.0.1:5173/src/App.tsx?t=1788843097815",
+            "lineNumber": 679,
+            "columnNumber": 23
+          },
+          {
+            "functionName": "react_stack_bottom_frame",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 18298,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "commitHookEffectListMount",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9142,
+            "columnNumber": 162
+          },
+          {
+            "functionName": "commitHookPassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9196,
+            "columnNumber": 59
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10771,
+            "columnNumber": 28
+          },
+          {
+            "functionName": "recursivelyTraversePassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10741,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10932,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "recursivelyTraversePassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10741,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10797,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "flushPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12881,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12507,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "performWorkUntilDeadline",
+            "scriptId": "23",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-PJMRTMRF.js?v=267e2fee",
+            "lineNumber": 29,
+            "columnNumber": 49
+          }
+        ]
+      }
+    },
+    {
+      "source": "other",
+      "level": "warning",
+      "text": "The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. ",
+      "timestamp": 1788864903802.119,
+      "url": "http://127.0.0.1:5173/src/game/audio.ts",
+      "lineNumber": 56,
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "createRaceAudioEngine",
+            "scriptId": "21",
+            "url": "http://127.0.0.1:5173/src/game/audio.ts",
+            "lineNumber": 56,
+            "columnNumber": 14
+          },
+          {
+            "functionName": "",
+            "scriptId": "11",
+            "url": "http://127.0.0.1:5173/src/App.tsx?t=1788843097815",
+            "lineNumber": 679,
+            "columnNumber": 23
+          },
+          {
+            "functionName": "react_stack_bottom_frame",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 18298,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "commitHookEffectListMount",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9142,
+            "columnNumber": 162
+          },
+          {
+            "functionName": "commitHookPassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9196,
+            "columnNumber": 59
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10771,
+            "columnNumber": 28
+          },
+          {
+            "functionName": "recursivelyTraversePassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10741,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10932,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "recursivelyTraversePassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10741,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10797,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "flushPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12881,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12507,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "performWorkUntilDeadline",
+            "scriptId": "23",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-PJMRTMRF.js?v=267e2fee",
+            "lineNumber": 29,
+            "columnNumber": 49
+          }
+        ]
+      }
+    },
+    {
+      "source": "other",
+      "level": "warning",
+      "text": "The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. ",
+      "timestamp": 1788864903802.273,
+      "url": "http://127.0.0.1:5173/src/game/audio.ts",
+      "lineNumber": 99,
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "setEnabled",
+            "scriptId": "21",
+            "url": "http://127.0.0.1:5173/src/game/audio.ts",
+            "lineNumber": 99,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "",
+            "scriptId": "11",
+            "url": "http://127.0.0.1:5173/src/App.tsx?t=1788843097815",
+            "lineNumber": 686,
+            "columnNumber": 22
+          },
+          {
+            "functionName": "react_stack_bottom_frame",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 18298,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "commitHookEffectListMount",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9142,
+            "columnNumber": 162
+          },
+          {
+            "functionName": "commitHookPassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9196,
+            "columnNumber": 59
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10771,
+            "columnNumber": 28
+          },
+          {
+            "functionName": "recursivelyTraversePassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10741,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10932,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "recursivelyTraversePassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10741,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "commitPassiveMountOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10797,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "flushPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12881,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12507,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "performWorkUntilDeadline",
+            "scriptId": "23",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-PJMRTMRF.js?v=267e2fee",
+            "lineNumber": 29,
+            "columnNumber": 49
+          }
+        ]
+      }
+    },
+    {
+      "source": "other",
+      "level": "warning",
+      "text": "The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. ",
+      "timestamp": 1788864903806.49,
+      "url": "http://127.0.0.1:5173/src/game/audio.ts",
+      "lineNumber": 54,
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "createRaceAudioEngine",
+            "scriptId": "21",
+            "url": "http://127.0.0.1:5173/src/game/audio.ts",
+            "lineNumber": 54,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "",
+            "scriptId": "11",
+            "url": "http://127.0.0.1:5173/src/App.tsx?t=1788843097815",
+            "lineNumber": 679,
+            "columnNumber": 23
+          },
+          {
+            "functionName": "react_stack_bottom_frame",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 18298,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "commitHookEffectListMount",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9142,
+            "columnNumber": 162
+          },
+          {
+            "functionName": "commitHookPassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9196,
+            "columnNumber": 59
+          },
+          {
+            "functionName": "reconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 11004,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "recursivelyTraverseReconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10971,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "reconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 11048,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "doubleInvokeEffectsOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13070,
+            "columnNumber": 134
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "recursivelyTraverseAndDoubleInvokeEffectsInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13043,
+            "columnNumber": 77
+          },
+          {
+            "functionName": "commitDoubleInvokeEffectsInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13078,
+            "columnNumber": 8
+          },
+          {
+            "functionName": "flushPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12888,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12507,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "performWorkUntilDeadline",
+            "scriptId": "23",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-PJMRTMRF.js?v=267e2fee",
+            "lineNumber": 29,
+            "columnNumber": 49
+          }
+        ]
+      }
+    },
+    {
+      "source": "other",
+      "level": "warning",
+      "text": "The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. ",
+      "timestamp": 1788864903806.614,
+      "url": "http://127.0.0.1:5173/src/game/audio.ts",
+      "lineNumber": 55,
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "createRaceAudioEngine",
+            "scriptId": "21",
+            "url": "http://127.0.0.1:5173/src/game/audio.ts",
+            "lineNumber": 55,
+            "columnNumber": 14
+          },
+          {
+            "functionName": "",
+            "scriptId": "11",
+            "url": "http://127.0.0.1:5173/src/App.tsx?t=1788843097815",
+            "lineNumber": 679,
+            "columnNumber": 23
+          },
+          {
+            "functionName": "react_stack_bottom_frame",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 18298,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "commitHookEffectListMount",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9142,
+            "columnNumber": 162
+          },
+          {
+            "functionName": "commitHookPassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9196,
+            "columnNumber": 59
+          },
+          {
+            "functionName": "reconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 11004,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "recursivelyTraverseReconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10971,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "reconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 11048,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "doubleInvokeEffectsOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13070,
+            "columnNumber": 134
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "recursivelyTraverseAndDoubleInvokeEffectsInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13043,
+            "columnNumber": 77
+          },
+          {
+            "functionName": "commitDoubleInvokeEffectsInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13078,
+            "columnNumber": 8
+          },
+          {
+            "functionName": "flushPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12888,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12507,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "performWorkUntilDeadline",
+            "scriptId": "23",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-PJMRTMRF.js?v=267e2fee",
+            "lineNumber": 29,
+            "columnNumber": 49
+          }
+        ]
+      }
+    },
+    {
+      "source": "other",
+      "level": "warning",
+      "text": "The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. ",
+      "timestamp": 1788864903806.713,
+      "url": "http://127.0.0.1:5173/src/game/audio.ts",
+      "lineNumber": 56,
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "createRaceAudioEngine",
+            "scriptId": "21",
+            "url": "http://127.0.0.1:5173/src/game/audio.ts",
+            "lineNumber": 56,
+            "columnNumber": 14
+          },
+          {
+            "functionName": "",
+            "scriptId": "11",
+            "url": "http://127.0.0.1:5173/src/App.tsx?t=1788843097815",
+            "lineNumber": 679,
+            "columnNumber": 23
+          },
+          {
+            "functionName": "react_stack_bottom_frame",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 18298,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "commitHookEffectListMount",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9142,
+            "columnNumber": 162
+          },
+          {
+            "functionName": "commitHookPassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9196,
+            "columnNumber": 59
+          },
+          {
+            "functionName": "reconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 11004,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "recursivelyTraverseReconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10971,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "reconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 11048,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "doubleInvokeEffectsOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13070,
+            "columnNumber": 134
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "recursivelyTraverseAndDoubleInvokeEffectsInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13043,
+            "columnNumber": 77
+          },
+          {
+            "functionName": "commitDoubleInvokeEffectsInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13078,
+            "columnNumber": 8
+          },
+          {
+            "functionName": "flushPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12888,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12507,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "performWorkUntilDeadline",
+            "scriptId": "23",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-PJMRTMRF.js?v=267e2fee",
+            "lineNumber": 29,
+            "columnNumber": 49
+          }
+        ]
+      }
+    },
+    {
+      "source": "other",
+      "level": "warning",
+      "text": "The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. ",
+      "timestamp": 1788864903806.846,
+      "url": "http://127.0.0.1:5173/src/game/audio.ts",
+      "lineNumber": 99,
+      "stackTrace": {
+        "callFrames": [
+          {
+            "functionName": "setEnabled",
+            "scriptId": "21",
+            "url": "http://127.0.0.1:5173/src/game/audio.ts",
+            "lineNumber": 99,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "",
+            "scriptId": "11",
+            "url": "http://127.0.0.1:5173/src/App.tsx?t=1788843097815",
+            "lineNumber": 686,
+            "columnNumber": 22
+          },
+          {
+            "functionName": "react_stack_bottom_frame",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 18298,
+            "columnNumber": 19
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "commitHookEffectListMount",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9142,
+            "columnNumber": 162
+          },
+          {
+            "functionName": "commitHookPassiveMountEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 9196,
+            "columnNumber": 59
+          },
+          {
+            "functionName": "reconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 11004,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "recursivelyTraverseReconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 10971,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "reconnectPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 11048,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "doubleInvokeEffectsOnFiber",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13070,
+            "columnNumber": 134
+          },
+          {
+            "functionName": "runWithFiberInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 728,
+            "columnNumber": 71
+          },
+          {
+            "functionName": "recursivelyTraverseAndDoubleInvokeEffectsInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13043,
+            "columnNumber": 77
+          },
+          {
+            "functionName": "commitDoubleInvokeEffectsInDEV",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 13078,
+            "columnNumber": 8
+          },
+          {
+            "functionName": "flushPassiveEffects",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12888,
+            "columnNumber": 10
+          },
+          {
+            "functionName": "",
+            "scriptId": "12",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=267e2fee",
+            "lineNumber": 12507,
+            "columnNumber": 12
+          },
+          {
+            "functionName": "performWorkUntilDeadline",
+            "scriptId": "23",
+            "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-PJMRTMRF.js?v=267e2fee",
+            "lineNumber": 29,
+            "columnNumber": 49
+          }
+        ]
+      }
+    }
+  ],
+  "failedRequests": []
+}

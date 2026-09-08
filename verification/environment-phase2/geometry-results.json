@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Road upward normals",
+    "Continuous closing UVs",
+    "Finite geometry",
+    "Verge road clearance",
+    "Closed mountain topology at all detail levels",
+    "Frozen physics, AI, checkpoints, camera and vehicle models unchanged"
+  ]
+}
