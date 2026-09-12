@@ -3,5 +3,9 @@ dist/
 .tools/
 .edge-qa-profile/
 .edge-phase2-profile/
+.edge-phase3-profile/
 *.log
 sunset-racer-*.png
+
+# Local browser sessions are never part of a release.
+.edge-*-profile/

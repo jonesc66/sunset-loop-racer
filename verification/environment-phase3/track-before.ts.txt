@@ -1,8 +1,8 @@
 import * as THREE from "three";
 
-export const TRACK_SAMPLE_COUNT = 600;
+export const TRACK_SAMPLE_COUNT = 360;
 export const TRACK_WIDTH = 25.5;
-export const CHECKPOINT_COUNT = 20;
+export const CHECKPOINT_COUNT = 14;
 
 export type TrackSample = {
   center: THREE.Vector3;
@@ -40,12 +40,7 @@ const BREMGARTEN_POINTS = [
   [-8, 54],
   [14, 50],
   [31, 55]
-].map(([x, z], i) => {
-  // Keep the grid and first bend in place; expand the distant sections smoothly.
-  const expansion = 1 + 0.85 * Math.sin(Math.PI * i / 20) ** 2;
-  return new THREE.Vector3((42 + (x - 42) * expansion) * TRACK_SCALE, 0,
-    (58 + (z - 58) * expansion) * TRACK_SCALE);
-});
+].map(([x, z]) => new THREE.Vector3(x * TRACK_SCALE, 0, z * TRACK_SCALE));
 const BREMGARTEN_CURVE = new THREE.CatmullRomCurve3(BREMGARTEN_POINTS, true, "centripetal", 0.32);
 
 function centerAt(progress: number) {
@@ -53,18 +48,7 @@ function centerAt(progress: number) {
   const a = t * TWO_PI;
   const point = BREMGARTEN_CURVE.getPointAt(t);
 
-  point.y = trackElevation(t);
   return point.add(new THREE.Vector3(Math.sin(a * 5) * 0.75, 0, Math.cos(a * 4) * 0.55));
-}
-
-// Smooth grades keep the original horizontal vehicle model; height is a track constraint.
-export function trackElevation(progress: number) {
-  const p = wrapProgress(progress);
-  const keys = [[0,0],[.1,0],[.23,12],[.32,5],[.4,9],[.49,9],[.58,2],[.7,0],[.8,4],[.89,18],[.9,18],[1,0]];
-  const i = keys.findIndex((k, i) => i > 0 && p <= k[0]);
-  const a = keys[i-1], b = keys[i];
-  const t = (p-a[0])/(b[0]-a[0]);
-  return a[1]+(b[1]-a[1])*(.5-.5*Math.cos(Math.PI*t));
 }
 
 export function wrapProgress(progress: number) {
@@ -87,9 +71,7 @@ function makeSample(progress: number): TrackSample {
   const center = centerAt(progress);
   const prev = centerAt(progress - 0.002);
   const next = centerAt(progress + 0.002);
-  const tangent = next.sub(prev);
-  tangent.y = 0;
-  tangent.normalize();
+  const tangent = next.sub(prev).normalize();
   const normal = new THREE.Vector3(-tangent.z, 0, tangent.x).normalize();
 
   return { center, tangent, normal, progress: wrapProgress(progress) };
@@ -137,7 +119,7 @@ export function nearestTrackSample(track: TrackInfo, position: THREE.Vector3) {
   let bestDistanceSq = Number.POSITIVE_INFINITY;
 
   for (let index = 0; index < track.samples.length; index += 1) {
-    const distanceSq = (track.samples[index].center.x-position.x)**2 + (track.samples[index].center.z-position.z)**2;
+    const distanceSq = track.samples[index].center.distanceToSquared(position);
     if (distanceSq < bestDistanceSq) {
       bestDistanceSq = distanceSq;
       bestIndex = index;
@@ -147,21 +129,11 @@ export function nearestTrackSample(track: TrackInfo, position: THREE.Vector3) {
   const best = track.samples[bestIndex];
   const offset = position.clone().sub(best.center);
   const lateral = offset.dot(best.normal);
-  // Interpolate vertical contact on the closest adjacent edge to avoid stair-stepping.
-  let surfaceHeight = best.center.y, edgeDistance = Infinity;
-  for (const neighbor of [-1, 1]) {
-    const b = track.samples[(bestIndex + neighbor + track.samples.length) % track.samples.length].center;
-    const dx = b.x-best.center.x, dz = b.z-best.center.z;
-    const t = THREE.MathUtils.clamp((offset.x*dx+offset.z*dz)/(dx*dx+dz*dz),0,1);
-    const distance = (offset.x-dx*t)**2+(offset.z-dz*t)**2;
-    if(distance<edgeDistance) { edgeDistance=distance;surfaceHeight=THREE.MathUtils.lerp(best.center.y,b.y,t); }
-  }
 
   return {
     sample: best,
     distance: Math.sqrt(bestDistanceSq),
     lateral,
-    surfaceHeight,
     progress: best.progress
   };
 }
@@ -183,7 +155,7 @@ export function createRoadGeometry(track: TrackInfo) {
     if (index > 0) distance += sample.center.distanceTo(track.samples[index - 1].center);
     const left = sample.center.clone().addScaledVector(sample.normal, TRACK_WIDTH / 2);
     const right = sample.center.clone().addScaledVector(sample.normal, -TRACK_WIDTH / 2);
-    vertices.push(left.x, left.y + 0.05, left.z, right.x, right.y + 0.05, right.z);
+    vertices.push(left.x, 0.05, left.z, right.x, 0.05, right.z);
     uvs.push(0, distance / track.length * repeats, TRACK_WIDTH / 4, distance / track.length * repeats);
     if (index < track.samples.length) {
       const l = index * 2, r = l + 1, nl = l + 2, nr = l + 3;
@@ -215,21 +187,19 @@ export function createDashGeometry(track: TrackInfo) {
     const rightFront = front.clone().addScaledVector(sample.normal, -dashWidth / 2);
     const leftBack = back.clone().addScaledVector(sample.normal, dashWidth / 2);
     const rightBack = back.clone().addScaledVector(sample.normal, -dashWidth / 2);
-    const frontHeight = nearestTrackSample(track, front).surfaceHeight + 0.09;
-    const backHeight = nearestTrackSample(track, back).surfaceHeight + 0.09;
 
     vertices.push(
       leftFront.x,
-      frontHeight,
+      0.09,
       leftFront.z,
       rightFront.x,
-      frontHeight,
+      0.09,
       rightFront.z,
       leftBack.x,
-      backHeight,
+      0.09,
       leftBack.z,
       rightBack.x,
-      backHeight,
+      0.09,
       rightBack.z
     );
 

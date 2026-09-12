@@ -1,0 +1,75 @@
+{
+  "mode": "after",
+  "started": "2026-09-12T09:30:19.189Z",
+  "views": [],
+  "checks": [
+    {
+      "nameEntry": "PASS"
+    },
+    {
+      "focus": {
+        "tag": "INPUT",
+        "race": "true",
+        "readOnly": true,
+        "inputMode": "none",
+        "value": ""
+      }
+    },
+    {
+      "chromiumComposition": "sent"
+    },
+    {
+      "stopped": {
+        "position": [
+          56.97349354521131,
+          3.106239810366069,
+          114.01212134752905
+        ],
+        "camera": [
+          48.55447651765387,
+          5.826239810366069,
+          110.83090266757354
+        ],
+        "distance": 9.402042331323553,
+        "fov": 58,
+        "ui": "TRACK MAP\nLIVE\n YOU\n● RIVALS\n▥ START\nSPEED\n0\nKM/H\nLAP\n1/3\nCP 0/20\nTIME\n0:15.1\nPOSITION 4/6\nBEST\nNONE\nLAP TIME\nW/S\naccelerate/brake\nA/D\nsteer\nSpace\nhandbrake\nR\nreset\nSOUND\nPERF\nLOW\nMEDIUM\nHIGH\nGPU\n1 FPS\nSOFTWARE\nANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11)\n590 calls | 438k triangles"
+      },
+      "moving": {
+        "position": [
+          61.63997773411811,
+          2.4507568753953355,
+          115.7754039995151
+        ],
+        "camera": [
+          52.997471034121496,
+          5.266466916245027,
+          112.50973727551677
+        ],
+        "distance": 9.658453512123884,
+        "fov": 58.91667090540851,
+        "ui": "TRACK MAP\nLIVE\n YOU\n● RIVALS\n▥ START\nSPEED\n53\nKM/H\nLAP\n1/3\nCP 0/20\nTIME\n0:30.7\nPOSITION 4/6\nBEST\nNONE\nLAP TIME\nW/S\naccelerate/brake\nA/D\nsteer\nSpace\nhandbrake\nR\nreset\nSOUND\nPERF\nLOW\nMEDIUM\nHIGH\nGPU\n1 FPS\nSOFTWARE\nANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11)\n640 calls | 423k triangles"
+      },
+      "reset": {
+        "position": [
+          69.07972267993395,
+          1.5243105133805703,
+          118.32995730476523
+        ],
+        "camera": [
+          60.507949143973136,
+          4.296394671920608,
+          115.22067555872339
+        ],
+        "distance": 9.530340241045742,
+        "fov": 58.550432901176926,
+        "ui": "TRACK MAP\nLIVE\n YOU\n● RIVALS\n▥ START\nSPEED\n0\nKM/H\nLAP\n1/3\nCP 0/20\nTIME\n0:46.8\nPOSITION 2/6\nBEST\nNONE\nLAP TIME\nW/S\naccelerate/brake\nA/D\nsteer\nSpace\nhandbrake\nR\nreset\nSOUND\nPERF\nLOW\nMEDIUM\nHIGH\nGPU\n1 FPS\nSOFTWARE\nANGLE (Microsoft, Microsoft Basic Render Driver (0x0000008C) Direct3D11 vs_5_0 ps_5_0, D3D11)\n638 calls | 418k triangles"
+      },
+      "compositionKeyPrevented": true
+    }
+  ],
+  "logs": [],
+  "requests": [],
+  "nativeWindowsIME": "Not exercised in headless browser; readonly target and Chromium composition pipeline tested",
+  "status": "PASS",
+  "ended": "2026-09-12T09:31:45.089Z"
+}

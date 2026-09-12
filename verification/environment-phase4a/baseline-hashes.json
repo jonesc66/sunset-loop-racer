@@ -1,0 +1,10 @@
+{
+  "src/game/track.ts": "0befd2a659266281901aa024e133964e721ae3dfd0a37e791ba1465eb1af3833",
+  "src/game/trackZones.ts": "79ddea2fef8d27e6d1e7340e1936bcdc2b599df49bcd1347503b2f5be49b0099",
+  "src/RaceScene.tsx": "415a4872b0d627ddd5eb163e2f1e51f3233147166444a6b76a9c909adbd7db5f",
+  "src/App.tsx": "6be34fc988be179bdc91ef7db2c1d246c2df438fbb212d81a0f23ad98a22691c",
+  "src/game/audio.ts": "c18fe1ba2994eb2a6c2c7ba8913b1b5f2172efe1dfe5196a1505ae56fda6b407",
+  "src/qualityPresets.ts": "975ad7fe8b4b85a163370ec378fbe157454ae305501b43f12f8accbe1191dadb",
+  "src/environment/Phase3Environment.tsx": "dd5def7110389ce2e67dec4767dfc253eb7d570ef5058ca93f083e4f55f6bd37",
+  "src/environment/BenchmarkEnvironment.tsx": "ce2830bcaf4bcd1cbaf9332cf23779ffa2d58c3bfd9d2c7ddeff3ce33de1b04a"
+}

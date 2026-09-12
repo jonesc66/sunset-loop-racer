@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "checks": [
+    "center and padding",
+    "equal X/Z scale",
+    "actual car position and heading",
+    "immutable HUD snapshots"
+  ]
+}

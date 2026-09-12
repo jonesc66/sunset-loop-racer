@@ -1,0 +1,201 @@
+{
+  "blender": "4.5.9 LTS",
+  "seed": 9031,
+  "units": "metres",
+  "output": "C:\\Users\\jones\\Documents\\game-race\\public\\assets\\environment\\phase3\\environment-v1.glb",
+  "command": "blender.exe --background --factory-startup --python tools/blender/generate_environment.py",
+  "meshes": [
+    {
+      "name": "cliff_lod0",
+      "triangles": 1340
+    },
+    {
+      "name": "cliff_lod1",
+      "triangles": 516
+    },
+    {
+      "name": "cliff_lod2",
+      "triangles": 188
+    },
+    {
+      "name": "rock_lod0",
+      "triangles": 1340
+    },
+    {
+      "name": "rock_lod1",
+      "triangles": 516
+    },
+    {
+      "name": "rock_lod2",
+      "triangles": 188
+    },
+    {
+      "name": "alpine_lod0",
+      "triangles": 1340
+    },
+    {
+      "name": "alpine_lod1",
+      "triangles": 516
+    },
+    {
+      "name": "alpine_lod2",
+      "triangles": 188
+    },
+    {
+      "name": "chalet_lod0",
+      "triangles": 1574
+    },
+    {
+      "name": "chalet_lod1",
+      "triangles": 1286
+    },
+    {
+      "name": "chalet_lod2",
+      "triangles": 446
+    },
+    {
+      "name": "barn_lod0",
+      "triangles": 1238
+    },
+    {
+      "name": "barn_lod1",
+      "triangles": 950
+    },
+    {
+      "name": "barn_lod2",
+      "triangles": 350
+    },
+    {
+      "name": "church_lod0",
+      "triangles": 1610
+    },
+    {
+      "name": "church_lod1",
+      "triangles": 1322
+    },
+    {
+      "name": "church_lod2",
+      "triangles": 482
+    },
+    {
+      "name": "warehouse_lod0",
+      "triangles": 348
+    },
+    {
+      "name": "warehouse_lod1",
+      "triangles": 348
+    },
+    {
+      "name": "warehouse_lod2",
+      "triangles": 60
+    },
+    {
+      "name": "garage_lod0",
+      "triangles": 300
+    },
+    {
+      "name": "garage_lod1",
+      "triangles": 300
+    },
+    {
+      "name": "garage_lod2",
+      "triangles": 60
+    },
+    {
+      "name": "tank_lod0",
+      "triangles": 60
+    },
+    {
+      "name": "tank_lod1",
+      "triangles": 44
+    },
+    {
+      "name": "tank_lod2",
+      "triangles": 28
+    },
+    {
+      "name": "fence_lod0",
+      "triangles": 48
+    },
+    {
+      "name": "fence_lod1",
+      "triangles": 48
+    },
+    {
+      "name": "fence_lod2",
+      "triangles": 48
+    },
+    {
+      "name": "hay_lod0",
+      "triangles": 12
+    },
+    {
+      "name": "hay_lod1",
+      "triangles": 12
+    },
+    {
+      "name": "hay_lod2",
+      "triangles": 12
+    },
+    {
+      "name": "pole_lod0",
+      "triangles": 60
+    },
+    {
+      "name": "pole_lod1",
+      "triangles": 60
+    },
+    {
+      "name": "pole_lod2",
+      "triangles": 60
+    },
+    {
+      "name": "bridge_lod0",
+      "triangles": 132
+    },
+    {
+      "name": "bridge_lod1",
+      "triangles": 120
+    },
+    {
+      "name": "bridge_lod2",
+      "triangles": 84
+    },
+    {
+      "name": "tunnel_lod0",
+      "triangles": 408
+    },
+    {
+      "name": "tunnel_lod1",
+      "triangles": 312
+    },
+    {
+      "name": "tunnel_lod2",
+      "triangles": 288
+    },
+    {
+      "name": "portal_lod0",
+      "triangles": 432
+    },
+    {
+      "name": "portal_lod1",
+      "triangles": 336
+    },
+    {
+      "name": "portal_lod2",
+      "triangles": 312
+    },
+    {
+      "name": "utility_lod0",
+      "triangles": 12
+    },
+    {
+      "name": "utility_lod1",
+      "triangles": 12
+    },
+    {
+      "name": "utility_lod2",
+      "triangles": 12
+    }
+  ]
+}

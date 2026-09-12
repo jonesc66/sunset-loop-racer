@@ -1,0 +1,237 @@
+{
+  "blender": "4.5.9 LTS",
+  "seed": 41027,
+  "textureSize": 1024,
+  "textureFamilies": [
+    "rock",
+    "concrete",
+    "ground",
+    "metal"
+  ],
+  "materials": [
+    "rock",
+    "weathered-rock",
+    "lakeshore-stone",
+    "concrete",
+    "aged-concrete",
+    "gravel",
+    "dirt",
+    "grass",
+    "painted-metal",
+    "dark-metal"
+  ],
+  "units": "metres",
+  "command": "Run from project: .tools/blender-4.5.9-windows-x64/blender.exe --background --factory-startup --python tools/blender/phase4a/build.py",
+  "meshes": [
+    {
+      "name": "cliff-a_lod0",
+      "material": "rock",
+      "vertices": 5586,
+      "triangles": 11168,
+      "lod": 0
+    },
+    {
+      "name": "cliff-a_lod1",
+      "material": "rock",
+      "vertices": 2123,
+      "triangles": 4242,
+      "lod": 1
+    },
+    {
+      "name": "cliff-a_lod2",
+      "material": "rock",
+      "vertices": 672,
+      "triangles": 1340,
+      "lod": 2
+    },
+    {
+      "name": "cliff-b_lod0",
+      "material": "rock",
+      "vertices": 5586,
+      "triangles": 11168,
+      "lod": 0
+    },
+    {
+      "name": "cliff-b_lod1",
+      "material": "rock",
+      "vertices": 2123,
+      "triangles": 4242,
+      "lod": 1
+    },
+    {
+      "name": "cliff-b_lod2",
+      "material": "rock",
+      "vertices": 672,
+      "triangles": 1340,
+      "lod": 2
+    },
+    {
+      "name": "boulder_lod0",
+      "material": "weathered-rock",
+      "vertices": 476,
+      "triangles": 896,
+      "lod": 0
+    },
+    {
+      "name": "boulder_lod1",
+      "material": "weathered-rock",
+      "vertices": 176,
+      "triangles": 340,
+      "lod": 1
+    },
+    {
+      "name": "boulder_lod2",
+      "material": "weathered-rock",
+      "vertices": 57,
+      "triangles": 107,
+      "lod": 2
+    },
+    {
+      "name": "shore-shelf_lod0",
+      "material": "lakeshore-stone",
+      "vertices": 476,
+      "triangles": 896,
+      "lod": 0
+    },
+    {
+      "name": "shore-shelf_lod1",
+      "material": "lakeshore-stone",
+      "vertices": 173,
+      "triangles": 340,
+      "lod": 1
+    },
+    {
+      "name": "shore-shelf_lod2",
+      "material": "lakeshore-stone",
+      "vertices": 56,
+      "triangles": 106,
+      "lod": 2
+    },
+    {
+      "name": "rubble_lod0",
+      "material": "weathered-rock",
+      "vertices": 476,
+      "triangles": 896,
+      "lod": 0
+    },
+    {
+      "name": "rubble_lod1",
+      "material": "weathered-rock",
+      "vertices": 173,
+      "triangles": 340,
+      "lod": 1
+    },
+    {
+      "name": "rubble_lod2",
+      "material": "weathered-rock",
+      "vertices": 56,
+      "triangles": 106,
+      "lod": 2
+    },
+    {
+      "name": "deck_lod0",
+      "material": "concrete",
+      "vertices": 84,
+      "triangles": 140,
+      "lod": 0
+    },
+    {
+      "name": "deck_lod1",
+      "material": "concrete",
+      "vertices": 59,
+      "triangles": 90,
+      "lod": 1
+    },
+    {
+      "name": "deck_lod2",
+      "material": "concrete",
+      "vertices": 59,
+      "triangles": 90,
+      "lod": 2
+    },
+    {
+      "name": "pier_lod0",
+      "material": "aged-concrete",
+      "vertices": 44,
+      "triangles": 68,
+      "lod": 0
+    },
+    {
+      "name": "pier_lod1",
+      "material": "aged-concrete",
+      "vertices": 32,
+      "triangles": 42,
+      "lod": 1
+    },
+    {
+      "name": "pier_lod2",
+      "material": "aged-concrete",
+      "vertices": 32,
+      "triangles": 42,
+      "lod": 2
+    },
+    {
+      "name": "railing_lod0",
+      "material": "painted-metal",
+      "vertices": 112,
+      "triangles": 168,
+      "lod": 0
+    },
+    {
+      "name": "railing_lod1",
+      "material": "painted-metal",
+      "vertices": 82,
+      "triangles": 96,
+      "lod": 1
+    },
+    {
+      "name": "railing_lod2",
+      "material": "painted-metal",
+      "vertices": 82,
+      "triangles": 96,
+      "lod": 2
+    },
+    {
+      "name": "drain_lod0",
+      "material": "dark-metal",
+      "vertices": 16,
+      "triangles": 24,
+      "lod": 0
+    },
+    {
+      "name": "drain_lod1",
+      "material": "dark-metal",
+      "vertices": 11,
+      "triangles": 14,
+      "lod": 1
+    },
+    {
+      "name": "drain_lod2",
+      "material": "dark-metal",
+      "vertices": 11,
+      "triangles": 14,
+      "lod": 2
+    },
+    {
+      "name": "abutment_lod0",
+      "material": "aged-concrete",
+      "vertices": 24,
+      "triangles": 36,
+      "lod": 0
+    },
+    {
+      "name": "abutment_lod1",
+      "material": "aged-concrete",
+      "vertices": 17,
+      "triangles": 22,
+      "lod": 1
+    },
+    {
+      "name": "abutment_lod2",
+      "material": "aged-concrete",
+      "vertices": 17,
+      "triangles": 22,
+      "lod": 2
+    }
+  ]
+}

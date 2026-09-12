@@ -1,3 +1,4 @@
+import TrackMinimap from "./TrackMinimap";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
@@ -46,7 +47,7 @@ type NewLeaderboardRecord = {
   recordedAt: number;
 };
 
-const TIME_LEADERBOARD_STORAGE_KEY = "bern-circuit-time-leaderboard-v1";
+const TIME_LEADERBOARD_STORAGE_KEY = "bern-circuit-time-leaderboard-v2-expanded-1525m-3laps";
 const emptyTimeLeaderboard = (): TimeLeaderboard => ({ race: [], lap: [] });
 
 function loadTimeLeaderboard(): TimeLeaderboard {
@@ -205,6 +206,7 @@ function Hud({
 
   return (
     <div className="hudLayer">
+      <TrackMinimap cars={hud.mapCars} />
       <section className="hudTop">
         <div className="hudTile">
           <span>Speed</span>
@@ -390,6 +392,7 @@ export default function App() {
   const [leaderboard, setLeaderboard] = useState<TimeLeaderboard>(loadTimeLeaderboard);
   const [newRecords, setNewRecords] = useState<NewLeaderboardRecord[]>([]);
   const shellRef = useRef<HTMLElement | null>(null);
+  const keyboardCaptureRef = useRef<HTMLInputElement | null>(null);
   const audioRef = useRef<ReturnType<typeof createRaceAudioEngine> | null>(null);
   const finishedRaceHandledRef = useRef(false);
 
@@ -446,7 +449,7 @@ export default function App() {
   }, [hud.phase, hud.results, leaderboard, playerName, playerVehicle]);
 
   useEffect(() => {
-    shellRef.current?.focus();
+    if (raceStarted) keyboardCaptureRef.current?.focus({ preventScroll: true });
 
     const focusGame = (event: KeyboardEvent) => {
       const target = event.target;
@@ -474,7 +477,7 @@ export default function App() {
         event.code === "ArrowRight" ||
         event.code === "Space"
       ) {
-        shellRef.current?.focus();
+        if (raceStarted) keyboardCaptureRef.current?.focus({ preventScroll: true });
       }
     };
 
@@ -483,15 +486,17 @@ export default function App() {
     return () => {
       window.removeEventListener("keydown", focusGame, { capture: true });
     };
-  }, []);
+  }, [raceStarted]);
 
   return (
     <main
       className="gameShell"
-      onPointerDown={() => shellRef.current?.focus()}
+      onPointerDown={() => { if (raceStarted) keyboardCaptureRef.current?.focus({ preventScroll: true }); }}
+      onClick={() => { if (raceStarted) keyboardCaptureRef.current?.focus({ preventScroll: true }); }}
       ref={shellRef}
       tabIndex={-1}
     >
+      {raceStarted && <input className="raceKeyboardCapture" data-race-controls="true" readOnly inputMode="none" tabIndex={-1} aria-label="Race keyboard controls" ref={keyboardCaptureRef} />}
       <Canvas
         camera={{ fov: 58, near: 0.1, far: 500, position: [0, 12, -25] }}
         dpr={qualityPresets[graphicsQuality].dpr}

@@ -8,6 +8,8 @@ import { qualityPresets } from "../qualityPresets";
 import { createMountain, randomSequence, roadDistance } from "./benchmarkGeometry";
 import { makeGpuTerrainMaterial } from "./gpuTerrainMaterial";
 
+import { zoneAt } from "../game/trackZones";
+
 const config = qualityPresets.gpu;
 const species = ["alpine_spruce", "scots_pine", "silver_fir", "mountain_pine"];
 type Instance = { position: THREE.Vector3; scale: number; rotation: number; variant: number; color: THREE.Color; lod: number };
@@ -21,13 +23,15 @@ function scatter(track: TrackInfo, surfaces: THREE.BufferGeometry[], count: numb
   const output: Instance[] = [];
   for (let i=0;i<count;i++) {
     const pose=sampleTrack(track,random());
+    if (random()>zoneAt(pose.progress).trees) continue;
     const offset=TRACK_WIDTH/2+(small ? 4+random()*24 : 9+random()**1.5*130);
     const p=pose.center.clone().addScaledVector(pose.normal,(random()>.5?1:-1)*offset).addScaledVector(pose.tangent,(random()-.5)*18);
+    if(pose.progress>=.3 && pose.progress<.4 && p.clone().sub(pose.center).dot(pose.normal)>0)continue;
     if (roadDistance(track,p.x,p.z)<TRACK_WIDTH/2+(small?3.7:8)) continue;
     ray.set(new THREE.Vector3(p.x,170,p.z),new THREE.Vector3(0,-1,0));
     const hit=ray.intersectObjects(meshes,false)[0];
     if (hit && Math.abs(hit.face?.normal.y ?? 1)<.58) continue;
-    p.y=(hit?.point.y ?? -.02)-.035;
+    p.y=Math.max(hit?.point.y ?? -.02,pose.center.y*THREE.MathUtils.clamp((80-offset)/48,0,1))-.035;
     output.push({position:p,scale:small ? .55+random()*.9 : .65+random()*.65,rotation:random()*Math.PI*2,variant:Math.floor(random()*(small?3:4)),lod:-1,
       color:new THREE.Color().setRGB(.82+random()*.26,.88+random()*.22,.78+random()*.22)});
   }
@@ -114,14 +118,16 @@ export function GpuRoadside({track,ground}:{track:TrackInfo;ground:THREE.BufferG
   return <>{geometry.map((g,i)=><instancedMesh key={i} ref={m=>{refs.current[i]=m;}} args={[g,undefined,plants.length]} castShadow={i<2} receiveShadow><meshStandardMaterial color={["#435735","#777665","#8a8351"][i]} roughness={1}/></instancedMesh>)}</>;
 }
 
-export function GpuRidges(){
+export function GpuRidges({track}:{track:TrackInfo}){
   const geometry=useMemo(()=>{
     const parts=Array.from({length:10},(_,i)=>{
       const a=i*Math.PI*2/10;
-      return createMountain(81+i*7,95,42+(i%3)*16,64,8).rotateY(-a).translate(Math.cos(a)*375,0,Math.sin(a)*365);
+      let radius=375;
+      while(radius<950 && roadDistance(track,Math.cos(a)*radius,Math.sin(a)*radius)<155)radius+=15;
+      return createMountain(81+i*7,95,42+(i%3)*16,64,8).rotateY(-a).translate(Math.cos(a)*radius,0,Math.sin(a)*radius);
     });
     const merged=mergeGeometries(parts)!;parts.forEach(g=>g.dispose());return merged;
-  },[]);
+  },[track]);
   useEffect(()=>()=>geometry.dispose(),[geometry]);
   return <mesh geometry={geometry}><meshStandardMaterial color="#93abaa" roughness={1}/></mesh>;
 }

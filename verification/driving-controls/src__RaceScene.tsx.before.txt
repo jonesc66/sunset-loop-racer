@@ -149,8 +149,6 @@ const sparkScale = new THREE.Vector3(1, 1, 1);
 const speedParticleScale = new THREE.Vector3(1, 0.12, 0.12);
 const cameraTarget = new THREE.Vector3();
 const desiredCamera = new THREE.Vector3();
-const cameraPositions = new WeakMap<THREE.Camera, THREE.Vector3>();
-const cameraMotion = new THREE.Vector3();
 
 
 function PerformanceProbe({ onUpdate }: { onUpdate: (stats: PerformanceStats) => void }) {
@@ -744,18 +742,11 @@ function makeHud(game: GameRuntime, now: number): HudState {
 }
 
 function updateCamera(camera: THREE.Camera, player: CarRuntime, dt: number) {
-  // Carry the camera with the car before smoothing; speed must not create extra trailing distance.
-  const previous = cameraPositions.get(camera);
-  if (previous && previous.distanceToSquared(player.position) < 6400) {
-    camera.position.add(cameraMotion.subVectors(player.position, previous));
-  }
-  if (previous) previous.copy(player.position);
-  else cameraPositions.set(camera, player.position.clone());
   const speed = Math.abs(player.speed);
   reusableForward.set(Math.sin(player.heading), 0, Math.cos(player.heading));
   const speedMix = THREE.MathUtils.clamp(speed / 68, 0, 1);
-  const chaseDistance = THREE.MathUtils.lerp(9.0, 10.5, speedMix);
-  const chaseHeight = THREE.MathUtils.lerp(2.8, 3.4, speedMix);
+  const chaseDistance = THREE.MathUtils.lerp(11.5, 17.8, speedMix);
+  const chaseHeight = THREE.MathUtils.lerp(3.2, 5.5, speedMix);
   desiredCamera
     .copy(player.position)
     .addScaledVector(reusableForward, -chaseDistance)
@@ -767,11 +758,11 @@ function updateCamera(camera: THREE.Camera, player: CarRuntime, dt: number) {
     camera.position.lerp(desiredCamera, 1 - Math.pow(0.018, dt));
   }
 
-  cameraTarget.copy(player.position).addScaledVector(reusableForward, 8.0).add(new THREE.Vector3(0, 1.35, 0));
+  cameraTarget.copy(player.position).addScaledVector(reusableForward, 10.5).add(new THREE.Vector3(0, 1.35, 0));
   camera.lookAt(cameraTarget);
 
   if (camera instanceof THREE.PerspectiveCamera) {
-    const targetFov = THREE.MathUtils.lerp(58, 64, speedMix);
+    const targetFov = THREE.MathUtils.lerp(64, 79, speedMix);
     camera.fov = THREE.MathUtils.lerp(camera.fov, targetFov, 1 - Math.pow(0.025, dt));
     camera.updateProjectionMatrix();
   }

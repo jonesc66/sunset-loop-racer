@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "camera": {
+    "stopped": {
+      "distance": 9.425497334358544,
+      "fov": 58,
+      "screenWidth": 0.22252869291011934
+    },
+    "fast": {
+      "distance": 11.036756769993294,
+      "fov": 63.99999999999908,
+      "screenWidth": 0.16825238324524547
+    },
+    "slowFrames": {
+      "distance": 11.036756769993726,
+      "fov": 63.99999999999909,
+      "screenWidth": 0.16825238324524
+    },
+    "old": {
+      "distance": 34.605955156005926,
+      "fov": 78.99999999999679,
+      "screenWidth": 0.03963116422686754
+    }
+  },
+  "input": [
+    "composition Process with physical code",
+    "independent simultaneous keys",
+    "keyup",
+    "blur",
+    "visibility",
+    "arrow suppression",
+    "name input preserved",
+    "legacy physical key fallback"
+  ]
+}

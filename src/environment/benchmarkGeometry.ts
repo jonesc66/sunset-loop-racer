@@ -34,7 +34,7 @@ export function createVerge(track: TrackInfo, side: number) {
       const p = pose.center.clone().addScaledVector(pose.normal, side * offset);
       const clearance = THREE.MathUtils.smoothstep(roadDistance(track, p.x, p.z), TRACK_WIDTH / 2 + 3.3, 25);
       const height = Math.sin(f * Math.PI) ** 2 * (1.8 + 1.4 * Math.sin(t * 29 + side) ** 2) * endFade * clearance;
-      positions.push(p.x, -0.016 + height, p.z);
+      positions.push(p.x, pose.center.y -0.016 + height, p.z);
       const c = new THREE.Color("#73735a").lerp(new THREE.Color("#526a35"), THREE.MathUtils.smoothstep(f, 0, 0.38));
       c.multiplyScalar(0.94 + Math.sin(i * 2.7 + j * 8.3) * 0.055);
       colors.push(c.r, c.g, c.b);
@@ -54,16 +54,16 @@ export function createVerge(track: TrackInfo, side: number) {
 
 // Closed sphere topology, sunk below ground. No open bottom or seam panels.
 export function createMountain(seed: number, width: number, height: number, depth: number, detail: number) {
-  const g = new THREE.SphereGeometry(1, detail * 2, detail);
+  const g = new THREE.SphereGeometry(1, Math.max(detail,36) * 2, Math.max(detail,36));
   const p = g.getAttribute("position");
   const colors = [];
   for (let i = 0; i < p.count; i++) {
     const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
     const relief = 1 + 0.15 * Math.sin(x * 9 + seed) * Math.cos(z * 11 - seed) + 0.07 * Math.sin(z * 23 + x * 17);
     const h = Math.max(0, y);
-    p.setXYZ(i, x * width * relief, y > 0 ? Math.pow(h, 1.65) * height * relief - 5 : y * 12 - 5, z * depth * relief);
+    p.setXYZ(i, x * width * relief, y > 0 ? Math.pow(h, 1.05) * height * relief * (.62+.26*Math.sin(x*4.7+z*2.1+seed)**2+.12*Math.sin(z*7.2-seed)**2) - 5 : y * 12 - 5, z * depth * relief);
     const rock = THREE.MathUtils.smoothstep(h + Math.sin(x * 20 + z * 9) * 0.12, 0.25, 0.85);
-    const color = new THREE.Color("#596a43").lerp(new THREE.Color("#858175"), rock);
+    const color = new THREE.Color("#68705b").lerp(new THREE.Color("#918b7d"), rock);
     color.multiplyScalar(0.84 + 0.16 * Math.sin(x * 15 + z * 18 + seed) ** 2);
     colors.push(color.r, color.g, color.b);
   }

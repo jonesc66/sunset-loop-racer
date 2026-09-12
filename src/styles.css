@@ -549,3 +549,33 @@ button {
     max-width: 230px;
   }
 }
+
+/* Fixed-orientation live map with its own HUD space. */
+.hudLayer { --map-width: 220px; --hud-inset: clamp(14px, 2.4vw, 28px); }
+.trackMinimap { position: absolute; top: var(--hud-inset); right: var(--hud-inset); width: var(--map-width); padding: 10px; border: 1px solid rgb(255 236 194 / 25%); border-radius: 10px; background: rgb(12 22 29 / 85%); box-shadow: 0 8px 24px #0004; }
+.minimapHeading, .minimapLegend { display: flex; justify-content: space-between; align-items: center; }
+.minimapHeading { font-size: 10px; letter-spacing: .1em; color: #dce9eb; }
+.minimapHeading span { color: #8ed8b2; font-size: 8px; }
+.trackMinimap svg { width: 100%; height: auto; display: block; overflow: hidden; }
+.minimapLegend { color: #b4c7ce; font-size: 8px; font-weight: 800; gap: 4px; }
+.minimapLegend span:first-child { color: #ffd15d; }
+.minimapLegend i { display: inline-block; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 7px solid #ffd15d; }
+.hudTop { right: calc(var(--hud-inset) + var(--map-width) + 18px); }
+.graphicsControls { top: calc(var(--hud-inset) + 200px); right: var(--hud-inset); bottom: auto; width: var(--map-width); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; }
+.graphicsControls button { min-width: 0; }
+@media (max-width: 900px) {
+  .hudTop { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 440px; }
+}
+@media (max-width: 640px) {
+  .hudLayer { --map-width: 140px; --hud-inset: 12px; }
+  .trackMinimap { padding: 7px; }
+  .minimapHeading { font-size: 8px; }
+  .minimapHeading span { display: none; }
+  .minimapLegend { font-size: 6px; gap: 2px; }
+  .graphicsControls { top: 153px; padding: 4px; }
+  .graphicsControls button { font-size: 9px; min-height: 25px; }
+  .performancePanel { left: 12px; right: auto; bottom: 80px; max-width: calc(100vw - 178px); }
+}
+
+/* A readonly focus target keeps text composition out of driving controls. */
+.raceKeyboardCapture { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; opacity: 0; pointer-events: none; caret-color: transparent; }

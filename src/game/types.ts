@@ -1,3 +1,4 @@
+import type { MinimapCar } from "./minimap";
 export type RacePhase = "countdown" | "race" | "finished";
 
 export type GraphicsQuality = "performance" | "low" | "medium" | "high" | "gpu";
@@ -24,6 +25,7 @@ export type ResultRow = {
 };
 
 export type HudState = {
+  mapCars?: MinimapCar[];
   phase: RacePhase;
   countdownText: string;
   speedKmh: number;

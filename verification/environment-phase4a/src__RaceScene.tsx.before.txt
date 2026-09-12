@@ -1,8 +1,8 @@
-import { withMinimap } from "./game/minimap";
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
+import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import {
   CHECKPOINT_COUNT,
@@ -32,10 +32,8 @@ import { BenchmarkAtmosphere, BenchmarkLandscape, RoadWear } from "./environment
 import { makeRoadMaterial } from "./environment/roadMaterial";
 import { qualityPresets, type EffectsQuality } from "./qualityPresets";
 import { Phase3Environment } from "./environment/Phase3Environment";
-import { Phase4AEnvironment } from "./environment/Phase4AEnvironment";
-import { applyArtDetailView } from "./environment/phase4aInspection";
 import { ZONE_VIEWPOINTS, zoneAt } from "./game/trackZones";
-import { FullSceneGround, NaturalForest } from "./environment/FullSceneArt";
+import { GpuGround } from "./environment/GpuEnvironment";
 import { assetUrl } from "./assetUrl";
 
 const TOTAL_LAPS = 3;
@@ -149,8 +147,6 @@ const sparkScale = new THREE.Vector3(1, 1, 1);
 const speedParticleScale = new THREE.Vector3(1, 0.12, 0.12);
 const cameraTarget = new THREE.Vector3();
 const desiredCamera = new THREE.Vector3();
-const cameraPositions = new WeakMap<THREE.Camera, THREE.Vector3>();
-const cameraMotion = new THREE.Vector3();
 
 
 function PerformanceProbe({ onUpdate }: { onUpdate: (stats: PerformanceStats) => void }) {
@@ -744,18 +740,11 @@ function makeHud(game: GameRuntime, now: number): HudState {
 }
 
 function updateCamera(camera: THREE.Camera, player: CarRuntime, dt: number) {
-  // Carry the camera with the car before smoothing; speed must not create extra trailing distance.
-  const previous = cameraPositions.get(camera);
-  if (previous && previous.distanceToSquared(player.position) < 6400) {
-    camera.position.add(cameraMotion.subVectors(player.position, previous));
-  }
-  if (previous) previous.copy(player.position);
-  else cameraPositions.set(camera, player.position.clone());
   const speed = Math.abs(player.speed);
   reusableForward.set(Math.sin(player.heading), 0, Math.cos(player.heading));
   const speedMix = THREE.MathUtils.clamp(speed / 68, 0, 1);
-  const chaseDistance = THREE.MathUtils.lerp(9.0, 10.5, speedMix);
-  const chaseHeight = THREE.MathUtils.lerp(2.8, 3.4, speedMix);
+  const chaseDistance = THREE.MathUtils.lerp(11.5, 17.8, speedMix);
+  const chaseHeight = THREE.MathUtils.lerp(3.2, 5.5, speedMix);
   desiredCamera
     .copy(player.position)
     .addScaledVector(reusableForward, -chaseDistance)
@@ -767,11 +756,11 @@ function updateCamera(camera: THREE.Camera, player: CarRuntime, dt: number) {
     camera.position.lerp(desiredCamera, 1 - Math.pow(0.018, dt));
   }
 
-  cameraTarget.copy(player.position).addScaledVector(reusableForward, 8.0).add(new THREE.Vector3(0, 1.35, 0));
+  cameraTarget.copy(player.position).addScaledVector(reusableForward, 10.5).add(new THREE.Vector3(0, 1.35, 0));
   camera.lookAt(cameraTarget);
 
   if (camera instanceof THREE.PerspectiveCamera) {
-    const targetFov = THREE.MathUtils.lerp(58, 64, speedMix);
+    const targetFov = THREE.MathUtils.lerp(64, 79, speedMix);
     camera.fov = THREE.MathUtils.lerp(camera.fov, targetFov, 1 - Math.pow(0.025, dt));
     camera.updateProjectionMatrix();
   }
@@ -1797,7 +1786,29 @@ type TreeInstance = {
 };
 
 function InstancedForest({ trees, castShadow }: { trees: TreeInstance[]; castShadow: boolean }) {
-  return <NaturalForest trees={trees} castShadow={castShadow} />;
+  const ref = useRef<THREE.InstancedMesh>(null);
+  const geometry = useMemo(() => {
+    const parts = [0, 1, 2].map(i => new THREE.ConeGeometry(2.8 - i * 0.6, 4.6 - i * 0.5, 7).translate(0, 3.5 + i * 1.8, 0));
+    const merged = mergeGeometries(parts)!;
+    parts.forEach(g => g.dispose());
+    return merged;
+  }, []);
+  useEffect(() => () => geometry.dispose(), [geometry]);
+  useLayoutEffect(() => {
+    if (!ref.current) return;
+    const dummy = new THREE.Object3D();
+    trees.forEach((tree, i) => {
+      dummy.position.copy(tree.position); dummy.rotation.set(0, tree.rotation, 0); dummy.scale.setScalar(tree.scale); dummy.updateMatrix();
+      ref.current!.setMatrixAt(i, dummy.matrix);
+      ref.current!.setColorAt(i, new THREE.Color(tree.color).multiplyScalar(0.6));
+    });
+    ref.current.instanceMatrix.needsUpdate = true;
+    if (ref.current.instanceColor) ref.current.instanceColor.needsUpdate = true;
+    ref.current.computeBoundingSphere();
+  }, [trees]);
+  return <instancedMesh ref={ref} args={[geometry, undefined, trees.length]} castShadow={castShadow} receiveShadow>
+    <meshStandardMaterial roughness={1} />
+  </instancedMesh>;
 }
 
 function Trees({
@@ -1867,7 +1878,10 @@ function Environment({ qualityConfig, track, quality }: { qualityConfig: Quality
   return (
     <>
       <BenchmarkAtmosphere quality={quality} track={track} />
-      <FullSceneGround />
+      {preset.enhancedEnvironment ? <GpuGround /> : <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]}>
+        <planeGeometry args={[1200, 1200]} />
+        <meshStandardMaterial color="#ffffff" map={grassTexture} roughness={0.98} />
+      </mesh>}
       <BenchmarkLandscape quality={quality} track={track} />
       <TrackSurface track={track} anisotropy={preset.anisotropy} />
       <RoadShoulders track={track} />
@@ -1876,12 +1890,11 @@ function Environment({ qualityConfig, track, quality }: { qualityConfig: Quality
       {!qualityConfig.minimalDrawCalls && <CheckpointGates track={track} />}
       <RoadSigns track={track} />
       <Suspense fallback={null}><Phase3Environment track={track} quality={quality} /></Suspense>
-      <Suspense fallback={null}><Phase4AEnvironment track={track} quality={quality} /></Suspense>
-      {!preset.enhancedEnvironment && <Suspense fallback={null}><Trees
+      {!preset.enhancedEnvironment && <Trees
         castShadow={false}
         step={qualityConfig.sceneryStep}
         track={track}
-      /></Suspense>}
+      />}
     </>
   );
 }
@@ -1909,7 +1922,7 @@ export default function RaceScene({
   useEffect(() => {
     const game = createGame(track, clock.getElapsedTime(), autoRaceTest);
     gameRef.current = game;
-    hudCallback.current(withMinimap(makeHud(game, clock.getElapsedTime()), game.cars));
+    hudCallback.current(makeHud(game, clock.getElapsedTime()));
   }, [autoRaceTest, clock, resetSeed, track]);
 
   useFrame((state, frameDelta) => {
@@ -1979,11 +1992,9 @@ export default function RaceScene({
       }
     }
 
-    if (import.meta.env.DEV && new URLSearchParams(window.location.search).has("environmentInspect")) applyArtDetailView(camera, track, window.location.hash.slice(1));
-
     if (now - game.lastHudAt > 0.08 || game.phase === "finished") {
       game.lastHudAt = now;
-      hudCallback.current(withMinimap(makeHud(game, now), game.cars));
+      hudCallback.current(makeHud(game, now));
     }
 
     if (autoRaceTest) {

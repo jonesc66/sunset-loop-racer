@@ -1,0 +1,173 @@
+{
+  "mode": "after",
+  "started": "2026-09-12T05:48:01.930Z",
+  "views": [],
+  "checks": [
+    {
+      "first": {
+        "player": "translate(156.9288923350582 134.80768596068066) rotate(-69.30037371911892)",
+        "rivals": 5
+      },
+      "moved": {
+        "player": "translate(160.25613364172284 136.064920880486) rotate(-69.30037371911892)",
+        "rivals": 5
+      },
+      "steered": {
+        "player": "translate(161.7313451855279 136.53620900828605) rotate(-82.87401106420101)",
+        "rivals": 5
+      },
+      "reset": {
+        "player": "translate(161.36410450795702 136.3424554424767) rotate(-72.48299593640067)",
+        "rivals": 5
+      }
+    },
+    {
+      "layout": {
+        "map": {
+          "x": 1032,
+          "y": 28,
+          "right": 1252,
+          "bottom": 218,
+          "width": 220,
+          "height": 190
+        },
+        "hud": {
+          "x": 28,
+          "y": 28,
+          "right": 1008,
+          "bottom": 117.4375,
+          "width": 980,
+          "height": 89.4375
+        },
+        "buttons": {
+          "x": 1032,
+          "y": 228,
+          "right": 1252,
+          "bottom": 305,
+          "width": 220,
+          "height": 77
+        },
+        "width": 1280,
+        "height": 720
+      }
+    },
+    {
+      "layout": {
+        "map": {
+          "x": 716.96875,
+          "y": 23.03125,
+          "right": 936.96875,
+          "bottom": 213.03125,
+          "width": 220,
+          "height": 190
+        },
+        "hud": {
+          "x": 23.03125,
+          "y": 23.03125,
+          "right": 698.96875,
+          "bottom": 106.859375,
+          "width": 675.9375,
+          "height": 83.828125
+        },
+        "buttons": {
+          "x": 716.96875,
+          "y": 223.03125,
+          "right": 936.96875,
+          "bottom": 300.03125,
+          "width": 220,
+          "height": 77
+        },
+        "width": 960,
+        "height": 540
+      }
+    },
+    {
+      "layout": {
+        "map": {
+          "x": 488,
+          "y": 12,
+          "right": 628,
+          "bottom": 137.171875,
+          "width": 140,
+          "height": 125.171875
+        },
+        "hud": {
+          "x": 15.359375,
+          "y": 15.359375,
+          "right": 455.359375,
+          "bottom": 161.421875,
+          "width": 440,
+          "height": 146.0625
+        },
+        "buttons": {
+          "x": 488,
+          "y": 153,
+          "right": 628,
+          "bottom": 216,
+          "width": 140,
+          "height": 63
+        },
+        "width": 640,
+        "height": 360
+      }
+    },
+    {
+      "layout": {
+        "map": {
+          "x": 238,
+          "y": 12,
+          "right": 378,
+          "bottom": 137.171875,
+          "width": 140,
+          "height": 125.171875
+        },
+        "hud": {
+          "x": 14,
+          "y": 14,
+          "right": 220,
+          "bottom": 153.625,
+          "width": 206,
+          "height": 139.625
+        },
+        "buttons": {
+          "x": 238,
+          "y": 153,
+          "right": 378,
+          "bottom": 216,
+          "width": 140,
+          "height": 63
+        },
+        "width": 390,
+        "height": 844
+      }
+    },
+    {
+      "quality": "high",
+      "map": {
+        "player": "translate(161.36410450795702 136.3424554424767) rotate(-72.48299593640067)",
+        "rivals": 5
+      }
+    },
+    {
+      "quality": "gpu",
+      "map": {
+        "player": "translate(161.36410450795702 136.3424554424767) rotate(-72.48299593640067)",
+        "rivals": 5
+      }
+    },
+    {
+      "quality": "perf",
+      "map": {
+        "player": "translate(161.36410450795702 136.3424554424767) rotate(-72.48299593640067)",
+        "rivals": 5
+      }
+    },
+    {
+      "reload": "PASS"
+    }
+  ],
+  "logs": [],
+  "requests": [],
+  "status": "PASS",
+  "ended": "2026-09-12T05:49:32.842Z"
+}
