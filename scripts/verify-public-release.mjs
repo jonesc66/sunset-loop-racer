@@ -75,8 +75,10 @@ try{
  await screenshot('public-gpu.png');
  await key('w',4500);await delay(300);const moved=await evaluate("document.querySelector('[data-map-player]').getAttribute('transform')");if(moved===initial.player)throw Error('Public player did not move');await screenshot('public-driving.png');
  const controls=await evaluate("({text:document.body.innerText,focus:document.activeElement?.dataset.raceControls})");if(controls.focus!=='true')throw Error('Keyboard focus missing');
- const loaded=await evaluate("performance.getEntriesByType('resource').map(r=>r.name)");for(const asset of ['/phase3/environment-v1.glb','/phase4a/environment.glb'])if(!loaded.some(n=>n.includes(asset)))throw Error('Missing deployed asset '+asset);
- report.checks.push({url:base,initial,moved,controls,loaded});report.failedResponses=failedResponses;
+ const loaded=await evaluate("performance.getEntriesByType('resource').map(r=>r.name)");
+ const assetChecks=await evaluate(`(async()=>{const paths=['assets/environment/phase3/environment-v1.glb','assets/environment/phase4a/environment.glb'];const result={};for(const path of paths){const response=await fetch(new URL(path,location.href));const bytes=await response.arrayBuffer();result[path]={ok:response.ok,status:response.status,bytes:bytes.byteLength};}return result;})()`);
+ for(const [asset,check] of Object.entries(assetChecks))if(!check.ok||check.bytes===0)throw Error('Missing deployed asset '+asset+' ('+check.status+')');
+ report.checks.push({url:base,initial,moved,controls,loaded,assetChecks});report.failedResponses=failedResponses;
  if(logs.some(l=>l.level==='error'||l.type==='error'||l.type==='exception')||requests.length||failedResponses.length)throw Error('Public runtime/network failure');report.status='PASS';
 }catch(error){report.status='FAIL';report.error=String(error);process.exitCode=1;await screenshot('failure.png').catch(()=>{});console.error(error);}
 finally{report.ended=new Date().toISOString();await fs.writeFile(path.join(out,'runtime.json'),JSON.stringify(report,null,2));console.log(report.status,report.error??'');await command('Page.navigate',{url:'about:blank'}).catch(()=>{});ws.close();}
