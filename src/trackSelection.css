@@ -1,0 +1,30 @@
+.trackSelection { position:absolute; inset:0; z-index:10; overflow:auto; background:linear-gradient(145deg,#142832,#10171f); color:#f3eee0; padding:clamp(18px,4vw,54px); }
+.trackSelectionContent { width:min(960px,100%); margin:auto; }
+.selectionStep { color:#b7c5c9; font-size:12px; letter-spacing:.12em; }
+.trackSelection h1 { font-size:clamp(28px,4vw,46px); margin:14px 0 24px; }
+.trackCards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.trackCard { display:flex; flex-direction:column; gap:14px; min-width:0; text-align:left; padding:24px; border:2px solid #53646c; border-radius:12px; background:#23343d; color:#f3eee0; cursor:pointer; }
+.trackCard[aria-pressed=true] { border-color:#ffd667; background:#36413e; }
+.trackCard strong { font-size:26px; } .trackCard span { line-height:1.5; } .trackCard small { color:#c8d2d5; } .trackCard b { color:#ffd667; font-size:13px; margin-top:auto; }
+.trackSelectionLeaderboard { margin:24px 0; padding:20px; background:#0e1b22; border-radius:12px; }
+.trackSelectionLeaderboard h2 { margin:0 0 16px; font-size:19px; }
+.trackSelectionLeaderboard h3 { color:#c0cdd3; font-size:12px; text-transform:uppercase; }
+.trackSelectionLeaderboard ol { padding-left:20px; }
+.trackSelectionLeaderboard li { padding:5px 0; } .trackSelectionLeaderboard li span { overflow-wrap:anywhere; margin-right:16px; }
+.trackContinue { border:0; background:#ffd667; color:#18232b; border-radius:8px; padding:15px 24px; font:inherit; font-weight:700; cursor:pointer; }
+.trackSelection button:focus-visible,.backToTracks:focus-visible { outline:3px solid white; outline-offset:4px; }
+.startMenu { padding-top:15vh; } .startMenu>p { text-transform:uppercase; letter-spacing:.18em; }
+.backToTracks { position:absolute; top:20px; right:24px; z-index:2; background:#172c36; color:#f3eee0; border:1px solid #96a8b2; padding:10px; border-radius:6px; cursor:pointer; }
+.resultTrackName { color:#d0d7d4; margin:0 0 10px; font-size:13px; }
+@media(max-width:650px) { .trackCards { grid-template-columns:1fr; } .trackCard { padding:18px; gap:8px; } .trackCard strong { font-size:22px; } .trackSelectionLeaderboard .timeLeaderboardColumns { grid-template-columns:1fr; } .backToTracks { top:8px;right:8px;font-size:11px;padding:7px; } }
+.resultNavigation { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
+.resultsPanel .resultNavigation button { margin:0; min-height:44px; padding:12px 8px; font-size:14px; }
+.resultNavigation button:first-child { grid-column:1 / -1; }
+.trackNavigation { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+.selectionBack { background:#1a2b35; color:#f3eee0; border:1px solid #96a8b2; border-radius:8px; padding:14px 20px; font:inherit; cursor:pointer; }
+.resultNavigation button:focus-visible,.selectionBack:focus-visible { outline:3px solid white; outline-offset:3px; }
+
+/* Keep the existing garage layout reachable when its content exceeds the viewport. */
+.gameShell .vehicleGarage { overflow-y:auto; align-content:safe center; }
+.hudLayer .resultsPanel { z-index:13; }
+.gameShell .hudLayer:has(.resultsPanel) { z-index:13; }

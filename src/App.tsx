@@ -1,3 +1,6 @@
+import { createRaceTrack, type RaceTrack } from "./game/trackDefinition";
+import "./trackSelection.css";
+import { DEFAULT_TRACK_ID, getTrackDefinition, leaderboardStorageKey, trackRegistry } from "./game/trackRegistry";
 import TrackMinimap from "./TrackMinimap";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
@@ -47,12 +50,11 @@ type NewLeaderboardRecord = {
   recordedAt: number;
 };
 
-const TIME_LEADERBOARD_STORAGE_KEY = "bern-circuit-time-leaderboard-v2-expanded-1525m-3laps";
 const emptyTimeLeaderboard = (): TimeLeaderboard => ({ race: [], lap: [] });
 
-function loadTimeLeaderboard(): TimeLeaderboard {
+function loadTimeLeaderboard(storageKey: string): TimeLeaderboard {
   try {
-    const stored = JSON.parse(window.localStorage.getItem(TIME_LEADERBOARD_STORAGE_KEY) ?? "null") as Partial<TimeLeaderboard> | null;
+    const stored = JSON.parse(window.localStorage.getItem(storageKey) ?? "null") as Partial<TimeLeaderboard> | null;
     const readEntries = (entries: unknown): TimeRecord[] =>
       Array.isArray(entries)
         ? entries
@@ -184,6 +186,7 @@ function GaragePreview({ vehicle }: { vehicle: PlayerVehicle }) {
 }
 
 function Hud({
+  track,
   hud,
   graphicsQuality,
   leaderboard,
@@ -191,8 +194,11 @@ function Hud({
   soundEnabled,
   onGraphicsQualityChange,
   onSoundToggle,
+  onChangeCar,
+  onChangeTrack,
   onRestart
 }: {
+  track: RaceTrack;
   hud: HudState;
   graphicsQuality: GraphicsQuality;
   leaderboard: TimeLeaderboard;
@@ -200,13 +206,15 @@ function Hud({
   soundEnabled: boolean;
   onGraphicsQualityChange: (quality: GraphicsQuality) => void;
   onSoundToggle: () => void;
+  onChangeCar: () => void;
+  onChangeTrack: () => void;
   onRestart: () => void;
 }) {
   const qualityOptions = qualityOrder;
 
   return (
     <div className="hudLayer">
-      <TrackMinimap cars={hud.mapCars} />
+      <TrackMinimap definition={track.definition} cars={hud.mapCars} />
       <section className="hudTop">
         <div className="hudTile">
           <span>Speed</span>
@@ -268,6 +276,7 @@ function Hud({
       {hud.phase === "finished" && (
         <section className="resultsPanel" aria-label="Race results">
           <h1>Race Complete</h1>
+          <p className="resultTrackName">{track.definition.displayName} · {track.lapCount} laps</p>
           {newRecords.length > 0 && (
             <section className="newRecordNotice" aria-label="New top five record">
               <strong>NEW TOP 5 RECORD{newRecords.length > 1 ? "S" : ""}</strong>
@@ -317,22 +326,54 @@ function Hud({
               </div>
             </div>
           </section>
-          <button type="button" onClick={onRestart}>
-            Race Again
-          </button>
+          <div className="resultNavigation" aria-label="Next race">
+            <button type="button" onClick={onRestart}>Race Again</button>
+            <button type="button" onClick={onChangeCar}>Change Car</button>
+            <button type="button" onClick={onChangeTrack}>Change Track</button>
+          </div>
         </section>
       )}
     </div>
   );
 }
 
+function TrackSelection({ selectedTrackId, onSelect, onContinue, onBack }: { selectedTrackId: string; onSelect: (id: string) => void; onContinue: () => void; onBack: () => void }) {
+  const selected = getTrackDefinition(selectedTrackId);
+  const records = loadTimeLeaderboard(leaderboardStorageKey(selected, selected.defaultLapCount));
+  return <section className="trackSelection" aria-label="Choose a track">
+    <div className="trackSelectionContent">
+      <p className="selectionStep">01 / TRACK · 02 / CAR · 03 / RACE</p>
+      <h1>Choose Your Track</h1>
+      <div className="trackCards">{[...trackRegistry.values()].map(track => <button type="button" key={track.id} data-track-id={track.id} aria-pressed={selectedTrackId === track.id} className="trackCard" onClick={() => onSelect(track.id)}>
+        <strong>{track.displayName}</strong><span>{track.description}</span>
+        <small>{track.defaultLapCount} laps · {track.route.length.toFixed(2)} world units</small>
+        <b>{selectedTrackId === track.id ? "Selected" : "Available — select track"}</b>
+      </button>)}</div>
+      <section className="trackSelectionLeaderboard" aria-label={selected.displayName + " Personal Top 5"}>
+        <h2>{selected.displayName} · Personal Top 5</h2>
+        <div className="timeLeaderboardColumns">{(["race", "lap"] as const).map(kind => <div key={kind}><h3>{kind === "race" ? "Full race" : "Fastest lap"}</h3>
+          {records[kind].length ? <ol>{records[kind].map(r => <li key={r.recordedAt + "-" + r.time}><span>{r.playerName}</span><strong>{formatTime(r.time)}</strong></li>)}</ol> : <p>No records yet</p>}
+        </div>)}</div>
+      </section>
+      <div className="trackNavigation">
+        <button className="trackContinue" type="button" onClick={onContinue}>Continue to Car Select</button>
+        <button className="selectionBack" type="button" onClick={onBack}>Back to Main Menu</button>
+      </div>
+    </div>
+  </section>;
+}
+
 function VehicleGarage({
+  trackName,
+  onBack,
   onStart,
   onPlayerNameChange,
   onVehicleChange,
   playerName,
   playerVehicle
 }: {
+  trackName: string;
+  onBack: () => void;
   onStart: () => void;
   onPlayerNameChange: (name: string) => void;
   onVehicleChange: (vehicle: PlayerVehicle) => void;
@@ -351,7 +392,7 @@ function VehicleGarage({
   return (
     <section className="vehicleGarage" style={{ backgroundImage: `url("${assetUrl("assets/bern-alpine-panorama-v2.png")}")` }} aria-label="Choose a car">
       <div className="garageHeading">
-        <span>Bern Circuit</span>
+        <span>{trackName} · Car Select</span>
         <h1>Choose Your Car</h1>
       </div>
       <label className="playerNameField">
@@ -373,6 +414,7 @@ function VehicleGarage({
           </button>
         ))}
       </div>
+      <button className="backToTracks" type="button" onClick={onBack}>Back to Track Select</button>
       <button className="startRaceButton" onClick={onStart} type="button">
         Start Race
       </button>
@@ -381,15 +423,19 @@ function VehicleGarage({
 }
 
 export default function App() {
+  const [selectedTrackId, setSelectedTrackId] = useState(DEFAULT_TRACK_ID);
+  const [selectionScreen, setSelectionScreen] = useState<"start" | "track" | "car" | "race">("start");
+  const [activeTrack, setActiveTrack] = useState(() => createRaceTrack(getTrackDefinition(selectedTrackId)));
+  const storageKey = leaderboardStorageKey(activeTrack.definition, activeTrack.lapCount);
   const [hud, setHud] = useState<HudState>(defaultHudState);
   const [resetSeed, setResetSeed] = useState(0);
   const [graphicsQuality, setGraphicsQuality] = useState<GraphicsQuality>("high");
-  const [playerVehicle, setPlayerVehicle] = useState<PlayerVehicle>("sportcar2");
+  const [selectedCarId, setSelectedCarId] = useState<PlayerVehicle>("sportcar2");
   const [playerName, setPlayerName] = useState("Driver");
-  const [raceStarted, setRaceStarted] = useState(false);
+  const raceStarted = selectionScreen === "race";
   const [performanceStats, setPerformanceStats] = useState<PerformanceStats | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const [leaderboard, setLeaderboard] = useState<TimeLeaderboard>(loadTimeLeaderboard);
+  const [leaderboard, setLeaderboard] = useState<TimeLeaderboard>(() => loadTimeLeaderboard(storageKey));
   const [newRecords, setNewRecords] = useState<NewLeaderboardRecord[]>([]);
   const shellRef = useRef<HTMLElement | null>(null);
   const keyboardCaptureRef = useRef<HTMLInputElement | null>(null);
@@ -428,10 +474,12 @@ export default function App() {
     finishedRaceHandledRef.current = true;
 
     const recordPlayerName = playerName.trim().slice(0, 24) || "Driver";
-    const race = addTopTime(leaderboard.race, playerResult.time, playerVehicle, recordPlayerName);
+    // Re-read this identity at commit time, preserving records saved since race start.
+    const currentLeaderboard = loadTimeLeaderboard(storageKey);
+    const race = addTopTime(currentLeaderboard.race, playerResult.time, selectedCarId, recordPlayerName);
     const lap = playerResult.bestLapTime === null
-      ? { records: leaderboard.lap, rank: null, candidate: null }
-      : addTopTime(leaderboard.lap, playerResult.bestLapTime, playerVehicle, recordPlayerName);
+      ? { records: currentLeaderboard.lap, rank: null, candidate: null }
+      : addTopTime(currentLeaderboard.lap, playerResult.bestLapTime, selectedCarId, recordPlayerName);
     const nextLeaderboard = { race: race.records, lap: lap.records };
     const nextRecords: NewLeaderboardRecord[] = [];
     if (race.rank !== null) nextRecords.push({ kind: "race", category: "Full race", rank: race.rank, time: playerResult.time, playerName: recordPlayerName, recordedAt: race.candidate.recordedAt });
@@ -442,11 +490,11 @@ export default function App() {
     setLeaderboard(nextLeaderboard);
     setNewRecords(nextRecords);
     try {
-      window.localStorage.setItem(TIME_LEADERBOARD_STORAGE_KEY, JSON.stringify(nextLeaderboard));
+      window.localStorage.setItem(storageKey, JSON.stringify(nextLeaderboard));
     } catch {
       // The end-of-race notification remains available even if storage is disabled.
     }
-  }, [hud.phase, hud.results, leaderboard, playerName, playerVehicle]);
+  }, [hud.phase, hud.results, leaderboard, playerName, selectedCarId, storageKey]);
 
   useEffect(() => {
     if (raceStarted) keyboardCaptureRef.current?.focus({ preventScroll: true });
@@ -488,6 +536,28 @@ export default function App() {
     };
   }, [raceStarted]);
 
+  function startRace() {
+    const nextTrack = createRaceTrack(getTrackDefinition(selectedTrackId));
+    setActiveTrack(nextTrack);
+    setLeaderboard(loadTimeLeaderboard(leaderboardStorageKey(nextTrack.definition, nextTrack.lapCount)));
+    finishedRaceHandledRef.current = false;
+    setNewRecords([]);
+    setPerformanceStats(null);
+    setHud({ ...defaultHudState, totalLaps: nextTrack.lapCount, checkpointTotal: nextTrack.checkpointTargets.length });
+    setResetSeed(seed => seed + 1);
+    setSelectionScreen("race");
+  }
+
+  function leaveRace(destination: "track" | "car") {
+    // Unmount the scene and discard transient race/results before another selection.
+    setHud({ ...defaultHudState, totalLaps: activeTrack.lapCount, checkpointTotal: activeTrack.checkpointTargets.length });
+    setNewRecords([]);
+    setPerformanceStats(null);
+    finishedRaceHandledRef.current = false;
+    setSelectedTrackId(activeTrack.definition.id);
+    setSelectionScreen(destination);
+  }
+
   return (
     <main
       className="gameShell"
@@ -514,8 +584,10 @@ export default function App() {
       >
         {raceStarted && (
           <RaceScene
+            key={`${activeTrack.definition.id}:${activeTrack.definition.timingVersion}:${activeTrack.lapCount}`}
+            track={activeTrack}
             graphicsQuality={graphicsQuality}
-            playerVehicle={playerVehicle}
+            playerVehicle={selectedCarId}
             resetSeed={resetSeed}
             onHudUpdate={setHud}
             onPerformanceUpdate={setPerformanceStats}
@@ -524,25 +596,30 @@ export default function App() {
       </Canvas>
       {raceStarted ? (
         <Hud
+          track={activeTrack}
           graphicsQuality={graphicsQuality}
           hud={hud}
           leaderboard={leaderboard}
           newRecords={newRecords}
           onGraphicsQualityChange={setGraphicsQuality}
           onSoundToggle={() => setSoundEnabled((enabled) => !enabled)}
-          onRestart={() => setResetSeed((seed) => seed + 1)}
+          onRestart={startRace}
+          onChangeCar={() => leaveRace("car")}
+          onChangeTrack={() => leaveRace("track")}
           soundEnabled={soundEnabled}
         />
       ) : (
-        <VehicleGarage
-          onStart={() => {
-            setResetSeed((seed) => seed + 1);
-            setRaceStarted(true);
-          }}
+        selectionScreen === "start" ? <section className="trackSelection" aria-label="Main menu"><div className="trackSelectionContent startMenu"><p>Sunset Loop Racer</p><h1>Two circuits. Your line.</h1><button type="button" className="trackContinue" onClick={() => setSelectionScreen("track")}>Start Game</button></div></section>
+        : selectionScreen === "track" ? <TrackSelection selectedTrackId={selectedTrackId} onSelect={setSelectedTrackId} onContinue={() => setSelectionScreen("car")} onBack={() => setSelectionScreen("start")} />
+        : <VehicleGarage
+          trackName={getTrackDefinition(selectedTrackId).displayName}
+          onBack={() => setSelectionScreen("track")}
+
+          onStart={startRace}
           onPlayerNameChange={setPlayerName}
-          onVehicleChange={setPlayerVehicle}
+          onVehicleChange={setSelectedCarId}
           playerName={playerName}
-          playerVehicle={playerVehicle}
+          playerVehicle={selectedCarId}
         />
       )}
       {raceStarted && performanceStats && (

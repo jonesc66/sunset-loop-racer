@@ -1,0 +1,693 @@
+{
+  "status": "WHOLE-TRACK QUALITY PASS / USER REVIEW REQUIRED",
+  "source": "assets/source/whole-track/library.blend",
+  "glb": "public/assets/environment/whole-track/library.glb",
+  "atlas": "Existing immutable 2048 shared atlas; procedural base/normal/ORM",
+  "meshes": [
+    {
+      "name": "Bronze_Office_lod0",
+      "asset": "Bronze_Office",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 5760,
+      "triangles": 9944,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        23.0,
+        21.200000762939453,
+        55.0
+      ],
+      "sourceTriangles": 9944
+    },
+    {
+      "name": "Bronze_Office_lod1",
+      "asset": "Bronze_Office",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1656,
+      "triangles": 2548,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        23.0,
+        21.200000762939453,
+        55.0
+      ],
+      "sourceTriangles": 2548
+    },
+    {
+      "name": "Bronze_Office_lod2",
+      "asset": "Bronze_Office",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1336,
+      "triangles": 2044,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        23.0,
+        21.200000762939453,
+        55.0
+      ],
+      "sourceTriangles": 2044
+    },
+    {
+      "name": "Silver_Fin_Tower_lod0",
+      "asset": "Silver_Fin_Tower",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 6164,
+      "triangles": 10520,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        25.0,
+        21.200000762939453,
+        58.900001525878906
+      ],
+      "sourceTriangles": 10520
+    },
+    {
+      "name": "Silver_Fin_Tower_lod1",
+      "asset": "Silver_Fin_Tower",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1752,
+      "triangles": 2628,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        25.0,
+        21.200000762939453,
+        58.900001525878906
+      ],
+      "sourceTriangles": 2628
+    },
+    {
+      "name": "Silver_Fin_Tower_lod2",
+      "asset": "Silver_Fin_Tower",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1552,
+      "triangles": 2328,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        25.0,
+        21.200000762939453,
+        58.900001525878906
+      ],
+      "sourceTriangles": 2328
+    },
+    {
+      "name": "Brick_Corner_lod0",
+      "asset": "Brick_Corner",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 13946,
+      "triangles": 24846,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        24.875,
+        20.200000762939453,
+        32.45000076293945
+      ],
+      "sourceTriangles": 24846
+    },
+    {
+      "name": "Brick_Corner_lod1",
+      "asset": "Brick_Corner",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 4364,
+      "triangles": 6548,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        24.875,
+        20.200000762939453,
+        32.45000076293945
+      ],
+      "sourceTriangles": 6548
+    },
+    {
+      "name": "Brick_Corner_lod2",
+      "asset": "Brick_Corner",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 3628,
+      "triangles": 5444,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        24.875,
+        20.200000762939453,
+        32.45000076293945
+      ],
+      "sourceTriangles": 5444
+    },
+    {
+      "name": "Terrace_Hotel_lod0",
+      "asset": "Terrace_Hotel",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 7416,
+      "triangles": 12992,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        25.0,
+        22.200000762939453,
+        35.84000015258789
+      ],
+      "sourceTriangles": 12992
+    },
+    {
+      "name": "Terrace_Hotel_lod1",
+      "asset": "Terrace_Hotel",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 2228,
+      "triangles": 3360,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        25.0,
+        22.200000762939453,
+        35.84000015258789
+      ],
+      "sourceTriangles": 3360
+    },
+    {
+      "name": "Terrace_Hotel_lod2",
+      "asset": "Terrace_Hotel",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1364,
+      "triangles": 2064,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        25.0,
+        22.200000762939453,
+        35.84000015258789
+      ],
+      "sourceTriangles": 2064
+    },
+    {
+      "name": "Courtyard_MixedUse_lod0",
+      "asset": "Courtyard_MixedUse",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 14032,
+      "triangles": 25044,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        24.875,
+        20.200000762939453,
+        28.700000762939453
+      ],
+      "sourceTriangles": 25044
+    },
+    {
+      "name": "Courtyard_MixedUse_lod1",
+      "asset": "Courtyard_MixedUse",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 4416,
+      "triangles": 6624,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        24.875,
+        20.200000762939453,
+        28.700000762939453
+      ],
+      "sourceTriangles": 6624
+    },
+    {
+      "name": "Courtyard_MixedUse_lod2",
+      "asset": "Courtyard_MixedUse",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 3648,
+      "triangles": 5472,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        24.875,
+        20.200000762939453,
+        28.700000762939453
+      ],
+      "sourceTriangles": 5472
+    },
+    {
+      "name": "Green_Glass_Office_lod0",
+      "asset": "Green_Glass_Office",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 2872,
+      "triangles": 4392,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        24.875,
+        23.200000762939453,
+        41.900001525878906
+      ],
+      "sourceTriangles": 4392
+    },
+    {
+      "name": "Green_Glass_Office_lod1",
+      "asset": "Green_Glass_Office",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 624,
+      "triangles": 988,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        24.875,
+        23.200000762939453,
+        41.900001525878906
+      ],
+      "sourceTriangles": 988
+    },
+    {
+      "name": "Green_Glass_Office_lod2",
+      "asset": "Green_Glass_Office",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 432,
+      "triangles": 680,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        24.875,
+        23.200000762939453,
+        41.900001525878906
+      ],
+      "sourceTriangles": 680
+    },
+    {
+      "name": "Design_Gallery_lod0",
+      "asset": "Design_Gallery",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 5002,
+      "triangles": 8458,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        26.0,
+        21.200000762939453,
+        16.0
+      ],
+      "sourceTriangles": 8458
+    },
+    {
+      "name": "Design_Gallery_lod1",
+      "asset": "Design_Gallery",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1392,
+      "triangles": 2088,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        26.0,
+        21.200000762939453,
+        16.0
+      ],
+      "sourceTriangles": 2088
+    },
+    {
+      "name": "Design_Gallery_lod2",
+      "asset": "Design_Gallery",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1072,
+      "triangles": 1608,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        26.0,
+        21.200000762939453,
+        16.0
+      ],
+      "sourceTriangles": 1608
+    },
+    {
+      "name": "Machiya_Bakery_lod0",
+      "asset": "Machiya_Bakery",
+      "category": "machiya",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 5784,
+      "triangles": 10214,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        14.658099174499512,
+        11.300000190734863,
+        7.8212432861328125
+      ],
+      "sourceTriangles": 10214
+    },
+    {
+      "name": "Machiya_Bakery_lod1",
+      "asset": "Machiya_Bakery",
+      "category": "machiya",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1322,
+      "triangles": 2072,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        7.8212432861328125
+      ],
+      "sourceTriangles": 2072
+    },
+    {
+      "name": "Machiya_Bakery_lod2",
+      "asset": "Machiya_Bakery",
+      "category": "machiya",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1122,
+      "triangles": 1764,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        7.8212432861328125
+      ],
+      "sourceTriangles": 1764
+    },
+    {
+      "name": "Machiya_Udon_lod0",
+      "asset": "Machiya_Udon",
+      "category": "machiya",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 6460,
+      "triangles": 11674,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        14.642322540283203,
+        11.300000190734863,
+        9.421243667602539
+      ],
+      "sourceTriangles": 11674
+    },
+    {
+      "name": "Machiya_Udon_lod1",
+      "asset": "Machiya_Udon",
+      "category": "machiya",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1684,
+      "triangles": 2716,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        9.421243667602539
+      ],
+      "sourceTriangles": 2716
+    },
+    {
+      "name": "Machiya_Udon_lod2",
+      "asset": "Machiya_Udon",
+      "category": "machiya",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1476,
+      "triangles": 2392,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        9.421243667602539
+      ],
+      "sourceTriangles": 2392
+    },
+    {
+      "name": "Garden_Bench_lod0",
+      "asset": "Garden_Bench",
+      "category": "district",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 640,
+      "triangles": 1050,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        5.070000171661377,
+        2.740000009536743,
+        1.212499976158142
+      ],
+      "sourceTriangles": 1050
+    },
+    {
+      "name": "Garden_Bench_lod1",
+      "asset": "Garden_Bench",
+      "category": "district",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 280,
+      "triangles": 330,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        5.070000171661377,
+        2.740000009536743,
+        1.212499976158142
+      ],
+      "sourceTriangles": 330
+    },
+    {
+      "name": "Garden_Bench_lod2",
+      "asset": "Garden_Bench",
+      "category": "district",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 280,
+      "triangles": 330,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        5.070000171661377,
+        2.740000009536743,
+        1.212499976158142
+      ],
+      "sourceTriangles": 330
+    },
+    {
+      "name": "Garden_Wall_lod0",
+      "asset": "Garden_Wall",
+      "category": "district",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 240,
+      "triangles": 440,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        7.199999809265137,
+        1.100000023841858,
+        2.0
+      ],
+      "sourceTriangles": 440
+    },
+    {
+      "name": "Garden_Wall_lod1",
+      "asset": "Garden_Wall",
+      "category": "district",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 80,
+      "triangles": 120,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        7.199999809265137,
+        1.100000023841858,
+        2.0
+      ],
+      "sourceTriangles": 120
+    },
+    {
+      "name": "Garden_Wall_lod2",
+      "asset": "Garden_Wall",
+      "category": "district",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 40,
+      "triangles": 60,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        7.199999809265137,
+        1.100000023841858,
+        2.0
+      ],
+      "sourceTriangles": 60
+    },
+    {
+      "name": "Kyoto_Arena_Hero_lod0",
+      "asset": "Kyoto_Arena_Hero",
+      "category": "hero",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 11400,
+      "triangles": 21640,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        132.1999969482422,
+        95.70599365234375,
+        28.0
+      ],
+      "sourceTriangles": 21640
+    },
+    {
+      "name": "Kyoto_Arena_Hero_lod1",
+      "asset": "Kyoto_Arena_Hero",
+      "category": "hero",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 3016,
+      "triangles": 5764,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        132.1999969482422,
+        95.5999984741211,
+        28.0
+      ],
+      "sourceTriangles": 5764
+    },
+    {
+      "name": "Kyoto_Arena_Hero_lod2",
+      "asset": "Kyoto_Arena_Hero",
+      "category": "hero",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 2128,
+      "triangles": 4060,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": "Revision C whole-track",
+      "dimensions": [
+        132.1999969482422,
+        95.5999984741211,
+        28.0
+      ],
+      "sourceTriangles": 4060
+    }
+  ],
+  "glbBytes": 13278052
+}

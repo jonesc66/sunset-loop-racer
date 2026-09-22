@@ -1,3 +1,4 @@
+import { beforeMultiTrack } from './multitrack-test-support.mjs';
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
@@ -15,14 +16,14 @@ const hashes=JSON.parse(await fs.readFile(out+'baseline-hashes.json','utf8'));
 for(const file of ['src/game/track.ts','src/game/trackZones.ts','src/App.tsx','src/game/audio.ts','src/qualityPresets.ts']){
   let bytes=await fs.readFile(file);
   if(file==='src/App.tsx'){
-    const source=beforeDrivingFix(file,bytes.toString('utf8'));
+    const source=beforeDrivingFix(file,beforeMultiTrack(file,bytes.toString('utf8')));
     const current='"bern-circuit-time-leaderboard-v2-expanded-1525m-3laps"';
     assert.equal(source.split(current).length,2,'Expanded track storage key occurs exactly once');
     bytes=Buffer.from(source.replace(current,'"bern-circuit-time-leaderboard-v1"').replace('import TrackMinimap from "./TrackMinimap";\r\n','').replace('\r\n      <TrackMinimap cars={hud.mapCars} />',''));
   }
   assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),hashes[file],file+' frozen except authorized record key');
 }
-let race=beforeDrivingFix('src/RaceScene.tsx',await fs.readFile('src/RaceScene.tsx','utf8'));
+let race=beforeDrivingFix('src/RaceScene.tsx',beforeMultiTrack('src/RaceScene.tsx',await fs.readFile('src/RaceScene.tsx','utf8')));
 // User-requested read-only minimap telemetry; core gameplay remains frozen below.
 race=race.replace('import { withMinimap } from "./game/minimap";\r\n','').replace('withMinimap(makeHud(game, clock.getElapsedTime()), game.cars)','makeHud(game, clock.getElapsedTime())').replace('withMinimap(makeHud(game, now), game.cars)','makeHud(game, now)');race=race.replaceAll('\r','');const before=(await fs.readFile(out+'src__RaceScene.tsx.before.txt','utf8')).replaceAll('\r','');
 // Explicitly reverse only the whole-scene visual substitutions; gameplay remains byte-frozen below.

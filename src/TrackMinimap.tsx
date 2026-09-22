@@ -1,19 +1,19 @@
 import { memo, useMemo } from 'react';
-import { createTrack } from './game/track';
-import { createMinimapProjection, type MinimapCar } from './game/minimap';
+import { sampleTrack } from './game/track';
+import type { TrackDefinition } from './game/trackDefinition';
+import { type MinimapCar } from './game/minimap';
 
 const EMPTY_CARS: MinimapCar[] = [];
-export default memo(function TrackMinimap({ cars = EMPTY_CARS }: { cars?: MinimapCar[] }) {
+export default memo(function TrackMinimap({ definition, cars = EMPTY_CARS }: { definition: TrackDefinition; cars?: MinimapCar[] }) {
   const map = useMemo(() => {
-    const track = createTrack();
-    const projection = createMinimapProjection(track.samples.map(s => s.center));
+    const { route: track, projection } = definition.minimap;
     const path = track.samples.map((sample, i) => {
       const p = projection.project(sample.center.x, sample.center.z);
       return (i ? 'L' : 'M') + p.x.toFixed(2) + ',' + p.y.toFixed(2);
     }).join(' ') + ' Z';
-    const start = track.samples[0];
+    const start = sampleTrack(track, definition.startFinish.progress);
     return { ...projection, path, start: projection.project(start.center.x, start.center.z), startAngle: -Math.atan2(start.tangent.x, start.tangent.z) * 180 / Math.PI };
-  }, []);
+  }, [definition]);
   const player = cars.find(car => car.isPlayer);
   return <section className="trackMinimap" aria-label="Track overview and live car positions">
     <div className="minimapHeading"><strong>TRACK MAP</strong><span>LIVE</span></div>

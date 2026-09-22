@@ -9,3 +9,5 @@ sunset-racer-*.png
 
 # Local browser sessions are never part of a release.
 .edge-*-profile/
+
+.chrome-*-profile/

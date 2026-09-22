@@ -1,0 +1,17 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
+import {build} from 'esbuild';
+const out='verification/neon-phase5-night-lighting/';
+const hashes=JSON.parse(await fs.readFile(out+'frozen-hashes.json'));
+for(const [p,h] of Object.entries(hashes))assert.equal(crypto.createHash('sha256').update(await fs.readFile(p)).digest('hex'),h,'Frozen: '+p);
+const before=await fs.readFile(out+'baseline-source/NeonMetroGraybox.tsx','utf8'),after=await fs.readFile('src/environment/NeonMetroGraybox.tsx','utf8');
+assert.equal(after.slice(after.indexOf('function ribbon('),after.indexOf('function Boxes(')),before.slice(before.indexOf('function ribbon('),before.indexOf('function Boxes(')),'Road mesh and curb geometry');
+assert.equal(after.slice(after.indexOf('const street=useMemo'),after.indexOf('const {mats}')),before.slice(before.indexOf('const street=useMemo'),before.indexOf('const {mats}')),'Street placement and collision-facing dimensions');
+await build({entryPoints:['src/game/trackRegistry.ts','src/environment/neonNightSettings.ts'],bundle:true,outdir:out+'compiled',platform:'node',format:'esm',packages:'external',outExtension:{'.js':'.mjs'}});
+const {getTrackDefinition,leaderboardStorageKey}=await import('../'+out+'compiled/game/trackRegistry.mjs');
+const {nightPresets}=await import('../'+out+'compiled/environment/neonNightSettings.mjs');
+const d=getTrackDefinition('neon-metro');assert(Math.abs(d.route.length-1735)<1e-8);assert.equal(d.route.checkpointTargets.length,24);assert.equal(d.defaultLapCount,3);assert.equal(d.spawns.ai.length+1,6);assert(leaderboardStorageKey(d,3).endsWith('neon-metro:v2:laps3'));
+assert(nightPresets.high.lights<nightPresets.gpu.lights);assert(nightPresets.high.bloom<nightPresets.gpu.bloom);assert(nightPresets.high.shadow<nightPresets.gpu.shadow);assert(Object.values(nightPresets).every(p=>p.lights<=3));
+const result={status:'PASS',frozenFiles:Object.keys(hashes).length,roadGeometry:'UNCHANGED',streetPlacement:'UNCHANGED',race:{length:d.route.length,checkpoints:24,laps:3,cars:6},quality:nightPresets,externalDownloads:0};
+await fs.writeFile(out+'automated.json',JSON.stringify(result,null,2));console.log(result);

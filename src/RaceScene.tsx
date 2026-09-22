@@ -1,3 +1,5 @@
+import type { RaceTrack } from "./game/trackDefinition";
+import NeonMetroGraybox from "./environment/NeonMetroGraybox";
 import { withMinimap } from "./game/minimap";
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { Suspense, useEffect, useLayoutEffect, useMemo, useRef } from "react";
@@ -5,11 +7,9 @@ import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import {
-  CHECKPOINT_COUNT,
   TRACK_WIDTH,
   createDashGeometry,
   createRoadGeometry,
-  createTrack,
   crossedProgress,
   forwardDelta,
   nearestTrackSample,
@@ -38,16 +38,10 @@ import { ZONE_VIEWPOINTS, zoneAt } from "./game/trackZones";
 import { FullSceneGround, NaturalForest } from "./environment/FullSceneArt";
 import { assetUrl } from "./assetUrl";
 
-const TOTAL_LAPS = 3;
 const COUNTDOWN_SECONDS = 3.35;
 const PLAYER_COLOR = "#ff3458";
 const IMPORTED_PLAYER_CAR_LENGTH = 6.05;
-const CHECKPOINT_GATE_HALF_WIDTH = TRACK_WIDTH * 0.5 + 8.0;
 const MAX_CHECKPOINT_STEP = 0.22;
-const GRID_FIRST_ROW_DISTANCE = 9;
-const GRID_ROW_SPACING = 16;
-const GRID_COLUMN_STAGGER = 5.5;
-const GRID_COLUMN_OFFSET = TRACK_WIDTH * 0.22;
 
 type CarRuntime = {
   name: string;
@@ -86,6 +80,7 @@ type CarRuntime = {
 };
 
 type GameRuntime = {
+  track: RaceTrack;
   cars: CarRuntime[];
   phase: RacePhase;
   resetAt: number;
@@ -101,6 +96,7 @@ type GameRuntime = {
 };
 
 type RaceSceneProps = {
+  track: RaceTrack;
   graphicsQuality: GraphicsQuality;
   playerVehicle: PlayerVehicle;
   resetSeed: number;
@@ -257,24 +253,12 @@ function createCar(
   };
 }
 
-function startGridSlot(track: TrackInfo, row: number, column: 0 | 1) {
-  const distanceBehindLine = GRID_FIRST_ROW_DISTANCE + row * GRID_ROW_SPACING + column * GRID_COLUMN_STAGGER;
+function createGame(track: RaceTrack, now: number, autoRace = false): GameRuntime {
+  const { player: playerGrid, ai } = track.definition.spawns;
+  const [solarGrid, vegaGrid, orionGrid, novaGrid, lyraGrid] = ai;
 
   return {
-    progress: wrapProgress(1 - distanceBehindLine / track.length),
-    laneOffset: column === 0 ? -GRID_COLUMN_OFFSET : GRID_COLUMN_OFFSET
-  };
-}
-
-function createGame(track: TrackInfo, now: number, autoRace = false): GameRuntime {
-  const solarGrid = startGridSlot(track, 0, 0);
-  const vegaGrid = startGridSlot(track, 0, 1);
-  const orionGrid = startGridSlot(track, 1, 0);
-  const novaGrid = startGridSlot(track, 1, 1);
-  const playerGrid = startGridSlot(track, 2, 0);
-  const lyraGrid = startGridSlot(track, 2, 1);
-
-  return {
+    track,
     phase: "countdown",
     resetAt: now,
     raceStartedAt: now + COUNTDOWN_SECONDS,
@@ -297,8 +281,8 @@ function createGame(track: TrackInfo, now: number, autoRace = false): GameRuntim
   };
 }
 
-function resetPlayerToTrack(track: TrackInfo, car: CarRuntime) {
-  const pose = sampleTrack(track, car.progress);
+function resetPlayerToTrack(track: RaceTrack, car: CarRuntime) {
+  const pose = track.definition.respawn(car.progress);
   car.position.copy(pose.center).addScaledVector(pose.normal, car.laneOffset);
   car.velocity.set(0, 0, 0);
   car.heading = tangentHeading(pose.tangent);
@@ -315,12 +299,12 @@ function resetPlayerToTrack(track: TrackInfo, car: CarRuntime) {
   car.collisionSlowdown = 0;
 }
 
-function updateCheckpoint(track: TrackInfo, car: CarRuntime, raceTime: number, lateral: number, progressStep: number) {
+function updateCheckpoint(track: RaceTrack, car: CarRuntime, raceTime: number, lateral: number, progressStep: number) {
   if (car.finished) {
     return;
   }
 
-  if (Math.abs(lateral) > CHECKPOINT_GATE_HALF_WIDTH) {
+  if (Math.abs(lateral) > track.definition.roadWidth * 0.5 + 8.0) {
     return;
   }
 
@@ -350,11 +334,11 @@ function updateCheckpoint(track: TrackInfo, car: CarRuntime, raceTime: number, l
       car.bestLapTime = car.bestLapTime === null ? lapTime : Math.min(car.bestLapTime, lapTime);
       car.completedLaps += 1;
 
-      if (car.completedLaps >= TOTAL_LAPS) {
+      if (car.completedLaps >= track.lapCount) {
         car.finished = true;
         car.finishTime = raceTime;
-        car.lap = TOTAL_LAPS;
-        car.nextCheckpointIndex = CHECKPOINT_COUNT;
+        car.lap = track.lapCount;
+        car.nextCheckpointIndex = track.checkpointTargets.length;
         return;
       }
 
@@ -368,7 +352,7 @@ function updateCheckpoint(track: TrackInfo, car: CarRuntime, raceTime: number, l
   }
 }
 
-function updatePlayer(track: TrackInfo, car: CarRuntime, input: InputState, dt: number, raceTime: number) {
+function updatePlayer(track: RaceTrack, car: CarRuntime, input: InputState, dt: number, raceTime: number) {
   if (input.resetRequested) {
     resetPlayerToTrack(track, car);
     input.resetRequested = false;
@@ -381,7 +365,7 @@ function updatePlayer(track: TrackInfo, car: CarRuntime, input: InputState, dt: 
   }
 
   const nearestBefore = nearestTrackSample(track, car.position);
-  const offRoad = Math.abs(nearestBefore.lateral) > TRACK_WIDTH * 0.5;
+  const offRoad = Math.abs(nearestBefore.lateral) > track.definition.roadWidth * 0.5;
   // In the chase-camera view, decreasing yaw turns the car visually right.
   const steerLeft = input.left ? 1 : 0;
   const steerRight = input.right ? -1 : 0;
@@ -459,7 +443,7 @@ function updatePlayer(track: TrackInfo, car: CarRuntime, input: InputState, dt: 
   car.position.addScaledVector(car.velocity, dt);
 
   const nearestAfter = nearestTrackSample(track, car.position);
-  const barrierLimit = TRACK_WIDTH * 0.5 + 4.8;
+  const barrierLimit = track.definition.roadWidth * 0.5 + 4.8;
 
   if (Math.abs(nearestAfter.lateral) > barrierLimit) {
     const clampedLateral = THREE.MathUtils.clamp(nearestAfter.lateral, -barrierLimit, barrierLimit);
@@ -480,7 +464,7 @@ function updatePlayer(track: TrackInfo, car: CarRuntime, input: InputState, dt: 
   }
 
   const nearestCurrent = nearestTrackSample(track, car.position);
-  if (Math.abs(nearestCurrent.lateral) > TRACK_WIDTH * 0.5 + 10) {
+  if (Math.abs(nearestCurrent.lateral) > track.definition.roadWidth * 0.5 + 10) {
     car.invalidLap = true;
   }
   const currentProgress = nearestCurrent.progress;
@@ -639,13 +623,13 @@ function resolveCarCollisions(track: TrackInfo, cars: CarRuntime[]) {
   }
 }
 
-function updateAi(track: TrackInfo, car: CarRuntime, cars: CarRuntime[], dt: number, raceTime: number) {
+function updateAi(track: RaceTrack, car: CarRuntime, cars: CarRuntime[], dt: number, raceTime: number) {
   if (car.finished) {
     return;
   }
 
-  const turnSoon = signedTurnAhead(track, car.progress, 0.052);
-  const turnNow = signedTurnAhead(track, car.progress, 0.018);
+  const turnSoon = signedTurnAhead(track.definition.aiRoute, car.progress, 0.052);
+  const turnNow = signedTurnAhead(track.definition.aiRoute, car.progress, 0.018);
   const cornerSeverity = THREE.MathUtils.clamp(Math.abs(turnSoon) * 6.2 + Math.abs(turnNow) * 2.2, 0, 1);
   const racingLine = THREE.MathUtils.clamp(-Math.sign(turnSoon || turnNow) * cornerSeverity * 7.2, -8.2, 8.2);
   const { speedPenalty, offsetPush, speedLimit } = findAiAvoidance(track, car, cars, raceTime);
@@ -664,7 +648,7 @@ function updateAi(track: TrackInfo, car: CarRuntime, cars: CarRuntime[], dt: num
   car.lastProgress = car.progress;
   car.progress = wrapProgress(car.progress + (car.speed / track.length) * dt);
 
-  const pose = sampleTrack(track, car.progress);
+  const pose = sampleTrack(track.definition.aiRoute, car.progress);
   const weave = Math.sin(raceTime * 1.1 + car.aiPhase) * 0.18;
   car.position.copy(pose.center).addScaledVector(pose.normal, car.laneOffset + weave);
   car.velocity.copy(pose.tangent).multiplyScalar(car.speed);
@@ -728,10 +712,10 @@ function makeHud(game: GameRuntime, now: number): HudState {
     countdownText,
     speedKmh: Math.round(Math.abs(player.speed) * 3.6),
     timer: game.phase === "finished" ? player.finishTime ?? raceTime : raceTime,
-    lap: Math.min(TOTAL_LAPS, player.lap),
-    totalLaps: TOTAL_LAPS,
+    lap: Math.min(game.track.lapCount, player.lap),
+    totalLaps: game.track.lapCount,
     checkpoint: player.nextCheckpointIndex,
-    checkpointTotal: CHECKPOINT_COUNT,
+    checkpointTotal: game.track.checkpointTargets.length,
     position: playerPlace,
     totalCars: game.cars.length,
     bestLapTime: player.bestLapTime,
@@ -1886,14 +1870,18 @@ function Environment({ qualityConfig, track, quality }: { qualityConfig: Quality
   );
 }
 
+const environmentRenderers: Record<string, typeof Environment> = { "sunset-loop": Environment, "neon-metro-graybox": NeonMetroGraybox };
+
 export default function RaceScene({
+  track,
   graphicsQuality,
   playerVehicle,
   resetSeed,
   onHudUpdate,
   onPerformanceUpdate
 }: RaceSceneProps) {
-  const track = useMemo(() => createTrack(), []);
+  const ActiveEnvironment = environmentRenderers[track.definition.environment.renderer];
+  if (!ActiveEnvironment) throw new Error(`Unknown environment: ${track.definition.environment.renderer}`);
   const qualityConfig = qualityPresets[graphicsQuality].effects;
   const keyboard = useKeyboard();
   const { camera, clock } = useThree();
@@ -2002,7 +1990,7 @@ export default function RaceScene({
   return (
     <>
       <PerformanceProbe onUpdate={onPerformanceUpdate} />
-      <Environment qualityConfig={qualityConfig} track={track} quality={graphicsQuality} />
+      <ActiveEnvironment qualityConfig={qualityConfig} track={track} quality={graphicsQuality} />
       <VisualEffects gameRef={gameRef} qualityConfig={qualityConfig} />
       {gameRef.current.cars.map((car, index) => (
         <group

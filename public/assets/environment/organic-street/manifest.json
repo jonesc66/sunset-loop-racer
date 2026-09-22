@@ -1,0 +1,274 @@
+{
+  "status": "VISUAL QUALITY PROTOTYPE / USER REVIEW REQUIRED",
+  "source": "assets/source/organic-street/library.blend",
+  "glb": "public/assets/environment/organic-street/library.glb",
+  "atlas": "existing kyoto-max atlas, unchanged",
+  "scope": "User-reported Sakura Boulevard trees/apartments and existing green street trees",
+  "meshes": [
+    {
+      "name": "Sakura_Boulevard_A_lod0",
+      "asset": "Sakura_Boulevard_A",
+      "category": "tree",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 1688,
+      "triangles": 1496,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        13.17691421508789,
+        13.808029174804688,
+        10.996734619140625
+      ],
+      "sourceTriangles": 1496
+    },
+    {
+      "name": "Sakura_Boulevard_A_lod1",
+      "asset": "Sakura_Boulevard_A",
+      "category": "tree",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1043,
+      "triangles": 1088,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        12.941035270690918,
+        13.574140548706055,
+        11.14687442779541
+      ],
+      "sourceTriangles": 1088
+    },
+    {
+      "name": "Sakura_Boulevard_A_lod2",
+      "asset": "Sakura_Boulevard_A",
+      "category": "tree",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 707,
+      "triangles": 920,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        13.226669311523438,
+        13.738142967224121,
+        11.383323669433594
+      ],
+      "sourceTriangles": 920
+    },
+    {
+      "name": "Sakura_Boulevard_B_lod0",
+      "asset": "Sakura_Boulevard_B",
+      "category": "tree",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 1688,
+      "triangles": 1496,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        12.151403427124023,
+        12.24155330657959,
+        10.186009407043457
+      ],
+      "sourceTriangles": 1496
+    },
+    {
+      "name": "Sakura_Boulevard_B_lod1",
+      "asset": "Sakura_Boulevard_B",
+      "category": "tree",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1043,
+      "triangles": 1088,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        12.166234016418457,
+        12.552118301391602,
+        10.213448524475098
+      ],
+      "sourceTriangles": 1088
+    },
+    {
+      "name": "Sakura_Boulevard_B_lod2",
+      "asset": "Sakura_Boulevard_B",
+      "category": "tree",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 707,
+      "triangles": 920,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        12.484384536743164,
+        12.609526634216309,
+        10.633552551269531
+      ],
+      "sourceTriangles": 920
+    },
+    {
+      "name": "Green_Street_Tree_lod0",
+      "asset": "Green_Street_Tree",
+      "category": "tree",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 11115,
+      "triangles": 10418,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        3.6733570098876953,
+        3.628892660140991,
+        3.586760997772217
+      ],
+      "sourceTriangles": 10418
+    },
+    {
+      "name": "Green_Street_Tree_lod1",
+      "asset": "Green_Street_Tree",
+      "category": "tree",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 3756,
+      "triangles": 3476,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        3.7210488319396973,
+        3.7650914192199707,
+        3.5593934059143066
+      ],
+      "sourceTriangles": 3476
+    },
+    {
+      "name": "Green_Street_Tree_lod2",
+      "asset": "Green_Street_Tree",
+      "category": "tree",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1866,
+      "triangles": 1856,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        3.487145185470581,
+        3.6682448387145996,
+        3.6852550506591797
+      ],
+      "sourceTriangles": 1856
+    },
+    {
+      "name": "Avenue_Apartment_lod0",
+      "asset": "Avenue_Apartment",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 20808,
+      "triangles": 38148,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        21.399999618530273,
+        17.0,
+        24.75
+      ],
+      "sourceTriangles": 38148
+    },
+    {
+      "name": "Avenue_Apartment_lod1",
+      "asset": "Avenue_Apartment",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 5704,
+      "triangles": 8556,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        21.399999618530273,
+        17.0,
+        24.75
+      ],
+      "sourceTriangles": 8556
+    },
+    {
+      "name": "Avenue_Apartment_lod2",
+      "asset": "Avenue_Apartment",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 4552,
+      "triangles": 6828,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        21.399999618530273,
+        17.0,
+        24.75
+      ],
+      "sourceTriangles": 6828
+    }
+  ],
+  "glbBytes": 5680500
+}

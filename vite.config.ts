@@ -9,6 +9,6 @@ export default defineConfig({
     port: 5173,
     // Generated evidence and local tool runtimes are not application source.
     // Windows can lock a just-written evidence file while chokidar starts watching it.
-    watch: { ignored: ["**/.edge-*-profile/**", "**/verification/**", "**/.tools/**"] }
+    watch: { ignored: ["**/.edge-*-profile/**", "**/.chrome-*-profile/**", "**/verification/**", "**/.tools/**"] }
   }
 });

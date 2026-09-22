@@ -1,0 +1,312 @@
+{
+  "blender": "4.5.9 LTS",
+  "source": "assets/source/kyoto/library.blend",
+  "glb": "public/assets/environment/kyoto/library.glb",
+  "units": "metres",
+  "axis": "Blender Z-up -> GLB Y-up; facade front +Z in GLB",
+  "origin": "ground centre",
+  "materials": 1,
+  "externalAssets": false,
+  "meshes": [
+    {
+      "name": "machiya_a_lod0",
+      "asset": "machiya_a",
+      "lod": 0,
+      "triangles": 2638,
+      "sector": "Market / Plaza",
+      "purpose": "reusable recessed timber shopfront and hipped eaves",
+      "dimensions": [
+        15.800000190734863,
+        12.360000610351562,
+        9.899999618530273
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "machiya_a_lod1",
+      "asset": "machiya_a",
+      "lod": 1,
+      "triangles": 2054,
+      "sector": "Market / Plaza",
+      "purpose": "reusable recessed timber shopfront and hipped eaves",
+      "dimensions": [
+        15.800000190734863,
+        12.360000610351562,
+        9.899999618530273
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "modern_office_lod0",
+      "asset": "modern_office",
+      "lod": 0,
+      "triangles": 2508,
+      "sector": "Avenue",
+      "purpose": "Blender authored reusable architecture / landmark",
+      "dimensions": [
+        21.0,
+        18.799999237060547,
+        40.650001525878906
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "modern_office_lod1",
+      "asset": "modern_office",
+      "lod": 1,
+      "triangles": 2412,
+      "sector": "Avenue",
+      "purpose": "Blender authored reusable architecture / landmark",
+      "dimensions": [
+        21.0,
+        18.799999237060547,
+        40.650001525878906
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "pagoda_lod0",
+      "asset": "pagoda",
+      "lod": 0,
+      "triangles": 3124,
+      "sector": "Plaza",
+      "purpose": "Blender authored reusable architecture / landmark",
+      "dimensions": [
+        15.0,
+        16.0,
+        33.0
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "pagoda_lod1",
+      "asset": "pagoda",
+      "lod": 1,
+      "triangles": 2204,
+      "sector": "Plaza",
+      "purpose": "Blender authored reusable architecture / landmark",
+      "dimensions": [
+        15.0,
+        16.0,
+        33.0
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "sakura_a_lod0",
+      "asset": "sakura_a",
+      "lod": 0,
+      "triangles": 820,
+      "sector": "Back Straight / Plaza",
+      "purpose": "Blender authored reusable architecture / landmark",
+      "dimensions": [
+        9.519594192504883,
+        9.03128433227539,
+        8.023932456970215
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "sakura_a_lod1",
+      "asset": "sakura_a",
+      "lod": 1,
+      "triangles": 596,
+      "sector": "Back Straight / Plaza",
+      "purpose": "Blender authored reusable architecture / landmark",
+      "dimensions": [
+        9.627511978149414,
+        9.18536376953125,
+        8.023932456970215
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "machiya_b_lod0",
+      "asset": "machiya_b",
+      "lod": 0,
+      "triangles": 2776,
+      "sector": "Market",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        15.800000190734863,
+        12.680000305175781,
+        10.899999618530273
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "machiya_b_lod1",
+      "asset": "machiya_b",
+      "lod": 1,
+      "triangles": 2192,
+      "sector": "Market",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        15.800000190734863,
+        12.680000305175781,
+        10.899999618530273
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "modern_apartment_lod0",
+      "asset": "modern_apartment",
+      "lod": 0,
+      "triangles": 3322,
+      "sector": "Downtown",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        22.0,
+        18.799999237060547,
+        26.075000762939453
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "modern_apartment_lod1",
+      "asset": "modern_apartment",
+      "lod": 1,
+      "triangles": 1930,
+      "sector": "Downtown",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        22.0,
+        18.799999237060547,
+        26.075000762939453
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "temple_gate_lod0",
+      "asset": "temple_gate",
+      "lod": 0,
+      "triangles": 580,
+      "sector": "Final Chicane",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        44.200626373291016,
+        1.7999999523162842,
+        14.966553688049316
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "temple_gate_lod1",
+      "asset": "temple_gate",
+      "lod": 1,
+      "triangles": 580,
+      "sector": "Final Chicane",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        44.200626373291016,
+        1.7999999523162842,
+        14.966553688049316
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "kyoto_arena_lod0",
+      "asset": "kyoto_arena",
+      "lod": 0,
+      "triangles": 5066,
+      "sector": "Stadium",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        144.4987030029297,
+        98.49971771240234,
+        25.31650733947754
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "kyoto_arena_lod1",
+      "asset": "kyoto_arena",
+      "lod": 1,
+      "triangles": 3914,
+      "sector": "Stadium",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        144.49668884277344,
+        98.49928283691406,
+        25.31650733947754
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "street_set_lod0",
+      "asset": "street_set",
+      "lod": 0,
+      "triangles": 366,
+      "sector": "Market / Downtown",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        6.574999809265137,
+        1.2100000381469727,
+        2.549999952316284
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "street_set_lod1",
+      "asset": "street_set",
+      "lod": 1,
+      "triangles": 366,
+      "sector": "Market / Downtown",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        6.574999809265137,
+        1.2100000381469727,
+        2.549999952316284
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "sakura_b_lod0",
+      "asset": "sakura_b",
+      "lod": 0,
+      "triangles": 820,
+      "sector": "Boulevard",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        9.508247375488281,
+        8.882265090942383,
+        8.023932456970215
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    },
+    {
+      "name": "sakura_b_lod1",
+      "asset": "sakura_b",
+      "lod": 1,
+      "triangles": 596,
+      "sector": "Boulevard",
+      "purpose": "reusable detailed frontage / silhouette landmark",
+      "dimensions": [
+        9.616166114807129,
+        9.036344528198242,
+        8.023932456970215
+      ],
+      "source": "assets/source/kyoto/library.blend",
+      "glb": "public/assets/environment/kyoto/library.glb"
+    }
+  ]
+}

@@ -1,0 +1,1164 @@
+{
+  "blender": "4.5.9 LTS",
+  "source": "assets/source/kyoto-quality/library.blend",
+  "glb": "public/assets/environment/kyoto-quality/library.glb",
+  "scope": [
+    "Market",
+    "Plaza"
+  ],
+  "materials": [
+    "timber",
+    "plaster",
+    "roof",
+    "stone",
+    "concrete",
+    "glass",
+    "accent",
+    "cloth"
+  ],
+  "textureSize": 512,
+  "meshes": [
+    {
+      "name": "Machiya_A_lod0_concrete",
+      "asset": "Machiya_A",
+      "lod": 0,
+      "material": "concrete",
+      "triangles": 540,
+      "dimensions": [
+        15.199999809265137,
+        11.100000381469727,
+        0.4000000059604645
+      ]
+    },
+    {
+      "name": "Machiya_A_lod0_plaster",
+      "asset": "Machiya_A",
+      "lod": 0,
+      "material": "plaster",
+      "triangles": 2268,
+      "dimensions": [
+        14.579999923706055,
+        11.699999809265137,
+        6.650000095367432
+      ]
+    },
+    {
+      "name": "Machiya_A_lod0_glass",
+      "asset": "Machiya_A",
+      "lod": 0,
+      "material": "glass",
+      "triangles": 2376,
+      "dimensions": [
+        14.760000228881836,
+        9.539999961853027,
+        6.005000114440918
+      ]
+    },
+    {
+      "name": "Machiya_A_lod0_timber",
+      "asset": "Machiya_A",
+      "lod": 0,
+      "material": "timber",
+      "triangles": 23220,
+      "dimensions": [
+        16.18199920654297,
+        12.51099967956543,
+        6.769999980926514
+      ]
+    },
+    {
+      "name": "Machiya_A_lod0_stone",
+      "asset": "Machiya_A",
+      "lod": 0,
+      "material": "stone",
+      "triangles": 1296,
+      "dimensions": [
+        13.625,
+        10.579999923706055,
+        3.690000057220459
+      ]
+    },
+    {
+      "name": "Machiya_A_lod0_accent",
+      "asset": "Machiya_A",
+      "lod": 0,
+      "material": "accent",
+      "triangles": 1312,
+      "dimensions": [
+        8.680000305175781,
+        11.755000114440918,
+        1.9200000762939453
+      ]
+    },
+    {
+      "name": "Machiya_A_lod0_roof",
+      "asset": "Machiya_A",
+      "lod": 0,
+      "material": "roof",
+      "triangles": 3784,
+      "dimensions": [
+        17.399999618530273,
+        12.699999809265137,
+        6.097015380859375
+      ]
+    },
+    {
+      "name": "Machiya_A_lod0_cloth",
+      "asset": "Machiya_A",
+      "lod": 0,
+      "material": "cloth",
+      "triangles": 16,
+      "dimensions": [
+        1.690000057220459,
+        10.140000343322754,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Machiya_A_lod1_concrete",
+      "asset": "Machiya_A",
+      "lod": 1,
+      "material": "concrete",
+      "triangles": 60,
+      "dimensions": [
+        15.199999809265137,
+        11.100000381469727,
+        0.4000000059604645
+      ]
+    },
+    {
+      "name": "Machiya_A_lod1_plaster",
+      "asset": "Machiya_A",
+      "lod": 1,
+      "material": "plaster",
+      "triangles": 252,
+      "dimensions": [
+        14.579999923706055,
+        11.699999809265137,
+        6.650000095367432
+      ]
+    },
+    {
+      "name": "Machiya_A_lod1_glass",
+      "asset": "Machiya_A",
+      "lod": 1,
+      "material": "glass",
+      "triangles": 264,
+      "dimensions": [
+        14.760000228881836,
+        9.539999961853027,
+        6.005000114440918
+      ]
+    },
+    {
+      "name": "Machiya_A_lod1_timber",
+      "asset": "Machiya_A",
+      "lod": 1,
+      "material": "timber",
+      "triangles": 2052,
+      "dimensions": [
+        16.18199920654297,
+        12.51099967956543,
+        6.769999980926514
+      ]
+    },
+    {
+      "name": "Machiya_A_lod1_stone",
+      "asset": "Machiya_A",
+      "lod": 1,
+      "material": "stone",
+      "triangles": 144,
+      "dimensions": [
+        13.625,
+        10.579999923706055,
+        3.690000057220459
+      ]
+    },
+    {
+      "name": "Machiya_A_lod1_accent",
+      "asset": "Machiya_A",
+      "lod": 1,
+      "material": "accent",
+      "triangles": 16,
+      "dimensions": [
+        1.690000057220459,
+        10.140000343322754,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Machiya_A_lod1_roof",
+      "asset": "Machiya_A",
+      "lod": 1,
+      "material": "roof",
+      "triangles": 360,
+      "dimensions": [
+        17.399999618530273,
+        12.699999809265137,
+        6.065525054931641
+      ]
+    },
+    {
+      "name": "Machiya_A_lod1_cloth",
+      "asset": "Machiya_A",
+      "lod": 1,
+      "material": "cloth",
+      "triangles": 16,
+      "dimensions": [
+        1.690000057220459,
+        10.140000343322754,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Machiya_B_lod0_concrete",
+      "asset": "Machiya_B",
+      "lod": 0,
+      "material": "concrete",
+      "triangles": 540,
+      "dimensions": [
+        15.199999809265137,
+        11.100000381469727,
+        0.4000000059604645
+      ]
+    },
+    {
+      "name": "Machiya_B_lod0_plaster",
+      "asset": "Machiya_B",
+      "lod": 0,
+      "material": "plaster",
+      "triangles": 2268,
+      "dimensions": [
+        14.579999923706055,
+        11.699999809265137,
+        6.650000095367432
+      ]
+    },
+    {
+      "name": "Machiya_B_lod0_glass",
+      "asset": "Machiya_B",
+      "lod": 0,
+      "material": "glass",
+      "triangles": 2376,
+      "dimensions": [
+        14.760000228881836,
+        9.539999961853027,
+        6.005000114440918
+      ]
+    },
+    {
+      "name": "Machiya_B_lod0_timber",
+      "asset": "Machiya_B",
+      "lod": 0,
+      "material": "timber",
+      "triangles": 27648,
+      "dimensions": [
+        16.18199920654297,
+        12.51099967956543,
+        7.710000038146973
+      ]
+    },
+    {
+      "name": "Machiya_B_lod0_stone",
+      "asset": "Machiya_B",
+      "lod": 0,
+      "material": "stone",
+      "triangles": 1296,
+      "dimensions": [
+        13.625,
+        10.579999923706055,
+        3.690000057220459
+      ]
+    },
+    {
+      "name": "Machiya_B_lod0_cloth",
+      "asset": "Machiya_B",
+      "lod": 0,
+      "material": "cloth",
+      "triangles": 16,
+      "dimensions": [
+        1.690000057220459,
+        10.140000343322754,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Machiya_B_lod0_roof",
+      "asset": "Machiya_B",
+      "lod": 0,
+      "material": "roof",
+      "triangles": 4576,
+      "dimensions": [
+        17.399999618530273,
+        12.699999809265137,
+        6.997014999389648
+      ]
+    },
+    {
+      "name": "Machiya_B_lod0_accent",
+      "asset": "Machiya_B",
+      "lod": 0,
+      "material": "accent",
+      "triangles": 1312,
+      "dimensions": [
+        12.28499984741211,
+        11.755000114440918,
+        1.9200000762939453
+      ]
+    },
+    {
+      "name": "Machiya_B_lod1_concrete",
+      "asset": "Machiya_B",
+      "lod": 1,
+      "material": "concrete",
+      "triangles": 60,
+      "dimensions": [
+        15.199999809265137,
+        11.100000381469727,
+        0.4000000059604645
+      ]
+    },
+    {
+      "name": "Machiya_B_lod1_plaster",
+      "asset": "Machiya_B",
+      "lod": 1,
+      "material": "plaster",
+      "triangles": 252,
+      "dimensions": [
+        14.579999923706055,
+        11.699999809265137,
+        6.650000095367432
+      ]
+    },
+    {
+      "name": "Machiya_B_lod1_glass",
+      "asset": "Machiya_B",
+      "lod": 1,
+      "material": "glass",
+      "triangles": 264,
+      "dimensions": [
+        14.760000228881836,
+        9.539999961853027,
+        6.005000114440918
+      ]
+    },
+    {
+      "name": "Machiya_B_lod1_timber",
+      "asset": "Machiya_B",
+      "lod": 1,
+      "material": "timber",
+      "triangles": 2328,
+      "dimensions": [
+        16.18199920654297,
+        12.51099967956543,
+        7.710000038146973
+      ]
+    },
+    {
+      "name": "Machiya_B_lod1_stone",
+      "asset": "Machiya_B",
+      "lod": 1,
+      "material": "stone",
+      "triangles": 144,
+      "dimensions": [
+        13.625,
+        10.579999923706055,
+        3.690000057220459
+      ]
+    },
+    {
+      "name": "Machiya_B_lod1_cloth",
+      "asset": "Machiya_B",
+      "lod": 1,
+      "material": "cloth",
+      "triangles": 16,
+      "dimensions": [
+        1.690000057220459,
+        10.140000343322754,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Machiya_B_lod1_roof",
+      "asset": "Machiya_B",
+      "lod": 1,
+      "material": "roof",
+      "triangles": 432,
+      "dimensions": [
+        17.399999618530273,
+        12.699999809265137,
+        6.9655256271362305
+      ]
+    },
+    {
+      "name": "Machiya_B_lod1_accent",
+      "asset": "Machiya_B",
+      "lod": 1,
+      "material": "accent",
+      "triangles": 16,
+      "dimensions": [
+        1.690000057220459,
+        10.140000343322754,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod0_concrete",
+      "asset": "Corner_Machiya",
+      "lod": 0,
+      "material": "concrete",
+      "triangles": 540,
+      "dimensions": [
+        15.199999809265137,
+        11.100000381469727,
+        0.4000000059604645
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod0_plaster",
+      "asset": "Corner_Machiya",
+      "lod": 0,
+      "material": "plaster",
+      "triangles": 2268,
+      "dimensions": [
+        14.579999923706055,
+        11.699999809265137,
+        6.650000095367432
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod0_glass",
+      "asset": "Corner_Machiya",
+      "lod": 0,
+      "material": "glass",
+      "triangles": 2376,
+      "dimensions": [
+        14.760000228881836,
+        9.539999961853027,
+        6.005000114440918
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod0_timber",
+      "asset": "Corner_Machiya",
+      "lod": 0,
+      "material": "timber",
+      "triangles": 28188,
+      "dimensions": [
+        16.69499969482422,
+        12.51099967956543,
+        7.859999656677246
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod0_stone",
+      "asset": "Corner_Machiya",
+      "lod": 0,
+      "material": "stone",
+      "triangles": 1296,
+      "dimensions": [
+        13.625,
+        10.579999923706055,
+        3.690000057220459
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod0_cloth",
+      "asset": "Corner_Machiya",
+      "lod": 0,
+      "material": "cloth",
+      "triangles": 16,
+      "dimensions": [
+        1.690000057220459,
+        10.140000343322754,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod0_roof",
+      "asset": "Corner_Machiya",
+      "lod": 0,
+      "material": "roof",
+      "triangles": 5176,
+      "dimensions": [
+        17.5,
+        12.699999809265137,
+        6.997014999389648
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod0_accent",
+      "asset": "Corner_Machiya",
+      "lod": 0,
+      "material": "accent",
+      "triangles": 1312,
+      "dimensions": [
+        12.28499984741211,
+        11.755000114440918,
+        1.9200000762939453
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod1_concrete",
+      "asset": "Corner_Machiya",
+      "lod": 1,
+      "material": "concrete",
+      "triangles": 60,
+      "dimensions": [
+        15.199999809265137,
+        11.100000381469727,
+        0.4000000059604645
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod1_plaster",
+      "asset": "Corner_Machiya",
+      "lod": 1,
+      "material": "plaster",
+      "triangles": 252,
+      "dimensions": [
+        14.579999923706055,
+        11.699999809265137,
+        6.650000095367432
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod1_glass",
+      "asset": "Corner_Machiya",
+      "lod": 1,
+      "material": "glass",
+      "triangles": 264,
+      "dimensions": [
+        14.760000228881836,
+        9.539999961853027,
+        6.005000114440918
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod1_timber",
+      "asset": "Corner_Machiya",
+      "lod": 1,
+      "material": "timber",
+      "triangles": 2388,
+      "dimensions": [
+        16.69499969482422,
+        12.51099967956543,
+        7.859999656677246
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod1_stone",
+      "asset": "Corner_Machiya",
+      "lod": 1,
+      "material": "stone",
+      "triangles": 144,
+      "dimensions": [
+        13.625,
+        10.579999923706055,
+        3.690000057220459
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod1_cloth",
+      "asset": "Corner_Machiya",
+      "lod": 1,
+      "material": "cloth",
+      "triangles": 16,
+      "dimensions": [
+        1.690000057220459,
+        10.140000343322754,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod1_roof",
+      "asset": "Corner_Machiya",
+      "lod": 1,
+      "material": "roof",
+      "triangles": 504,
+      "dimensions": [
+        17.5,
+        12.699999809265137,
+        6.9655256271362305
+      ]
+    },
+    {
+      "name": "Corner_Machiya_lod1_accent",
+      "asset": "Corner_Machiya",
+      "lod": 1,
+      "material": "accent",
+      "triangles": 16,
+      "dimensions": [
+        1.690000057220459,
+        10.140000343322754,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod0_timber",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 0,
+      "material": "timber",
+      "triangles": 2052,
+      "dimensions": [
+        7.099999904632568,
+        2.510999917984009,
+        4.325000286102295
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod0_glass",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 0,
+      "material": "glass",
+      "triangles": 216,
+      "dimensions": [
+        5.475000381469727,
+        0.7999999523162842,
+        2.9000000953674316
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod0_stone",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 0,
+      "material": "stone",
+      "triangles": 108,
+      "dimensions": [
+        2.75,
+        0.48000001907348633,
+        0.1600000262260437
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod0_concrete",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 0,
+      "material": "concrete",
+      "triangles": 108,
+      "dimensions": [
+        2.299999952316284,
+        1.700000286102295,
+        0.2199999839067459
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod0_accent",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 0,
+      "material": "accent",
+      "triangles": 332,
+      "dimensions": [
+        4.885000228881836,
+        0.9774999618530273,
+        1.9200000762939453
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod0_roof",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 0,
+      "material": "roof",
+      "triangles": 712,
+      "dimensions": [
+        7.599999904632568,
+        2.6999998092651367,
+        0.897014856338501
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod0_plaster",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 0,
+      "material": "plaster",
+      "triangles": 108,
+      "dimensions": [
+        2.3499999046325684,
+        0.039999961853027344,
+        0.40000009536743164
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod1_timber",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 1,
+      "material": "timber",
+      "triangles": 192,
+      "dimensions": [
+        7.099999904632568,
+        2.510999917984009,
+        4.325000286102295
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod1_glass",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 1,
+      "material": "glass",
+      "triangles": 24,
+      "dimensions": [
+        5.475000381469727,
+        0.7999999523162842,
+        2.9000000953674316
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod1_stone",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 1,
+      "material": "stone",
+      "triangles": 12,
+      "dimensions": [
+        2.75,
+        0.48000001907348633,
+        0.1600000262260437
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod1_concrete",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 1,
+      "material": "concrete",
+      "triangles": 12,
+      "dimensions": [
+        2.299999952316284,
+        1.700000286102295,
+        0.2199999839067459
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod1_accent",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 1,
+      "material": "accent",
+      "triangles": 8,
+      "dimensions": [
+        1.690000057220459,
+        0.1700000762939453,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod1_roof",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 1,
+      "material": "roof",
+      "triangles": 72,
+      "dimensions": [
+        7.599999904632568,
+        2.6999998092651367,
+        0.865525484085083
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_A_lod1_plaster",
+      "asset": "Kyoto_Shopfront_A",
+      "lod": 1,
+      "material": "plaster",
+      "triangles": 12,
+      "dimensions": [
+        2.3499999046325684,
+        0.039999961853027344,
+        0.40000009536743164
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod0_timber",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 0,
+      "material": "timber",
+      "triangles": 2052,
+      "dimensions": [
+        7.099999904632568,
+        2.510999917984009,
+        4.325000286102295
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod0_glass",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 0,
+      "material": "glass",
+      "triangles": 216,
+      "dimensions": [
+        5.475000381469727,
+        0.7999999523162842,
+        2.9000000953674316
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod0_stone",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 0,
+      "material": "stone",
+      "triangles": 108,
+      "dimensions": [
+        2.75,
+        0.48000001907348633,
+        0.1600000262260437
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod0_concrete",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 0,
+      "material": "concrete",
+      "triangles": 108,
+      "dimensions": [
+        2.299999952316284,
+        1.700000286102295,
+        0.2199999839067459
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod0_cloth",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 0,
+      "material": "cloth",
+      "triangles": 8,
+      "dimensions": [
+        1.690000057220459,
+        0.1700000762939453,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod0_roof",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 0,
+      "material": "roof",
+      "triangles": 712,
+      "dimensions": [
+        7.599999904632568,
+        2.6999998092651367,
+        0.897014856338501
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod0_plaster",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 0,
+      "material": "plaster",
+      "triangles": 108,
+      "dimensions": [
+        2.3499999046325684,
+        0.039999961853027344,
+        0.40000009536743164
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod0_accent",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 0,
+      "material": "accent",
+      "triangles": 324,
+      "dimensions": [
+        1.2799999713897705,
+        0.034999847412109375,
+        0.24000024795532227
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod1_timber",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 1,
+      "material": "timber",
+      "triangles": 192,
+      "dimensions": [
+        7.099999904632568,
+        2.510999917984009,
+        4.325000286102295
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod1_glass",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 1,
+      "material": "glass",
+      "triangles": 24,
+      "dimensions": [
+        5.475000381469727,
+        0.7999999523162842,
+        2.9000000953674316
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod1_stone",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 1,
+      "material": "stone",
+      "triangles": 12,
+      "dimensions": [
+        2.75,
+        0.48000001907348633,
+        0.1600000262260437
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod1_concrete",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 1,
+      "material": "concrete",
+      "triangles": 12,
+      "dimensions": [
+        2.299999952316284,
+        1.700000286102295,
+        0.2199999839067459
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod1_cloth",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 1,
+      "material": "cloth",
+      "triangles": 8,
+      "dimensions": [
+        1.690000057220459,
+        0.1700000762939453,
+        0.7199997901916504
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod1_roof",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 1,
+      "material": "roof",
+      "triangles": 72,
+      "dimensions": [
+        7.599999904632568,
+        2.6999998092651367,
+        0.865525484085083
+      ]
+    },
+    {
+      "name": "Kyoto_Shopfront_B_lod1_plaster",
+      "asset": "Kyoto_Shopfront_B",
+      "lod": 1,
+      "material": "plaster",
+      "triangles": 12,
+      "dimensions": [
+        2.3499999046325684,
+        0.039999961853027344,
+        0.40000009536743164
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod0_stone",
+      "asset": "Pagoda_Hero",
+      "lod": 0,
+      "material": "stone",
+      "triangles": 1404,
+      "dimensions": [
+        17.0,
+        17.0,
+        22.145000457763672
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod0_plaster",
+      "asset": "Pagoda_Hero",
+      "lod": 0,
+      "material": "plaster",
+      "triangles": 540,
+      "dimensions": [
+        8.800000190734863,
+        8.800000190734863,
+        24.0
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod0_timber",
+      "asset": "Pagoda_Hero",
+      "lod": 0,
+      "material": "timber",
+      "triangles": 63504,
+      "dimensions": [
+        14.508000373840332,
+        14.508000373840332,
+        31.400001525878906
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod0_glass",
+      "asset": "Pagoda_Hero",
+      "lod": 0,
+      "material": "glass",
+      "triangles": 1080,
+      "dimensions": [
+        3.7760000228881836,
+        8.5,
+        22.700000762939453
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod0_roof",
+      "asset": "Pagoda_Hero",
+      "lod": 0,
+      "material": "roof",
+      "triangles": 4700,
+      "dimensions": [
+        15.600000381469727,
+        15.600000381469727,
+        26.202226638793945
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod1_stone",
+      "asset": "Pagoda_Hero",
+      "lod": 1,
+      "material": "stone",
+      "triangles": 156,
+      "dimensions": [
+        17.0,
+        17.0,
+        22.145000457763672
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod1_plaster",
+      "asset": "Pagoda_Hero",
+      "lod": 1,
+      "material": "plaster",
+      "triangles": 60,
+      "dimensions": [
+        8.800000190734863,
+        8.800000190734863,
+        24.0
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod1_timber",
+      "asset": "Pagoda_Hero",
+      "lod": 1,
+      "material": "timber",
+      "triangles": 3504,
+      "dimensions": [
+        14.508000373840332,
+        14.508000373840332,
+        31.400001525878906
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod1_glass",
+      "asset": "Pagoda_Hero",
+      "lod": 1,
+      "material": "glass",
+      "triangles": 120,
+      "dimensions": [
+        3.7760000228881836,
+        8.5,
+        22.700000762939453
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod1_roof",
+      "asset": "Pagoda_Hero",
+      "lod": 1,
+      "material": "roof",
+      "triangles": 444,
+      "dimensions": [
+        15.600000381469727,
+        15.600000381469727,
+        26.170001983642578
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod0_stone",
+      "asset": "Traditional_Wall",
+      "lod": 0,
+      "material": "stone",
+      "triangles": 108,
+      "dimensions": [
+        8.0,
+        1.100000023841858,
+        0.36000001430511475
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod0_plaster",
+      "asset": "Traditional_Wall",
+      "lod": 0,
+      "material": "plaster",
+      "triangles": 108,
+      "dimensions": [
+        8.0,
+        0.47999998927116394,
+        1.75
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod0_timber",
+      "asset": "Traditional_Wall",
+      "lod": 0,
+      "material": "timber",
+      "triangles": 324,
+      "dimensions": [
+        8.184000015258789,
+        1.4880000352859497,
+        1.8999998569488525
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod0_roof",
+      "asset": "Traditional_Wall",
+      "lod": 0,
+      "material": "roof",
+      "triangles": 792,
+      "dimensions": [
+        8.800000190734863,
+        1.600000023841858,
+        0.7517886161804199
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod1_stone",
+      "asset": "Traditional_Wall",
+      "lod": 1,
+      "material": "stone",
+      "triangles": 12,
+      "dimensions": [
+        8.0,
+        1.100000023841858,
+        0.36000001430511475
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod1_plaster",
+      "asset": "Traditional_Wall",
+      "lod": 1,
+      "material": "plaster",
+      "triangles": 12,
+      "dimensions": [
+        8.0,
+        0.47999998927116394,
+        1.75
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod1_timber",
+      "asset": "Traditional_Wall",
+      "lod": 1,
+      "material": "timber",
+      "triangles": 36,
+      "dimensions": [
+        8.184000015258789,
+        1.4880000352859497,
+        1.8999998569488525
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod1_roof",
+      "asset": "Traditional_Wall",
+      "lod": 1,
+      "material": "roof",
+      "triangles": 72,
+      "dimensions": [
+        8.800000190734863,
+        1.600000023841858,
+        0.7217886447906494
+      ]
+    }
+  ],
+  "normalStrategy": "Bevel 2 segments + angle sharp edges + Weighted Normal applied to exported mesh",
+  "units": "metres; GLB Y-up; ground origin"
+}

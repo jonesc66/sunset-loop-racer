@@ -1,0 +1,1166 @@
+{
+  "status": "MAX-QUALITY ASSET PROTOTYPE / USER REVIEW REQUIRED",
+  "batch": 1,
+  "blender": "4.5.9 LTS",
+  "atlas": {
+    "resolution": 2048,
+    "tileResolution": 512,
+    "maps": [
+      "base",
+      "normal",
+      "orm"
+    ],
+    "surfaces": [
+      "timber",
+      "plaster",
+      "roof",
+      "stone",
+      "warm",
+      "cool",
+      "ivory",
+      "metal",
+      "teal",
+      "blue",
+      "amber",
+      "brick",
+      "bark",
+      "blossom",
+      "cloth",
+      "darkwood"
+    ],
+    "ao": "procedural material micro-occlusion; not scene AO"
+  },
+  "source": "assets/source/kyoto-max/library.blend",
+  "glb": "public/assets/environment/kyoto-max/library.glb",
+  "meshes": [
+    {
+      "name": "Modern_Tower_A_lod0",
+      "asset": "Modern_Tower_A",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 1296,
+      "triangles": 2384,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        20.0,
+        19.899999618530273,
+        53.5
+      ]
+    },
+    {
+      "name": "Modern_Tower_A_lod1",
+      "asset": "Modern_Tower_A",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 402,
+      "triangles": 612,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        20.0,
+        19.899999618530273,
+        53.5
+      ]
+    },
+    {
+      "name": "Modern_Tower_A_lod2",
+      "asset": "Modern_Tower_A",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 274,
+      "triangles": 420,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        20.0,
+        19.899999618530273,
+        53.5
+      ]
+    },
+    {
+      "name": "Modern_Tower_B_lod0",
+      "asset": "Modern_Tower_B",
+      "category": "modern",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 1294,
+      "triangles": 2396,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        24.0,
+        19.200000762939453,
+        40.5
+      ]
+    },
+    {
+      "name": "Modern_Tower_B_lod1",
+      "asset": "Modern_Tower_B",
+      "category": "modern",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 422,
+      "triangles": 668,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        24.0,
+        19.200000762939453,
+        40.5
+      ]
+    },
+    {
+      "name": "Modern_Tower_B_lod2",
+      "asset": "Modern_Tower_B",
+      "category": "modern",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 176,
+      "triangles": 284,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        24.0,
+        19.200000762939453,
+        40.5
+      ]
+    },
+    {
+      "name": "Machiya_A_lod0",
+      "asset": "Machiya_A",
+      "category": "machiya",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 6122,
+      "triangles": 11230,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.64141845703125,
+        11.199999809265137,
+        8.501243591308594
+      ]
+    },
+    {
+      "name": "Machiya_A_lod1",
+      "asset": "Machiya_A",
+      "category": "machiya",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1560,
+      "triangles": 2330,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.199999809265137,
+        8.501243591308594
+      ]
+    },
+    {
+      "name": "Machiya_A_lod2",
+      "asset": "Machiya_A",
+      "category": "machiya",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1536,
+      "triangles": 2282,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.199999809265137,
+        8.501243591308594
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod0",
+      "asset": "Pagoda_Hero",
+      "category": "hero",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 18700,
+      "triangles": 34716,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        17.0,
+        17.0,
+        32.19499969482422
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod1",
+      "asset": "Pagoda_Hero",
+      "category": "hero",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 4207,
+      "triangles": 6914,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        17.0,
+        17.0,
+        32.19499969482422
+      ]
+    },
+    {
+      "name": "Pagoda_Hero_lod2",
+      "asset": "Pagoda_Hero",
+      "category": "hero",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 3507,
+      "triangles": 5634,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        17.0,
+        17.0,
+        32.19499969482422
+      ]
+    },
+    {
+      "name": "Sakura_A_lod0",
+      "asset": "Sakura_A",
+      "category": "tree",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 1688,
+      "triangles": 1496,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        12.763701438903809,
+        12.361425399780273,
+        10.032787322998047
+      ]
+    },
+    {
+      "name": "Sakura_A_lod1",
+      "asset": "Sakura_A",
+      "category": "tree",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1043,
+      "triangles": 1088,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        13.25872802734375,
+        12.533924102783203,
+        10.290616035461426
+      ]
+    },
+    {
+      "name": "Sakura_A_lod2",
+      "asset": "Sakura_A",
+      "category": "tree",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 707,
+      "triangles": 920,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        13.54916000366211,
+        12.88160514831543,
+        10.565177917480469
+      ]
+    },
+    {
+      "name": "Temple_Gate_lod0",
+      "asset": "Temple_Gate",
+      "category": "district",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 300,
+      "triangles": 564,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        9.241867065429688,
+        3.5,
+        6.351243495941162
+      ]
+    },
+    {
+      "name": "Temple_Gate_lod1",
+      "asset": "Temple_Gate",
+      "category": "district",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 94,
+      "triangles": 152,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        9.242624282836914,
+        3.5,
+        6.351243495941162
+      ]
+    },
+    {
+      "name": "Temple_Gate_lod2",
+      "asset": "Temple_Gate",
+      "category": "district",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 86,
+      "triangles": 136,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        9.242624282836914,
+        3.5,
+        6.351243495941162
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod0",
+      "asset": "Traditional_Wall",
+      "category": "district",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 328,
+      "triangles": 628,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        8.800000190734863,
+        1.600000023841858,
+        2.615000009536743
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod1",
+      "asset": "Traditional_Wall",
+      "category": "district",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 128,
+      "triangles": 228,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        8.800000190734863,
+        1.600000023841858,
+        2.615000009536743
+      ]
+    },
+    {
+      "name": "Traditional_Wall_lod2",
+      "asset": "Traditional_Wall",
+      "category": "district",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 96,
+      "triangles": 164,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        8.800000190734863,
+        1.600000023841858,
+        2.615000009536743
+      ]
+    },
+    {
+      "name": "Temple_Hall_lod0",
+      "asset": "Temple_Hall",
+      "category": "district",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 2100,
+      "triangles": 3904,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        16.2412166595459,
+        11.0,
+        6.9512434005737305
+      ]
+    },
+    {
+      "name": "Temple_Hall_lod1",
+      "asset": "Temple_Hall",
+      "category": "district",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 558,
+      "triangles": 868,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        16.241493225097656,
+        11.0,
+        6.9512434005737305
+      ]
+    },
+    {
+      "name": "Temple_Hall_lod2",
+      "asset": "Temple_Hall",
+      "category": "district",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 550,
+      "triangles": 852,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        16.241493225097656,
+        11.0,
+        6.9512434005737305
+      ]
+    }
+  ],
+  "glbBytes": 5299252,
+  "assets": [
+    {
+      "name": "Modern_Tower_A",
+      "source": "assets/source/kyoto-max/library.blend",
+      "glb": "public/assets/environment/kyoto-max/Modern_Tower_A.glb",
+      "glbBytes": 221580,
+      "category": "modern",
+      "materials": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Existing road comparison near Plaza approach"
+      ],
+      "lods": [
+        {
+          "name": "Modern_Tower_A_lod0",
+          "asset": "Modern_Tower_A",
+          "category": "modern",
+          "lod": 0,
+          "tier": "Hero / near",
+          "vertices": 1296,
+          "triangles": 2384,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            20.0,
+            19.899999618530273,
+            53.5
+          ]
+        },
+        {
+          "name": "Modern_Tower_A_lod1",
+          "asset": "Modern_Tower_A",
+          "category": "modern",
+          "lod": 1,
+          "tier": "Mid",
+          "vertices": 402,
+          "triangles": 612,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            20.0,
+            19.899999618530273,
+            53.5
+          ]
+        },
+        {
+          "name": "Modern_Tower_A_lod2",
+          "asset": "Modern_Tower_A",
+          "category": "modern",
+          "lod": 2,
+          "tier": "Far",
+          "vertices": 274,
+          "triangles": 420,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            20.0,
+            19.899999618530273,
+            53.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Modern_Tower_B",
+      "source": "assets/source/kyoto-max/library.blend",
+      "glb": "public/assets/environment/kyoto-max/Modern_Tower_B.glb",
+      "glbBytes": 215060,
+      "category": "modern",
+      "materials": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Existing road comparison near Plaza approach"
+      ],
+      "lods": [
+        {
+          "name": "Modern_Tower_B_lod0",
+          "asset": "Modern_Tower_B",
+          "category": "modern",
+          "lod": 0,
+          "tier": "Hero / near",
+          "vertices": 1294,
+          "triangles": 2396,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            24.0,
+            19.200000762939453,
+            40.5
+          ]
+        },
+        {
+          "name": "Modern_Tower_B_lod1",
+          "asset": "Modern_Tower_B",
+          "category": "modern",
+          "lod": 1,
+          "tier": "Mid",
+          "vertices": 422,
+          "triangles": 668,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            24.0,
+            19.200000762939453,
+            40.5
+          ]
+        },
+        {
+          "name": "Modern_Tower_B_lod2",
+          "asset": "Modern_Tower_B",
+          "category": "modern",
+          "lod": 2,
+          "tier": "Far",
+          "vertices": 176,
+          "triangles": 284,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            24.0,
+            19.200000762939453,
+            40.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Machiya_A",
+      "source": "assets/source/kyoto-max/library.blend",
+      "glb": "public/assets/environment/kyoto-max/Machiya_A.glb",
+      "glbBytes": 1026944,
+      "category": "machiya",
+      "materials": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "lods": [
+        {
+          "name": "Machiya_A_lod0",
+          "asset": "Machiya_A",
+          "category": "machiya",
+          "lod": 0,
+          "tier": "Hero / near",
+          "vertices": 6122,
+          "triangles": 11230,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            14.64141845703125,
+            11.199999809265137,
+            8.501243591308594
+          ]
+        },
+        {
+          "name": "Machiya_A_lod1",
+          "asset": "Machiya_A",
+          "category": "machiya",
+          "lod": 1,
+          "tier": "Mid",
+          "vertices": 1560,
+          "triangles": 2330,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            14.65999984741211,
+            11.199999809265137,
+            8.501243591308594
+          ]
+        },
+        {
+          "name": "Machiya_A_lod2",
+          "asset": "Machiya_A",
+          "category": "machiya",
+          "lod": 2,
+          "tier": "Far",
+          "vertices": 1536,
+          "triangles": 2282,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            14.65999984741211,
+            11.199999809265137,
+            8.501243591308594
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pagoda_Hero",
+      "source": "assets/source/kyoto-max/library.blend",
+      "glb": "public/assets/environment/kyoto-max/Pagoda_Hero.glb",
+      "glbBytes": 3087688,
+      "category": "hero",
+      "materials": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "lods": [
+        {
+          "name": "Pagoda_Hero_lod0",
+          "asset": "Pagoda_Hero",
+          "category": "hero",
+          "lod": 0,
+          "tier": "Hero / near",
+          "vertices": 18700,
+          "triangles": 34716,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            17.0,
+            17.0,
+            32.19499969482422
+          ]
+        },
+        {
+          "name": "Pagoda_Hero_lod1",
+          "asset": "Pagoda_Hero",
+          "category": "hero",
+          "lod": 1,
+          "tier": "Mid",
+          "vertices": 4207,
+          "triangles": 6914,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            17.0,
+            17.0,
+            32.19499969482422
+          ]
+        },
+        {
+          "name": "Pagoda_Hero_lod2",
+          "asset": "Pagoda_Hero",
+          "category": "hero",
+          "lod": 2,
+          "tier": "Far",
+          "vertices": 3507,
+          "triangles": 5634,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            17.0,
+            17.0,
+            32.19499969482422
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sakura_A",
+      "source": "assets/source/kyoto-max/library.blend",
+      "glb": "public/assets/environment/kyoto-max/Sakura_A.glb",
+      "glbBytes": 241072,
+      "category": "tree",
+      "materials": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "lods": [
+        {
+          "name": "Sakura_A_lod0",
+          "asset": "Sakura_A",
+          "category": "tree",
+          "lod": 0,
+          "tier": "Hero / near",
+          "vertices": 1688,
+          "triangles": 1496,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            12.763701438903809,
+            12.361425399780273,
+            10.032787322998047
+          ]
+        },
+        {
+          "name": "Sakura_A_lod1",
+          "asset": "Sakura_A",
+          "category": "tree",
+          "lod": 1,
+          "tier": "Mid",
+          "vertices": 1043,
+          "triangles": 1088,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            13.25872802734375,
+            12.533924102783203,
+            10.290616035461426
+          ]
+        },
+        {
+          "name": "Sakura_A_lod2",
+          "asset": "Sakura_A",
+          "category": "tree",
+          "lod": 2,
+          "tier": "Far",
+          "vertices": 707,
+          "triangles": 920,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            13.54916000366211,
+            12.88160514831543,
+            10.565177917480469
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Temple_Gate",
+      "source": "assets/source/kyoto-max/library.blend",
+      "glb": "public/assets/environment/kyoto-max/Temple_Gate.glb",
+      "glbBytes": 59436,
+      "category": "district",
+      "materials": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "lods": [
+        {
+          "name": "Temple_Gate_lod0",
+          "asset": "Temple_Gate",
+          "category": "district",
+          "lod": 0,
+          "tier": "Hero / near",
+          "vertices": 300,
+          "triangles": 564,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            9.241867065429688,
+            3.5,
+            6.351243495941162
+          ]
+        },
+        {
+          "name": "Temple_Gate_lod1",
+          "asset": "Temple_Gate",
+          "category": "district",
+          "lod": 1,
+          "tier": "Mid",
+          "vertices": 94,
+          "triangles": 152,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            9.242624282836914,
+            3.5,
+            6.351243495941162
+          ]
+        },
+        {
+          "name": "Temple_Gate_lod2",
+          "asset": "Temple_Gate",
+          "category": "district",
+          "lod": 2,
+          "tier": "Far",
+          "vertices": 86,
+          "triangles": 136,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            9.242624282836914,
+            3.5,
+            6.351243495941162
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Traditional_Wall",
+      "source": "assets/source/kyoto-max/library.blend",
+      "glb": "public/assets/environment/kyoto-max/Traditional_Wall.glb",
+      "glbBytes": 71096,
+      "category": "district",
+      "materials": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "lods": [
+        {
+          "name": "Traditional_Wall_lod0",
+          "asset": "Traditional_Wall",
+          "category": "district",
+          "lod": 0,
+          "tier": "Hero / near",
+          "vertices": 328,
+          "triangles": 628,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            8.800000190734863,
+            1.600000023841858,
+            2.615000009536743
+          ]
+        },
+        {
+          "name": "Traditional_Wall_lod1",
+          "asset": "Traditional_Wall",
+          "category": "district",
+          "lod": 1,
+          "tier": "Mid",
+          "vertices": 128,
+          "triangles": 228,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            8.800000190734863,
+            1.600000023841858,
+            2.615000009536743
+          ]
+        },
+        {
+          "name": "Traditional_Wall_lod2",
+          "asset": "Traditional_Wall",
+          "category": "district",
+          "lod": 2,
+          "tier": "Far",
+          "vertices": 96,
+          "triangles": 164,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            8.800000190734863,
+            1.600000023841858,
+            2.615000009536743
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Temple_Hall",
+      "source": "assets/source/kyoto-max/library.blend",
+      "glb": "public/assets/environment/kyoto-max/Temple_Hall.glb",
+      "glbBytes": 377948,
+      "category": "district",
+      "materials": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "lods": [
+        {
+          "name": "Temple_Hall_lod0",
+          "asset": "Temple_Hall",
+          "category": "district",
+          "lod": 0,
+          "tier": "Hero / near",
+          "vertices": 2100,
+          "triangles": 3904,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            16.2412166595459,
+            11.0,
+            6.9512434005737305
+          ]
+        },
+        {
+          "name": "Temple_Hall_lod1",
+          "asset": "Temple_Hall",
+          "category": "district",
+          "lod": 1,
+          "tier": "Mid",
+          "vertices": 558,
+          "triangles": 868,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            16.241493225097656,
+            11.0,
+            6.9512434005737305
+          ]
+        },
+        {
+          "name": "Temple_Hall_lod2",
+          "asset": "Temple_Hall",
+          "category": "district",
+          "lod": 2,
+          "tier": "Far",
+          "vertices": 550,
+          "triangles": 852,
+          "materials": 1,
+          "meshes": 1,
+          "textureResolution": 2048,
+          "useSector": [
+            "Market",
+            "Plaza"
+          ],
+          "dimensions": [
+            16.241493225097656,
+            11.0,
+            6.9512434005737305
+          ]
+        }
+      ]
+    }
+  ]
+}

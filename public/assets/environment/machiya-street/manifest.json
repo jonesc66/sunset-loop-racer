@@ -1,0 +1,276 @@
+{
+  "status": "MAX-QUALITY ASSET PROTOTYPE / USER REVIEW REQUIRED",
+  "source": "assets/source/machiya-street/library.blend",
+  "glb": "public/assets/environment/machiya-street/library.glb",
+  "atlas": "shared immutable kyoto-max atlas",
+  "scope": [
+    "Neon Market frontage only"
+  ],
+  "meshes": [
+    {
+      "name": "Machiya_Tea_lod0",
+      "asset": "Machiya_Tea",
+      "category": "machiya",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 5256,
+      "triangles": 9704,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.642322540283203,
+        11.300000190734863,
+        7.8212432861328125
+      ],
+      "sourceTriangles": 9704
+    },
+    {
+      "name": "Machiya_Tea_lod1",
+      "asset": "Machiya_Tea",
+      "category": "machiya",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1306,
+      "triangles": 2048,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        7.8212432861328125
+      ],
+      "sourceTriangles": 2060
+    },
+    {
+      "name": "Machiya_Tea_lod2",
+      "asset": "Machiya_Tea",
+      "category": "machiya",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1106,
+      "triangles": 1740,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        7.8212432861328125
+      ],
+      "sourceTriangles": 1752
+    },
+    {
+      "name": "Machiya_Workshop_lod0",
+      "asset": "Machiya_Workshop",
+      "category": "machiya",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 5560,
+      "triangles": 10276,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.642322540283203,
+        11.300000190734863,
+        9.421243667602539
+      ],
+      "sourceTriangles": 10276
+    },
+    {
+      "name": "Machiya_Workshop_lod1",
+      "asset": "Machiya_Workshop",
+      "category": "machiya",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1400,
+      "triangles": 2200,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        9.421243667602539
+      ],
+      "sourceTriangles": 2212
+    },
+    {
+      "name": "Machiya_Workshop_lod2",
+      "asset": "Machiya_Workshop",
+      "category": "machiya",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1192,
+      "triangles": 1876,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        9.421243667602539
+      ],
+      "sourceTriangles": 1888
+    },
+    {
+      "name": "Kyoto_Inn_lod0",
+      "asset": "Kyoto_Inn",
+      "category": "machiya",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 5956,
+      "triangles": 10988,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.642322540283203,
+        11.300000190734863,
+        9.52124309539795
+      ],
+      "sourceTriangles": 10988
+    },
+    {
+      "name": "Kyoto_Inn_lod1",
+      "asset": "Kyoto_Inn",
+      "category": "machiya",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1434,
+      "triangles": 2240,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        9.52124309539795
+      ],
+      "sourceTriangles": 2252
+    },
+    {
+      "name": "Kyoto_Inn_lod2",
+      "asset": "Kyoto_Inn",
+      "category": "machiya",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1202,
+      "triangles": 1884,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        9.52124309539795
+      ],
+      "sourceTriangles": 1896
+    },
+    {
+      "name": "Corner_Shop_lod0",
+      "asset": "Corner_Shop",
+      "category": "machiya",
+      "lod": 0,
+      "tier": "Hero / near",
+      "vertices": 5688,
+      "triangles": 10496,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.642322540283203,
+        11.300000190734863,
+        8.071243286132812
+      ],
+      "sourceTriangles": 10496
+    },
+    {
+      "name": "Corner_Shop_lod1",
+      "asset": "Corner_Shop",
+      "category": "machiya",
+      "lod": 1,
+      "tier": "Mid",
+      "vertices": 1450,
+      "triangles": 2264,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        8.071243286132812
+      ],
+      "sourceTriangles": 2276
+    },
+    {
+      "name": "Corner_Shop_lod2",
+      "asset": "Corner_Shop",
+      "category": "machiya",
+      "lod": 2,
+      "tier": "Far",
+      "vertices": 1250,
+      "triangles": 1956,
+      "materials": 1,
+      "meshes": 1,
+      "textureResolution": 2048,
+      "useSector": [
+        "Market",
+        "Plaza"
+      ],
+      "dimensions": [
+        14.65999984741211,
+        11.300000190734863,
+        8.071243286132812
+      ],
+      "sourceTriangles": 1968
+    }
+  ],
+  "glbBytes": 3770188
+}

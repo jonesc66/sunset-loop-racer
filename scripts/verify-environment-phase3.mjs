@@ -1,3 +1,4 @@
+import { beforeMultiTrack, foundation } from './multitrack-test-support.mjs';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import ts from 'typescript';
@@ -12,7 +13,7 @@ for(const [file,name] of [['src/game/track.ts','track'],['src/game/trackZones.ts
 const trackAPI=await import('../'+dir+'track.mjs');
 const {createTrack,sampleTrack,createRoadGeometry,TRACK_WIDTH}=trackAPI;
 const {TRACK_ZONES,TUNNEL,BRIDGE,TRACK_SEGMENTS}=await import('../'+dir+'trackZones.mjs');
-const track=createTrack();
+const track=foundation.createRaceTrack(foundation.sunsetLoop);
 await fs.writeFile(dir+'before.mjs',compile(await fs.readFile(dir+'track-before.ts.txt','utf8')));
 const old=(await import('../'+dir+'before.mjs')).createTrack();
 const ratio=track.length/old.length-1;assert(ratio>=.5&&ratio<=.8);
@@ -89,9 +90,9 @@ for(let p=TUNNEL.start+.002;p<TUNNEL.end-.002;p+=.001){
 const race=await fs.readFile('src/RaceScene.tsx','utf8');
 const baseline=await fs.readFile('verification/environment-phase2/baseline/RaceScene.tsx','utf8');
 const section=s=>s.slice(s.indexOf('function createCar('),s.indexOf('function updateCamera(')).replaceAll('\r\n','\n');
-assert.equal(section(race),section(baseline),'Core gameplay is frozen');
+assert.equal(section(beforeMultiTrack('src/RaceScene.tsx',race)),section(baseline),'Core gameplay is frozen');
 const pure=race.slice(race.indexOf('function createCar('),race.indexOf('function updateCamera('));
-const constants=race.slice(race.indexOf('const TOTAL_LAPS'),race.indexOf('type CarRuntime'));
+const constants=race.slice(race.indexOf('const COUNTDOWN_SECONDS'),race.indexOf('type CarRuntime'));
 const reusable='const reusableForward=new THREE.Vector3(),reusableRight=new THREE.Vector3();';
 const api=Function('THREE',...Object.keys(trackAPI),compile(constants+reusable+pure)+';return {createGame,updateAi,resolveCarCollisions,updateCheckpoint,resetPlayerToTrack,updatePlayer};')(THREE,...Object.values(trackAPI));
 const game=api.createGame(track,0,true);const visited=game.cars.map(()=>new Set());
