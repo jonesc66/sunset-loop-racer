@@ -30,7 +30,18 @@ async function click(label){
 }
 async function state(){return await evaluate('document.body.innerText');}
 async function screenshot(name){const r=await command('Page.captureScreenshot',{format:'png'});await fs.writeFile(path.join(out,name),Buffer.from(r.data,'base64'));}
-async function navigate(url){await command('Page.navigate',{url:'about:blank'});await command('Page.navigate',{url});await waitFor("[...document.querySelectorAll('button')].some(b=>b.textContent.trim()==='Start Race')",90000);await click('Start Race');await waitFor("document.querySelector('[aria-label=\"Graphics quality\"]')!==null");await delay(5000);}
+async function navigate(url){
+  await command('Page.navigate',{url:'about:blank'});
+  await command('Page.navigate',{url});
+  await waitFor("[...document.querySelectorAll('button')].some(b=>b.textContent.trim()==='Start Game')",90000);
+  await click('Start Game');
+  await waitFor("[...document.querySelectorAll('button')].some(b=>b.textContent.trim()==='Continue to Car Select')");
+  await click('Continue to Car Select');
+  await waitFor("[...document.querySelectorAll('button')].some(b=>b.textContent.trim()==='Start Race')");
+  await click('Start Race');
+  await waitFor("document.querySelector('[aria-label=\"Graphics quality\"]')!==null");
+  await delay(5000);
+}
 async function quality(name){await click(name);await waitFor(`[...document.querySelectorAll('.activeQuality')].some(b=>b.textContent.trim().toLowerCase()===${JSON.stringify(name.toLowerCase())})`);
   if(name==='gpu')await waitFor(`(async()=>{const url=performance.getEntriesByType('resource').map(x=>x.name).find(x=>x.includes('/@react-three_fiber.js'));if(!url)return false;const f=await import(url);const r=f._roots.get(document.querySelector('canvas'));const forest=r?.store.getState().scene.getObjectByName('gpu-forest');return !!forest&&forest.children.some(m=>m.count>0)})()`,120000);
   await delay(4000);
