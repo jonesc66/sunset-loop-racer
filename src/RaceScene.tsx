@@ -37,6 +37,7 @@ import { applyArtDetailView } from "./environment/phase4aInspection";
 import { ZONE_VIEWPOINTS, zoneAt } from "./game/trackZones";
 import { FullSceneGround, NaturalForest } from "./environment/FullSceneArt";
 import { assetUrl } from "./assetUrl";
+import { advanceRaceAi } from "./game/raceAI";
 
 const COUNTDOWN_SECONDS = 3.35;
 const PLAYER_COLOR = "#ff3458";
@@ -62,6 +63,10 @@ type CarRuntime = {
   collisionFlash: number;
   collisionCount: number;
   collisionSlowdown: number;
+  collisionIntensity: number;
+  surfaceRoughness: number;
+  tireSlip: number;
+  longitudinalLoad: number;
   progress: number;
   lastProgress: number;
   nextCheckpointIndex: number;
@@ -89,6 +94,8 @@ type GameRuntime = {
   lastSmokeAt: number;
   lastSkidAt: number;
   lastSpeedParticleAt: number;
+  lastSparkCollision: number;
+  finishStartedAt: number | null;
   smokeParticles: VisualParticle[];
   sparkParticles: VisualParticle[];
   speedParticles: VisualParticle[];
@@ -140,6 +147,8 @@ const reusableRight = new THREE.Vector3();
 const reusableMatrix = new THREE.Matrix4();
 const reusableQuaternion = new THREE.Quaternion();
 const reusableScale = new THREE.Vector3();
+const particleColor = new THREE.Color();
+const skidEuler = new THREE.Euler();
 const smokeScale = new THREE.Vector3(1, 1, 1);
 const sparkScale = new THREE.Vector3(1, 1, 1);
 const speedParticleScale = new THREE.Vector3(1, 0.12, 0.12);
@@ -235,6 +244,10 @@ function createCar(
     collisionFlash: 0,
     collisionCount: 0,
     collisionSlowdown: 0,
+    collisionIntensity: 0,
+    surfaceRoughness: 0,
+    tireSlip: 0,
+    longitudinalLoad: 0,
     progress: wrapProgress(progress),
     lastProgress: wrapProgress(progress),
     nextCheckpointIndex: 0,
@@ -266,6 +279,8 @@ function createGame(track: RaceTrack, now: number, autoRace = false): GameRuntim
     lastSmokeAt: 0,
     lastSkidAt: 0,
     lastSpeedParticleAt: 0,
+    lastSparkCollision: 0,
+    finishStartedAt: null,
     smokeParticles: [],
     sparkParticles: [],
     speedParticles: [],
@@ -297,6 +312,10 @@ function resetPlayerToTrack(track: RaceTrack, car: CarRuntime) {
   car.isBraking = false;
   car.collisionFlash = 0;
   car.collisionSlowdown = 0;
+  car.collisionIntensity = 0;
+  car.surfaceRoughness = 0;
+  car.tireSlip = 0;
+  car.longitudinalLoad = 0;
 }
 
 function updateCheckpoint(track: RaceTrack, car: CarRuntime, raceTime: number, lateral: number, progressStep: number) {
@@ -353,14 +372,30 @@ function updateCheckpoint(track: RaceTrack, car: CarRuntime, raceTime: number, l
 }
 
 function updatePlayer(track: RaceTrack, car: CarRuntime, input: InputState, dt: number, raceTime: number) {
-  if (input.resetRequested) {
+  if (input.resetRequested && !car.finished) {
     resetPlayerToTrack(track, car);
     input.resetRequested = false;
   }
 
   if (car.finished) {
+    // A short coast after the flag, with timing and checkpoint state already locked.
+    car.position.addScaledVector(car.velocity, dt);
+    const contact = nearestTrackSample(track, car.position);
+    const coastLimit = track.definition.roadWidth * 0.5 + 3.5;
+    if (Math.abs(contact.lateral) > coastLimit) {
+      car.position.copy(contact.sample.center).addScaledVector(contact.sample.normal, THREE.MathUtils.clamp(contact.lateral, -coastLimit, coastLimit));
+    }
     car.velocity.multiplyScalar(Math.pow(0.1, dt));
     car.speed = car.velocity.length();
+    car.isAccelerating = false;
+    car.isBraking = true;
+    car.driftAmount *= Math.exp(-8 * dt);
+    car.tireSlip = 0;
+    car.collisionFlash *= Math.exp(-12 * dt);
+    car.bodyRoll *= Math.exp(-8 * dt);
+    car.bodyPitch *= Math.exp(-8 * dt);
+    car.suspensionOffset *= Math.exp(-8 * dt);
+    car.longitudinalLoad *= Math.exp(-8 * dt);
     return;
   }
 
@@ -383,6 +418,7 @@ function updatePlayer(track: RaceTrack, car: CarRuntime, input: InputState, dt: 
   let forwardSpeed = car.velocity.dot(reusableForward);
   let lateralSpeed = car.velocity.dot(reusableRight);
   const speedAbs = car.velocity.length();
+  const previousSpeed = car.speed;
   const maxForwardSpeed = offRoad ? 38 : 82;
   const maxReverseSpeed = offRoad ? 4.5 : 8;
   const steeringSpeed = Math.abs(forwardSpeed);
@@ -460,6 +496,7 @@ function updatePlayer(track: RaceTrack, car: CarRuntime, input: InputState, dt: 
     car.collisionFlash = Math.max(car.collisionFlash, Math.min(1, Math.abs(normalSpeed) / 24));
     if (Math.abs(normalSpeed) > 3.5) {
       car.collisionCount += 1;
+      car.collisionIntensity = THREE.MathUtils.clamp(Math.abs(normalSpeed) / 24, 0.12, 1);
     }
   }
 
@@ -480,9 +517,16 @@ function updatePlayer(track: RaceTrack, car: CarRuntime, input: InputState, dt: 
   const visualSpeed = Math.abs(car.speed);
   const driftAmount = THREE.MathUtils.clamp(Math.abs(lateralSpeed) / 18, 0, 1);
   car.driftAmount = THREE.MathUtils.lerp(car.driftAmount, driftAmount, 1 - Math.pow(0.001, dt));
-  const targetRoll = THREE.MathUtils.clamp(-steer * visualSpeed * 0.0045 - lateralSpeed * 0.012, -0.28, 0.28);
-  const targetPitch = THREE.MathUtils.clamp(braking * 0.095 - throttle * 0.04 - Math.abs(lateralSpeed) * 0.0015, -0.08, 0.12);
-  const roadBuzz = Math.sin(raceTime * (offRoad ? 22 : 15) + visualSpeed * 0.25) * (offRoad ? 0.075 : 0.035);
+  const acceleration = (car.speed - previousSpeed) / Math.max(dt, 0.001);
+  car.longitudinalLoad = THREE.MathUtils.lerp(car.longitudinalLoad, THREE.MathUtils.clamp(acceleration / 38, -1, 1), 1 - Math.exp(-9 * dt));
+  car.surfaceRoughness = THREE.MathUtils.lerp(car.surfaceRoughness, offRoad ? Math.min(1, visualSpeed / 30) : 0, 1 - Math.exp(-10 * dt));
+  // Routine steering does not smoke/squeal. Handbrake, hard braking and large slip do.
+  const slip = !offRoad && visualSpeed > 10
+    ? Math.max(braking && forwardSpeed > 14 ? 0.55 : 0, handbrake ? Math.min(1, 0.4 + driftAmount) : THREE.MathUtils.clamp((Math.abs(lateralSpeed) - 8) / 12, 0, 1)) : 0;
+  car.tireSlip = THREE.MathUtils.lerp(car.tireSlip, slip, 1 - Math.exp(-12 * dt));
+  const targetRoll = THREE.MathUtils.clamp(-car.steerInput * visualSpeed * 0.0024 - lateralSpeed * 0.005, -0.17, 0.17);
+  const targetPitch = THREE.MathUtils.clamp(-car.longitudinalLoad * 0.065 + car.collisionFlash * 0.035, -0.065, 0.10);
+  const roadBuzz = Math.sin(raceTime * (offRoad ? 22 : 15) + visualSpeed * 0.25) * (offRoad ? 0.06 : 0.014);
 
   car.bodyRoll = THREE.MathUtils.lerp(car.bodyRoll, targetRoll, 1 - Math.pow(0.0015, dt));
   car.bodyPitch = THREE.MathUtils.lerp(car.bodyPitch, targetPitch, 1 - Math.pow(0.002, dt));
@@ -491,60 +535,6 @@ function updatePlayer(track: RaceTrack, car: CarRuntime, input: InputState, dt: 
     roadBuzz * THREE.MathUtils.clamp(visualSpeed / 55 + driftAmount * 0.35, 0, 1),
     1 - Math.pow(0.012, dt)
   );
-}
-
-function signedTurnAhead(track: TrackInfo, progress: number, lookAhead = 0.045) {
-  const now = sampleTrack(track, progress);
-  const ahead = sampleTrack(track, progress + lookAhead);
-  return now.tangent.z * ahead.tangent.x - now.tangent.x * ahead.tangent.z;
-}
-
-function findAiAvoidance(track: TrackInfo, car: CarRuntime, cars: CarRuntime[], raceTime: number) {
-  let speedPenalty = 0;
-  let offsetPush = 0;
-  let speedLimit = Number.POSITIVE_INFINITY;
-  const pose = sampleTrack(track, car.progress);
-  const startCaution = THREE.MathUtils.clamp(1 - raceTime / 8, 0, 1);
-
-  for (const other of cars) {
-    if (other === car || other.finished) {
-      continue;
-    }
-
-    const toOther = other.position.clone().sub(car.position);
-    toOther.y = 0;
-    const forwardMeters = toOther.dot(pose.tangent);
-    const lateralMeters = toOther.dot(pose.normal);
-    const distance = Math.hypot(forwardMeters, lateralMeters);
-    const absLateral = Math.abs(lateralMeters);
-    const respectMultiplier = other.isPlayer ? 1.18 : 1;
-
-    if (forwardMeters > -4 && forwardMeters < 48 && absLateral < 15) {
-      const forwardCloseness = 1 - Math.max(0, forwardMeters) / 48;
-      const sideRisk = 1 - absLateral / 15;
-      const caution = 1 + startCaution * 0.55;
-      const risk = forwardCloseness * sideRisk * caution * respectMultiplier;
-
-      speedPenalty = Math.max(speedPenalty, (15 + sideRisk * 24) * risk);
-      speedLimit = Math.min(speedLimit, THREE.MathUtils.lerp(14, 46, Math.max(0, forwardMeters) / 48));
-      offsetPush += lateralMeters <= 0 ? 4.8 * risk : -4.8 * risk;
-    }
-
-    if (Math.abs(forwardMeters) < 18 && absLateral < 12) {
-      const sideBySideRisk = (1 - Math.abs(forwardMeters) / 18) * (1 - absLateral / 12) * respectMultiplier;
-      offsetPush += lateralMeters <= 0 ? 5.8 * sideBySideRisk : -5.8 * sideBySideRisk;
-      speedPenalty = Math.max(speedPenalty, 9 * sideBySideRisk);
-    }
-
-    if (distance < 7.2) {
-      const emergency = 1 - distance / 7.2;
-      speedLimit = Math.min(speedLimit, 10 + distance * 1.25);
-      speedPenalty = Math.max(speedPenalty, 30 * emergency * respectMultiplier);
-      offsetPush += lateralMeters <= 0 ? 7.5 * emergency : -7.5 * emergency;
-    }
-  }
-
-  return { speedPenalty, offsetPush, speedLimit };
 }
 
 function applyCollisionFeedback(car: CarRuntime, impact: number) {
@@ -556,6 +546,7 @@ function applyCollisionFeedback(car: CarRuntime, impact: number) {
   car.collisionSlowdown = Math.max(car.collisionSlowdown, THREE.MathUtils.clamp(impact * 0.42, 2.2, 12));
   if (impact > 3.2) {
     car.collisionCount += 1;
+    car.collisionIntensity = THREE.MathUtils.clamp(impact / 22, 0.12, 1);
   }
 }
 
@@ -628,43 +619,16 @@ function updateAi(track: RaceTrack, car: CarRuntime, cars: CarRuntime[], dt: num
     return;
   }
 
-  const turnSoon = signedTurnAhead(track.definition.aiRoute, car.progress, 0.052);
-  const turnNow = signedTurnAhead(track.definition.aiRoute, car.progress, 0.018);
-  const cornerSeverity = THREE.MathUtils.clamp(Math.abs(turnSoon) * 6.2 + Math.abs(turnNow) * 2.2, 0, 1);
-  const racingLine = THREE.MathUtils.clamp(-Math.sign(turnSoon || turnNow) * cornerSeverity * 7.2, -8.2, 8.2);
-  const { speedPenalty, offsetPush, speedLimit } = findAiAvoidance(track, car, cars, raceTime);
-  const speedWave = Math.sin(raceTime * 0.72 + car.aiPhase) * 0.85;
-  const cornerSpeed = car.aiBaseSpeed * THREE.MathUtils.lerp(1, 0.74, cornerSeverity);
-  car.collisionSlowdown = Math.max(0, car.collisionSlowdown - dt * 7);
-  const openRoadTargetSpeed = Math.max(24, cornerSpeed + speedWave - speedPenalty - car.collisionSlowdown * 2.2);
-  const targetSpeed = Math.min(openRoadTargetSpeed, speedLimit);
-  car.isAccelerating = targetSpeed > car.speed + 0.7;
-  car.isBraking = targetSpeed < car.speed - 0.4 || cornerSeverity > 0.58;
-  car.collisionFlash = Math.max(0, car.collisionFlash - dt * 5);
-
-  car.aiTargetOffset = THREE.MathUtils.clamp(car.laneOffset * 0.38 + racingLine + offsetPush, -8.5, 8.5);
-  car.laneOffset = THREE.MathUtils.lerp(car.laneOffset, car.aiTargetOffset, 1 - Math.pow(0.006, dt));
-  car.speed = THREE.MathUtils.lerp(car.speed, targetSpeed, 1 - Math.pow(0.018, dt));
-  car.lastProgress = car.progress;
-  car.progress = wrapProgress(car.progress + (car.speed / track.length) * dt);
-
-  const pose = sampleTrack(track.definition.aiRoute, car.progress);
-  const weave = Math.sin(raceTime * 1.1 + car.aiPhase) * 0.18;
-  car.position.copy(pose.center).addScaledVector(pose.normal, car.laneOffset + weave);
-  car.velocity.copy(pose.tangent).multiplyScalar(car.speed);
-  car.heading = tangentHeading(pose.tangent);
-  car.driftAmount = THREE.MathUtils.lerp(car.driftAmount, cornerSeverity * 0.25, 1 - Math.pow(0.01, dt));
-  car.bodyRoll = THREE.MathUtils.lerp(car.bodyRoll, -weave * 0.045, 1 - Math.pow(0.004, dt));
-  car.bodyPitch = THREE.MathUtils.lerp(car.bodyPitch, 0, 1 - Math.pow(0.004, dt));
-  car.suspensionOffset = THREE.MathUtils.lerp(
-    car.suspensionOffset,
-    Math.sin(raceTime * 13 + car.aiPhase) * 0.025,
-    1 - Math.pow(0.015, dt)
-  );
+  advanceRaceAi(track, car, cars, dt, raceTime);
 
   const nearestCurrent = nearestTrackSample(track, car.position);
   const movement = forwardDelta(car.lastProgress, car.progress);
   updateCheckpoint(track, car, raceTime, nearestCurrent.lateral, movement);
+}
+
+function raceProgress(car: CarRuntime) {
+  // The grid lies just before zero. Do not rank it ahead of cars that crossed zero.
+  return car.completedLaps + car.progress - (car.nextCheckpointIndex === 0 && car.progress > 0.5 ? 1 : 0);
 }
 
 function getLiveOrder(cars: CarRuntime[]) {
@@ -681,7 +645,7 @@ function getLiveOrder(cars: CarRuntime[]) {
       return 1;
     }
 
-    return b.completedLaps + b.progress - (a.completedLaps + a.progress);
+    return raceProgress(b) - raceProgress(a);
   });
 }
 
@@ -705,13 +669,15 @@ function makeHud(game: GameRuntime, now: number): HudState {
   if (game.phase === "countdown") {
     countdownText =
       countdownRemaining > 0.35 ? String(Math.max(1, Math.ceil(countdownRemaining - 0.35))) : "GO!";
+  } else if (game.phase === "race" && raceTime < 0.7) {
+    countdownText = "GO!";
   }
 
   return {
     phase: game.phase,
     countdownText,
     speedKmh: Math.round(Math.abs(player.speed) * 3.6),
-    timer: game.phase === "finished" ? player.finishTime ?? raceTime : raceTime,
+    timer: player.finishTime ?? raceTime,
     lap: Math.min(game.track.lapCount, player.lap),
     totalLaps: game.track.lapCount,
     checkpoint: player.nextCheckpointIndex,
@@ -723,11 +689,21 @@ function makeHud(game: GameRuntime, now: number): HudState {
     braking: player.isBraking,
     drifting: player.driftAmount,
     collisionCount: player.collisionCount,
+    collisionIntensity: player.collisionIntensity,
+    surfaceRoughness: player.surfaceRoughness,
+    tireSlip: player.tireSlip,
+    offRoad: player.surfaceRoughness > 0.1,
+    lapTimes: player.lapTimes.slice(),
+    currentLapTime: player.finished ? 0 : Math.max(0, raceTime - player.lapStartedAt),
+    completedLaps: player.completedLaps,
+    lastLapTime: player.lapTimes[player.lapTimes.length - 1] ?? null,
+    previousBestLapTime: player.lapTimes.length > 1 ? Math.min(...player.lapTimes.slice(0, -1)) : null,
+    finishElapsed: game.finishStartedAt === null ? 0 : now - game.finishStartedAt,
     results
   };
 }
 
-function updateCamera(camera: THREE.Camera, player: CarRuntime, dt: number) {
+function updateCamera(camera: THREE.Camera, player: CarRuntime, dt: number, time = 0, gridRemaining = 0) {
   // Carry the camera with the car before smoothing; speed must not create extra trailing distance.
   const previous = cameraPositions.get(camera);
   if (previous && previous.distanceToSquared(player.position) < 6400) {
@@ -738,12 +714,20 @@ function updateCamera(camera: THREE.Camera, player: CarRuntime, dt: number) {
   const speed = Math.abs(player.speed);
   reusableForward.set(Math.sin(player.heading), 0, Math.cos(player.heading));
   const speedMix = THREE.MathUtils.clamp(speed / 68, 0, 1);
-  const chaseDistance = THREE.MathUtils.lerp(9.0, 10.5, speedMix);
-  const chaseHeight = THREE.MathUtils.lerp(2.8, 3.4, speedMix);
+  const load = player.longitudinalLoad ?? 0;
+  const impact = player.collisionFlash ?? 0;
+  const roughness = player.finished ? 0 : player.surfaceRoughness ?? 0;
+  const settle = THREE.MathUtils.smoothstep(gridRemaining, 0, 3.35);
+  const chaseDistance = THREE.MathUtils.lerp(9.0, 10.5, speedMix) + settle * 1.1 + load * 0.18;
+  const chaseHeight = THREE.MathUtils.lerp(2.8, 3.4, speedMix) + settle * 0.5;
+  const side = THREE.MathUtils.clamp((player.steerInput ?? 0) * speedMix * 0.28 + (player.bodyRoll ?? 0) * 0.6, -0.45, 0.45);
+  const vibration = Math.sin(time * 43) * (speedMix ** 4 * 0.007 + roughness * 0.024 + impact * 0.06);
   desiredCamera
     .copy(player.position)
-    .addScaledVector(reusableForward, -chaseDistance)
-    .add(new THREE.Vector3(0, chaseHeight, 0));
+    .addScaledVector(reusableForward, -chaseDistance);
+  desiredCamera.x += reusableForward.z * side;
+  desiredCamera.z -= reusableForward.x * side;
+  desiredCamera.y += chaseHeight + vibration;
 
   if (camera.position.distanceToSquared(desiredCamera) > 6400) {
     camera.position.copy(desiredCamera);
@@ -751,11 +735,12 @@ function updateCamera(camera: THREE.Camera, player: CarRuntime, dt: number) {
     camera.position.lerp(desiredCamera, 1 - Math.pow(0.018, dt));
   }
 
-  cameraTarget.copy(player.position).addScaledVector(reusableForward, 8.0).add(new THREE.Vector3(0, 1.35, 0));
+  cameraTarget.copy(player.position).addScaledVector(reusableForward, 8.0);
+  cameraTarget.y += 1.35 + load * 0.10 + vibration * 0.35;
   camera.lookAt(cameraTarget);
 
   if (camera instanceof THREE.PerspectiveCamera) {
-    const targetFov = THREE.MathUtils.lerp(58, 64, speedMix);
+    const targetFov = THREE.MathUtils.lerp(58, 64, speedMix) - settle * 2;
     camera.fov = THREE.MathUtils.lerp(camera.fov, targetFov, 1 - Math.pow(0.025, dt));
     camera.updateProjectionMatrix();
   }
@@ -785,23 +770,32 @@ function updateEffectPools(game: GameRuntime, dt: number) {
     return particle.life > 0;
   };
 
-  game.smokeParticles = game.smokeParticles.filter(updateParticle);
-  game.sparkParticles = game.sparkParticles.filter(updateParticle);
-  game.speedParticles = game.speedParticles.filter(updateParticle);
+  // Compact in place: stable pool arrays, no per-frame filter allocations.
+  for (const pool of [game.smokeParticles, game.sparkParticles, game.speedParticles]) {
+    let alive = 0;
+    for (let i = 0; i < pool.length; i++) if (updateParticle(pool[i])) pool[alive++] = pool[i];
+    pool.length = alive;
+  }
 
   game.skidMarks.forEach((mark) => {
     mark.age += dt;
-    mark.opacity = Math.max(0, 1 - mark.age / mark.maxAge);
+    mark.opacity = 0.76 * Math.max(0, 1 - mark.age / mark.maxAge);
   });
-  game.skidMarks = game.skidMarks.filter((mark) => mark.age < mark.maxAge);
+  let aliveMarks = 0;
+  for (let i = 0; i < game.skidMarks.length; i++) {
+    if (game.skidMarks[i].age < game.skidMarks[i].maxAge) game.skidMarks[aliveMarks++] = game.skidMarks[i];
+  }
+  game.skidMarks.length = aliveMarks;
 }
 
 function emitPlayerEffects(game: GameRuntime, player: CarRuntime, quality: QualityConfig, raceTime: number) {
+  if (player.finished) return;
   const speed = Math.abs(player.speed);
   reusableForward.set(Math.sin(player.heading), 0, Math.cos(player.heading));
   reusableRight.set(reusableForward.z, 0, -reusableForward.x);
 
-  if (quality.smoke && player.driftAmount > 0.24 && speed > 10 && raceTime - game.lastSmokeAt > 0.045) {
+  const dust = player.surfaceRoughness > 0.3;
+  if (quality.smoke && (player.tireSlip > 0.32 || dust) && speed > 10 && raceTime - game.lastSmokeAt > (quality.maxSmoke < 40 ? 0.11 : 0.065)) {
     game.lastSmokeAt = raceTime;
     for (const side of [-1, 1]) {
       addParticle(
@@ -817,17 +811,17 @@ function emitPlayerEffects(game: GameRuntime, player: CarRuntime, quality: Quali
             .multiplyScalar(-1.5 - speed * 0.035)
             .addScaledVector(reusableRight, side * 0.45)
             .add(new THREE.Vector3(0, 0.55, 0)),
-          life: 1.2,
-          maxLife: 1.2,
-          size: 0.48 + player.driftAmount * 0.62,
-          color: "#c7c2b7"
+          life: dust ? 0.65 : 0.95,
+          maxLife: dust ? 0.65 : 0.95,
+          size: 0.35 + player.tireSlip * 0.5,
+          color: dust ? "#a29070" : "#c7c2b7"
         },
         quality.maxSmoke
       );
     }
   }
 
-  if (player.driftAmount > 0.18 && speed > 8 && raceTime - game.lastSkidAt > 0.07) {
+  if (player.tireSlip > 0.35 && !dust && speed > 10 && raceTime - game.lastSkidAt > 0.09) {
     game.lastSkidAt = raceTime;
     for (const side of [-1, 1]) {
       game.skidMarks.push({
@@ -838,8 +832,8 @@ function emitPlayerEffects(game: GameRuntime, player: CarRuntime, quality: Quali
           .add(new THREE.Vector3(0, 0.115, 0)),
         heading: player.heading,
         age: 0,
-        maxAge: 18,
-        width: 0.28 + player.driftAmount * 0.18,
+        maxAge: 12,
+        width: 0.24 + player.tireSlip * 0.12,
         opacity: 0.76
       });
     }
@@ -866,8 +860,9 @@ function emitPlayerEffects(game: GameRuntime, player: CarRuntime, quality: Quali
     );
   }
 
-  if (quality.sparks && player.collisionFlash > 0.85) {
-    for (let index = 0; index < 8; index += 1) {
+  if (quality.sparks && player.collisionFlash > 0.4 && player.collisionCount !== game.lastSparkCollision) {
+    game.lastSparkCollision = player.collisionCount;
+    for (let index = 0; index < Math.ceil(3 + player.collisionIntensity * 5); index += 1) {
       const spread = (index / 8) * Math.PI * 2;
       addParticle(
         game.sparkParticles,
@@ -897,9 +892,14 @@ function updateInstances(
   }
 
   mesh.count = particles.length;
+  let opacity = mesh.geometry.getAttribute("instanceOpacity") as THREE.InstancedBufferAttribute | undefined;
+  if (!opacity || opacity.count !== mesh.instanceMatrix.count) {
+    opacity = new THREE.InstancedBufferAttribute(new Float32Array(mesh.instanceMatrix.count), 1);
+    mesh.geometry.setAttribute("instanceOpacity", opacity);
+  }
   particles.forEach((particle, index) => {
-    const alpha = Math.max(0.08, particle.life / particle.maxLife);
-    reusableScale.copy(baseScale).multiplyScalar(particle.size * alpha);
+    const alpha = Math.max(0, particle.life / particle.maxLife);
+    reusableScale.copy(baseScale).multiplyScalar(particle.size * (faceCamera ? 1 + (1 - alpha) * 1.7 : Math.max(0.08, alpha)));
     reusableQuaternion.identity();
 
     if (faceCamera && camera) {
@@ -908,8 +908,12 @@ function updateInstances(
 
     reusableMatrix.compose(particle.position, reusableQuaternion, reusableScale);
     mesh.setMatrixAt(index, reusableMatrix);
+    mesh.setColorAt(index, particleColor.set(particle.color));
+    opacity!.setX(index, Math.min(1, (1 - alpha) * 12) * alpha);
   });
   mesh.instanceMatrix.needsUpdate = true;
+  opacity.needsUpdate = true;
+  if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
 }
 
 function updateSkidInstances(mesh: THREE.InstancedMesh | null, marks: SkidMark[]) {
@@ -918,13 +922,27 @@ function updateSkidInstances(mesh: THREE.InstancedMesh | null, marks: SkidMark[]
   }
 
   mesh.count = marks.length;
+  let opacity = mesh.geometry.getAttribute("instanceOpacity") as THREE.InstancedBufferAttribute | undefined;
+  if (!opacity || opacity.count !== mesh.instanceMatrix.count) {
+    opacity = new THREE.InstancedBufferAttribute(new Float32Array(mesh.instanceMatrix.count), 1);
+    mesh.geometry.setAttribute("instanceOpacity", opacity);
+  }
   marks.forEach((mark, index) => {
-    reusableQuaternion.setFromEuler(new THREE.Euler(-Math.PI / 2, 0, -mark.heading));
+    reusableQuaternion.setFromEuler(skidEuler.set(-Math.PI / 2, 0, mark.heading));
     reusableScale.set(mark.width, 2.2, 1);
     reusableMatrix.compose(mark.position, reusableQuaternion, reusableScale);
     mesh.setMatrixAt(index, reusableMatrix);
+    opacity!.setX(index, mark.opacity);
   });
   mesh.instanceMatrix.needsUpdate = true;
+  opacity.needsUpdate = true;
+}
+
+function particleFade(shader: { vertexShader: string; fragmentShader: string }) {
+  shader.vertexShader = "attribute float instanceOpacity; varying float particleAlpha;\n" + shader.vertexShader;
+  shader.vertexShader = shader.vertexShader.replace("#include <begin_vertex>", "#include <begin_vertex>\nparticleAlpha = instanceOpacity;");
+  shader.fragmentShader = "varying float particleAlpha;\n" + shader.fragmentShader;
+  shader.fragmentShader = shader.fragmentShader.replace("#include <color_fragment>", "#include <color_fragment>\ndiffuseColor.a *= particleAlpha;");
 }
 
 function VisualEffects({
@@ -939,10 +957,11 @@ function VisualEffects({
   const speedRef = useRef<THREE.InstancedMesh>(null);
   const skidRef = useRef<THREE.InstancedMesh>(null);
   const { camera } = useThree();
+  const [smokeTexture, sparkTexture] = useLoader(THREE.TextureLoader, [assetUrl("assets/effects/phase6/tire-smoke.png"), assetUrl("assets/effects/phase6/impact-spark.png")]);
 
   useFrame(() => {
     updateInstances(smokeRef.current, gameRef.current.smokeParticles, smokeScale, true, camera);
-    updateInstances(sparkRef.current, gameRef.current.sparkParticles, sparkScale, false);
+    updateInstances(sparkRef.current, gameRef.current.sparkParticles, sparkScale, true, camera);
     updateInstances(speedRef.current, gameRef.current.speedParticles, speedParticleScale, false);
     updateSkidInstances(skidRef.current, gameRef.current.skidMarks);
   });
@@ -951,18 +970,18 @@ function VisualEffects({
     <>
       <instancedMesh ref={skidRef} args={[undefined, undefined, qualityConfig.maxSkids]} frustumCulled={false}>
         <planeGeometry args={[1, 1]} />
-        <meshBasicMaterial color="#090705" depthWrite={false} opacity={0.42} transparent />
+        <meshBasicMaterial color="#090705" depthWrite={false} opacity={0.42} transparent onBeforeCompile={particleFade} />
       </instancedMesh>
       {qualityConfig.smoke && (
         <instancedMesh ref={smokeRef} args={[undefined, undefined, qualityConfig.maxSmoke]} frustumCulled={false}>
-          <sphereGeometry args={[0.55, 8, 6]} />
-          <meshBasicMaterial color="#c7c2b7" depthWrite={false} opacity={0.18} transparent />
+          <planeGeometry args={[2.2, 2.2]} />
+          <meshBasicMaterial map={smokeTexture} depthWrite={false} opacity={0.62} transparent onBeforeCompile={particleFade} />
         </instancedMesh>
       )}
       {qualityConfig.sparks && (
         <instancedMesh ref={sparkRef} args={[undefined, undefined, qualityConfig.maxSparks]} frustumCulled={false}>
-          <sphereGeometry args={[0.16, 6, 4]} />
-          <meshBasicMaterial color="#ffbf35" toneMapped={false} />
+          <planeGeometry args={[1.5, 1.5]} />
+          <meshBasicMaterial map={sparkTexture} blending={THREE.AdditiveBlending} transparent depthWrite={false} toneMapped={false} onBeforeCompile={particleFade} />
         </instancedMesh>
       )}
       {qualityConfig.speedParticles && (
@@ -975,9 +994,18 @@ function VisualEffects({
   );
 }
 
-function CarWheel({ x, z }: { x: number; z: number }) {
+function CarWheel({ x, z, car }: { x: number; z: number; car?: CarRuntime }) {
+  const steering = useRef<THREE.Group>(null);
+  const spin = useRef<THREE.Group>(null);
+  useFrame((_, delta) => {
+    if (!car || !steering.current || !spin.current) return;
+    steering.current.rotation.y = z > 0 ? car.steerInput * 0.38 : 0;
+    steering.current.position.y = 0.52 - car.suspensionOffset * 0.6;
+    spin.current.rotation.y = (spin.current.rotation.y - car.speed * Math.min(delta, 0.033) / 0.47) % (Math.PI * 2);
+  });
   return (
-    <group position={[x, 0.52, z]} rotation={[0, 0, Math.PI / 2]}>
+    <group ref={steering} position={[x, 0.52, z]}>
+    <group rotation={[0, 0, Math.PI / 2]}><group ref={spin}>
       <mesh castShadow>
         <cylinderGeometry args={[0.47, 0.47, 0.42, 32]} />
         <meshStandardMaterial color="#0a0b0d" roughness={0.76} />
@@ -994,12 +1022,12 @@ function CarWheel({ x, z }: { x: number; z: number }) {
         <boxGeometry args={[0.12, 0.045, 0.22]} />
         <meshStandardMaterial color="#e33131" metalness={0.42} roughness={0.32} />
       </mesh>
-    </group>
+    </group></group></group>
   );
 }
 
-function CarModel({ color, brakeLightOn, collisionFlash }: { color: string; brakeLightOn: boolean; collisionFlash: number }) {
-  const bodyColor = collisionFlash > 0 ? "#fff1c2" : color;
+function CarModel({ color, brakeLightOn, collisionFlash, car }: { color: string; brakeLightOn: boolean; collisionFlash: number; car?: CarRuntime }) {
+  const bodyColor = useMemo(() => new THREE.Color(color).lerp(new THREE.Color("#fff1c2"), Math.min(0.18, collisionFlash * 0.18)), [color, collisionFlash]);
   const lowerBody = useMemo(() => new RoundedBoxGeometry(2.25, 0.58, 4.45, 5, 0.2), []);
   const hood = useMemo(() => new RoundedBoxGeometry(1.98, 0.34, 1.48, 4, 0.16), []);
   const rearDeck = useMemo(() => new RoundedBoxGeometry(2.02, 0.3, 1.16, 4, 0.14), []);
@@ -1159,10 +1187,10 @@ function CarModel({ color, brakeLightOn, collisionFlash }: { color: string; brak
         <meshStandardMaterial color="#14181b" metalness={0.68} roughness={0.28} />
       </mesh>
 
-      <CarWheel x={-1.18} z={1.36} />
-      <CarWheel x={1.18} z={1.36} />
-      <CarWheel x={-1.18} z={-1.42} />
-      <CarWheel x={1.18} z={-1.42} />
+      <CarWheel car={car} x={-1.18} z={1.36} />
+      <CarWheel car={car} x={1.18} z={1.36} />
+      <CarWheel car={car} x={-1.18} z={-1.42} />
+      <CarWheel car={car} x={1.18} z={-1.42} />
     </group>
   );
 }
@@ -1188,6 +1216,8 @@ function ImportedCarScene({
   }, [model]);
 
   useLayoutEffect(() => {
+    const owned: THREE.Material[] = [];
+    const originals: { mesh: THREE.Mesh; material: THREE.Material | THREE.Material[] }[] = [];
     model.traverse((child) => {
       if (!(child instanceof THREE.Mesh)) return;
 
@@ -1195,6 +1225,8 @@ function ImportedCarScene({
       child.receiveShadow = true;
       const sourceMaterials = Array.isArray(child.material) ? child.material : [child.material];
       const materials = sourceMaterials.map((material) => material.clone());
+      originals.push({ mesh: child, material: child.material });
+      owned.push(...materials);
 
       materials.forEach((material) => {
         const name = material.name.toLowerCase();
@@ -1244,12 +1276,29 @@ function ImportedCarScene({
         if (name.startsWith("redlight")) {
           if (material instanceof THREE.MeshStandardMaterial) {
             material.emissive.set("#ff192b");
-            material.emissiveIntensity = brakeLightOn ? 4.1 : 0.72;
+            material.emissiveIntensity = 0.72;
           }
         }
       });
 
       child.material = Array.isArray(child.material) ? materials : materials[0];
+    });
+    return () => {
+      for (const { mesh, material } of originals) mesh.material = material;
+      for (const material of owned) material.dispose();
+    };
+  }, [colorProfile, model]);
+
+  useLayoutEffect(() => {
+    model.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return;
+      for (const material of Array.isArray(child.material) ? child.material : [child.material]) {
+        // Imported brake discs/calipers are not lamps. Match rear glass/lamp materials only.
+        if (material instanceof THREE.MeshStandardMaterial && /redlight|taillight|tail_light|tail_lamp|r_lights|red.?glass/i.test(material.name)) {
+          material.emissive.set("#ff192b");
+          material.emissiveIntensity = brakeLightOn ? 4.1 : 0.72;
+        }
+      }
     });
   }, [brakeLightOn, colorProfile, model]);
 
@@ -1300,7 +1349,7 @@ function PerformanceCarModel({
   brakeLightOn: boolean;
   collisionFlash: number;
 }) {
-  const bodyColor = collisionFlash > 0 ? "#fff1c2" : color;
+  const bodyColor = useMemo(() => new THREE.Color(color).lerp(new THREE.Color("#fff1c2"), Math.min(0.18, collisionFlash * 0.18)), [color, collisionFlash]);
 
   return (
     <group>
@@ -1886,7 +1935,8 @@ export default function RaceScene({
   const keyboard = useKeyboard();
   const { camera, clock } = useThree();
   const autoRaceTest = import.meta.env.DEV && new URLSearchParams(window.location.search).has("autoRace");
-  const gameRef = useRef<GameRuntime>(createGame(track, 0, autoRaceTest));
+  const initialGame = useMemo(() => createGame(track, 0, autoRaceTest), [track, autoRaceTest]);
+  const gameRef = useRef<GameRuntime>(initialGame);
   const carRefs = useRef<(THREE.Group | null)[]>([]);
   const hudCallback = useRef(onHudUpdate);
 
@@ -1897,8 +1947,14 @@ export default function RaceScene({
   useEffect(() => {
     const game = createGame(track, clock.getElapsedTime(), autoRaceTest);
     gameRef.current = game;
+    cameraPositions.delete(camera);
+    const player = game.cars[0];
+    camera.position.copy(player.position);
+    camera.position.x -= Math.sin(player.heading) * 10.1;
+    camera.position.z -= Math.cos(player.heading) * 10.1;
+    camera.position.y += 3.3;
     hudCallback.current(withMinimap(makeHud(game, clock.getElapsedTime()), game.cars));
-  }, [autoRaceTest, clock, resetSeed, track]);
+  }, [autoRaceTest, camera, clock, resetSeed, track]);
 
   useFrame((state, frameDelta) => {
     const game = gameRef.current;
@@ -1912,7 +1968,7 @@ export default function RaceScene({
 
     const raceTime = Math.max(0, now - game.raceStartedAt);
 
-    if (game.phase === "race") {
+    if (game.phase === "race" || game.phase === "finishing") {
       if (autoRaceTest) {
         updateAi(track, game.cars[0], game.cars, dt, raceTime);
       } else {
@@ -1926,11 +1982,19 @@ export default function RaceScene({
 
       resolveCarCollisions(track, game.cars);
 
-      if (game.cars.every((car) => car.finished)) {
+      if (game.cars[0].finished && game.finishStartedAt === null) {
+        game.finishStartedAt = now;
+        game.phase = "finishing";
+      }
+      if (game.finishStartedAt !== null && now - game.finishStartedAt >= 2) {
         game.phase = "finished";
       }
     } else if (game.phase === "finished") {
       updatePlayer(track, game.cars[0], keyboard.current, dt, raceTime);
+      // The result can appear immediately while remaining opponents finish naturally.
+      for (let index = 1; index < game.cars.length; index += 1) {
+        updateAi(track, game.cars[index], game.cars, dt, raceTime);
+      }
     }
 
     updateEffectPools(game, dt);
@@ -1952,7 +2016,7 @@ export default function RaceScene({
       }
     });
 
-    updateCamera(camera, game.cars[0], dt);
+    updateCamera(camera, game.cars[0], dt, raceTime, game.phase === "countdown" ? Math.max(0, game.raceStartedAt - now) : 0);
     if (import.meta.env.DEV && new URLSearchParams(window.location.search).has("environmentInspect")) {
       const hash = decodeURIComponent(window.location.hash.slice(1));
       const view = ZONE_VIEWPOINTS.find(v => v.name === hash || v.name.split("-")[0] === hash)?.progress ?? Number(hash);
@@ -1969,7 +2033,7 @@ export default function RaceScene({
 
     if (import.meta.env.DEV && new URLSearchParams(window.location.search).has("environmentInspect")) applyArtDetailView(camera, track, window.location.hash.slice(1));
 
-    if (now - game.lastHudAt > 0.08 || game.phase === "finished") {
+    if (now - game.lastHudAt > 0.08) {
       game.lastHudAt = now;
       hudCallback.current(withMinimap(makeHud(game, now), game.cars));
     }
@@ -1995,6 +2059,7 @@ export default function RaceScene({
       {gameRef.current.cars.map((car, index) => (
         <group
           key={car.name}
+          name={`race-car-${index}`}
           scale={car.isPlayer ? 1.08 : 1}
           ref={(node) => {
             carRefs.current[index] = node;
@@ -2007,11 +2072,11 @@ export default function RaceScene({
               color={car.color}
             />
           ) : qualityPresets[graphicsQuality].importedPlayer && car.isPlayer ? (
-            <Suspense fallback={<CarModel brakeLightOn={car.isBraking} collisionFlash={car.collisionFlash} color={car.color} />}>
+            <Suspense fallback={<CarModel car={car} brakeLightOn={car.isBraking} collisionFlash={car.collisionFlash} color={car.color} />}>
               <HighQualityPlayerCar brakeLightOn={car.isBraking} vehicle={playerVehicle} />
             </Suspense>
           ) : (
-            <CarModel brakeLightOn={car.isBraking} collisionFlash={car.collisionFlash} color={car.color} />
+            <CarModel car={car} brakeLightOn={car.isBraking} collisionFlash={car.collisionFlash} color={car.color} />
           )}
         </group>
       ))}

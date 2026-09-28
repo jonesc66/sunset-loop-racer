@@ -1,5 +1,5 @@
 import type { MinimapCar } from "./minimap";
-export type RacePhase = "countdown" | "race" | "finished";
+export type RacePhase = "countdown" | "race" | "finishing" | "finished";
 
 export type GraphicsQuality = "performance" | "low" | "medium" | "high" | "gpu";
 
@@ -41,6 +41,16 @@ export type HudState = {
   braking: boolean;
   drifting: number;
   collisionCount: number;
+  lapTimes: number[];
+  currentLapTime: number;
+  offRoad: boolean;
+  completedLaps?: number;
+  lastLapTime?: number | null;
+  previousBestLapTime?: number | null;
+  finishElapsed?: number;
+  surfaceRoughness?: number;
+  tireSlip?: number;
+  collisionIntensity?: number;
   results: ResultRow[];
 };
 
@@ -60,6 +70,9 @@ export const defaultHudState: HudState = {
   braking: false,
   drifting: 0,
   collisionCount: 0,
+  lapTimes: [],
+  currentLapTime: 0,
+  offRoad: false,
   results: []
 };
 

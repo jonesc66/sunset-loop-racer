@@ -1,0 +1,16 @@
+{
+  "generator": "Blender 4.5.9 LTS",
+  "source": "tools/blender/phase6/build_effects.py",
+  "license": "Original procedural project assets; no third-party inputs",
+  "textures": {
+    "tire-smoke.png": [
+      256,
+      256
+    ],
+    "impact-spark.png": [
+      128,
+      128
+    ]
+  },
+  "scope": "Bounded tire smoke, offroad dust tint and collision sparks; no environment changes"
+}

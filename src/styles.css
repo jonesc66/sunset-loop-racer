@@ -579,3 +579,125 @@ button {
 
 /* A readonly focus target keeps text composition out of driving controls. */
 .raceKeyboardCapture { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; opacity: 0; pointer-events: none; caret-color: transparent; }
+
+/* Phase 6 keeps the warm glass HUD, with a clear position/speed hierarchy. */
+.hudTop { max-width: 920px; gap: 9px; transition: opacity .3s ease; }
+.hudTile { padding: 11px 13px; font-variant-numeric: tabular-nums; }
+.hudTile strong { font-size: clamp(1.35rem, 2.65vw, 2.05rem); line-height: 1.15; }
+.hudTile strong em { color: #d7d3c4; font-size: .52em; font-style: normal; font-weight: 750; }
+.hudTile small { margin-top: 4px; font-size: 9px; letter-spacing: .02em; }
+.positionTile { border-left: 3px solid #ffd15d; }
+.positionTile strong { color: #ffdb80; }
+.finalLapTile { border-color: #ffd15d; }
+.finalLapTile > span { color: #ffe7a9; }
+.phase-countdown .hudTop, .phase-countdown .speedGauge { animation: hudArrival .45s ease both; }
+@keyframes hudArrival { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.speedGauge { position: absolute; left: var(--hud-inset); bottom: 78px; width: 164px; padding: 13px 15px; border-left: 3px solid #ffd15d; border-radius: 7px; background: linear-gradient(110deg, #10191dea, #15191bbb); box-shadow: 0 8px 24px #0004; font-variant-numeric: tabular-nums; }
+.drivingState { color: #c5d8d8; font-size: 9px; font-weight: 850; letter-spacing: .12em; }
+.speedReadout { display: flex; align-items: baseline; gap: 9px; }
+.speedReadout strong { font-size: 44px; line-height: 1.2; letter-spacing: -.04em; }
+.speedReadout span { font-size: 9px; font-weight: 900; color: #ffe3a6; }
+.speedMeter { height: 3px; margin-top: 5px; overflow: hidden; background: #ffffff24; }
+.speedMeter i { display: block; height: 100%; background: #ffd15d; transform-origin: left; transition: transform .12s linear; }
+.surfaceWarning { border-color: #e7a577; }.surfaceWarning .drivingState { color: #ffc091; }
+.controlsHint { width: max-content; max-width: calc(100vw - 32px); gap: 6px 10px; padding: 9px 13px; font-size: 11px; }
+.performancePanel { bottom: 78px; max-width: min(230px, 30vw); }
+.graphicsControls button:focus-visible { outline: 2px solid #fff4ce; outline-offset: 2px; }
+
+.startPresentation { position: absolute; top: 48%; left: 50%; display: grid; justify-items: center; gap: 15px; width: min(480px, 94vw); text-align: center; transform: translate(-50%, -50%); text-shadow: 0 3px 16px #000d; }
+.startPresentation p { margin: 0; font-size: clamp(13px, 1.8vw, 18px); font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
+.startPresentation > span { font-size: 10px; font-weight: 850; letter-spacing: .12em; }
+.startLights { display: flex; gap: 12px; padding: 9px 14px; border: 1px solid #ffffff36; border-radius: 24px; background: #11181dea; box-shadow: 0 5px 20px #0006; }
+.startLights i { width: 15px; height: 15px; border-radius: 50%; background: #504239; transition: background .12s, box-shadow .12s; }.startLights .lit { background: #ffca59; box-shadow: 0 0 12px #ffbc6277; }
+.startPresentation .countdown { position: static; transform: none; font-size: clamp(80px, 14vw, 132px); line-height: .95; animation: countdownBeat .36s ease-out both; }
+@keyframes countdownBeat { from { opacity: .3; transform: scale(1.22); } to { opacity: 1; transform: scale(1); } }
+.goPresentation { position: absolute; top: 45%; left: 50%; color: #fff2c5; font-size: clamp(70px, 13vw, 128px); font-weight: 950; font-style: italic; text-shadow: 0 5px 24px #000a; transform: translate(-50%, -50%); animation: goLaunch .65s ease-out both; }
+@keyframes goLaunch { 0% { opacity: 0; transform: translate(-50%, -50%) scale(.8); } 20%, 60% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, -54%) scale(1.12); } }
+.raceNotices { position: absolute; top: 132px; left: var(--hud-inset); display: grid; justify-items: start; gap: 9px; max-width: calc(100vw - var(--map-width) - 48px); }
+.lapNotice { display: grid; gap: 4px; min-width: 224px; max-width: 100%; padding: 11px 14px; border-left: 3px solid #8cdcc3; border-radius: 5px; background: linear-gradient(100deg, #101a21f0, #101a21ba); box-shadow: 0 6px 18px #0003; animation: noticeArrival .25s ease-out; }
+.lapNotice > strong { font-size: 20px; line-height: 1.1; font-style: italic; letter-spacing: .035em; }
+.lapNotice > span { display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px; font-size: 11px; font-weight: 750; color: #d9e3df; font-variant-numeric: tabular-nums; }
+.personalBestNotice { border-color: #ffd15d; }.personalBestNotice > strong { color: #ffde85; }
+.lapNotice b { margin-left: 5px; font-size: 11px; }.fasterSplit { color: #9ae5b8; }.slowerSplit { color: #f4c293; }
+.positionNotice { display: flex; align-items: baseline; gap: 11px; padding: 8px 12px; border-radius: 4px; background: #13212be8; animation: noticeArrival .2s ease-out; }
+.positionNotice span { font-size: 9px; font-weight: 850; letter-spacing: .08em; }.positionNotice strong { font-size: 18px; font-variant-numeric: tabular-nums; }.positionGain { color: #b7f3c8; }.positionLoss { color: #e3d7be; }
+@keyframes noticeArrival { from { opacity: 0; transform: translateX(-9px); } to { opacity: 1; transform: translateX(0); } }
+.phase-finishing .controlsHint, .phase-finishing .graphicsControls { opacity: 0; pointer-events: none; }
+.finishPresentation { position: absolute; top: 43%; left: 50%; width: min(600px, 90vw); text-align: center; transform: translate(-50%, -50%); text-shadow: 0 4px 24px #000b; animation: finishArrival .4s ease-out; }
+.finishFlag { width: 100%; height: 8px; margin: 0 auto 16px; opacity: .85; background: repeating-conic-gradient(#fff4d6 0% 25%, #182128 0% 50%) 0 0 / 16px 16px; mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); }
+.finishPresentation > span { font-size: 12px; font-weight: 850; letter-spacing: .25em; }
+.finishPresentation h1 { margin: 3px 0 8px; color: #ffe5a3; font-size: clamp(64px, 11vw, 126px); line-height: 1; font-style: italic; font-weight: 950; letter-spacing: -.05em; }
+.finishPresentation p { display: flex; justify-content: center; align-items: baseline; gap: 8px; margin: 0; font-size: 21px; font-variant-numeric: tabular-nums; }.finishPresentation p strong { font-size: 28px; }.finishPresentation p i { align-self: center; height: 16px; width: 1px; margin: 0 12px; background: #ffffff73; }
+@keyframes finishArrival { from { opacity: 0; transform: translate(-50%, -50%) scale(1.07); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+
+/* Classification remains scrollable, including compact landscape screens. */
+.phase-finished > .hudTop, .phase-finished > .trackMinimap, .phase-finished > .speedGauge, .phase-finished > .controlsHint, .phase-finished > .graphicsControls { display: none; }
+.resultsBackdrop { position: absolute; inset: 0; background: #07101573; pointer-events: auto; }
+.hudLayer .resultsPanel { width: min(800px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); padding: 22px 24px 18px; background: linear-gradient(145deg, #172328f7, #101619f5); border-radius: 12px; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #53636b #152027; animation: resultArrival .35s ease-out; }
+@keyframes resultArrival { from { opacity: 0; } to { opacity: 1; } }
+.resultHeader { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.resultEyebrow { margin: 0 0 6px; color: #ffd879; font-size: 10px; font-weight: 900; letter-spacing: .16em; }
+.resultsPanel h1 { margin: 0 0 7px; font-size: clamp(23px, 3.2vw, 33px); letter-spacing: -.035em; }
+.resultTrackName { margin-bottom: 0; color: #b9c9cb; font-size: 12px; }
+.resultPosition { flex-shrink: 0; display: grid; justify-items: center; min-width: 72px; border-left: 1px solid #ffffff24; padding-left: 17px; }.resultPosition span, .resultPosition small { color: #c5d2d2; font-size: 8px; font-weight: 800; letter-spacing: .1em; }.resultPosition strong { color: #ffdc83; font-size: 43px; font-style: italic; line-height: 1.1; }
+.resultStats { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 15px; margin: 17px 0 14px; padding: 12px 0; border-block: 1px solid #ffffff20; font-variant-numeric: tabular-nums; }.resultStats > div { min-width: 0; }.resultStats span { display: block; color: #c1cec9; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; }.resultStats strong { display: block; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 22px; }.resultStats > div:last-child strong { font-size: 18px; padding-top: 3px; }
+.newRecordNotice { margin: 0 0 12px; padding: 9px 12px; background: linear-gradient(110deg, #d2a13424, #263e3940); }.newRecordNotice > div { display: flex; flex-wrap: wrap; gap: 4px 20px; }.newRecordNotice span { font-size: 10px; }.newRecordNotice small { color: #e7cdb0; font-size: 10px; }
+.lapBreakdown { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0 0 16px; font-variant-numeric: tabular-nums; }.lapBreakdown > div { padding: 8px 10px; border: 1px solid #ffffff18; border-radius: 5px; background: #ffffff05; }.lapBreakdown span { display: flex; align-items: baseline; justify-content: space-between; gap: 5px; color: #b8c7c9; font-size: 9px; font-weight: 800; }.lapBreakdown strong { display: block; margin-top: 3px; font-size: 17px; }.lapBreakdown b { color: #ffdb7f; font-size: 8px; }.lapBreakdown .bestLapSplit { border-color: #d4ac4e73; background: #f5cc4c0c; }
+.resultDetails { display: grid; grid-template-columns: 1.1fr 1fr; align-items: start; gap: 22px; }
+.resultDetails h2 { margin: 0 0 9px; color: #dae4df; font-size: 11px; font-weight: 850; letter-spacing: .07em; text-transform: uppercase; }
+.resultsList { gap: 5px; }.resultRow { grid-template-columns: 17px 10px minmax(0, 1fr) auto; min-height: 36px; gap: 7px; padding: 6px 8px; border-radius: 5px; font-size: 11px; }.resultRow .carSwatch { width: 9px; height: 9px; border: 1px solid #ffffff99; }.resultRow .driverName small { display: inline-block; margin-left: 6px; color: #ffdc83; font-size: 7px; }.resultRow .resultTime { text-align: right; font-variant-numeric: tabular-nums; }.resultRow .resultTime small { display: block; margin-top: 2px; color: #aebfc3; font-size: 8px; font-weight: 650; }.winnerResult .place { color: #ffe4a0; }
+.resultDetails .timeLeaderboard { margin: 0; border: 0; padding: 0; }.resultDetails .timeLeaderboardColumns { margin-top: 0; gap: 12px; grid-template-columns: 1fr; }.resultDetails .timeLeaderboard h3 { font-size: 9px; color: #b1c9ce; }.resultDetails .timeLeaderboard ol { gap: 5px; padding: 0; margin-top: 6px; font-size: 10px; }.resultDetails .timeLeaderboard li { grid-template-columns: 12px minmax(0, 1fr) auto; gap: 6px; }.resultDetails .timeLeaderboard li > b { font-size: 9px; color: #9cafb5; }.resultDetails .timeLeaderboard li.noRecords { display: block; color: #acbfc4; }
+.timeLeaderboard .newTopTime { animation: recordGlow 1s ease-out 2; text-shadow: none; color: #ffdc83; }.timeLeaderboard .newTopTime .timeRecordName { color: #ffdc83; }
+@keyframes recordGlow { 50% { color: #fff2c5; background: #e3bc4922; } }
+.resultsPanel .resultNavigation { grid-template-columns: 1.2fr 1fr 1fr; gap: 10px; margin-top: 18px; padding-top: 13px; border-top: 1px solid #ffffff24; }.resultsPanel .resultNavigation button { grid-column: auto; min-height: 42px; font-size: 12px; }.resultsPanel .resultNavigation button:not(:first-child) { background: #ffffff0d; border: 1px solid #d1ded445; color: #e3ebe4; }.resultsPanel .resultNavigation button:not(:first-child):hover { background: #ffffff18; }
+
+@media (max-width: 960px) {
+  .hudTop { grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: none; gap: 6px; }
+  .hudTile { padding: 9px; }.hudTile > span { font-size: 9px; }.hudTile strong { font-size: 22px; }.hudTile small { font-size: 8px; }
+  .hudLayer { --map-width: 180px; --hud-inset: 16px; }
+  .graphicsControls { top: calc(var(--hud-inset) + 168px); }.graphicsControls button { font-size: 10px; }
+  .raceNotices { top: 113px; }
+  .speedGauge { bottom: 64px; width: 146px; }.speedReadout strong { font-size: 38px; }
+  .performancePanel { bottom: 64px; }
+}
+@media (max-width: 700px) {
+  .hudLayer { --map-width: 140px; --hud-inset: 12px; }
+  .hudTop { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .hudTile { padding: 8px; }.hudTile strong { font-size: 21px; }.hudTile small { margin-top: 2px; font-size: 8px; }.hudTile > span { font-size: 8px; }
+  .graphicsControls { top: 151px; }.graphicsControls button { min-height: 26px; font-size: 8px; }
+  .raceNotices { top: 178px; max-width: calc(100vw - 24px); }.lapNotice { min-width: 204px; padding: 9px 11px; }.lapNotice > strong { font-size: 18px; }
+  .speedGauge { width: 135px; bottom: 77px; padding: 10px 12px; }.speedReadout strong { font-size: 35px; }.drivingState { font-size: 8px; }
+  .performancePanel { left: auto; right: 12px; bottom: 77px; max-width: 170px; }.performancePanel small { font-size: 8px; }
+  .controlsHint { width: calc(100vw - 24px); max-width: 470px; font-size: 10px; gap: 4px 8px; }
+  .startPresentation { top: 48%; }.startPresentation > span { font-size: 9px; }
+  .hudLayer .resultsPanel { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); padding: 16px; }
+  .resultDetails { grid-template-columns: 1fr; gap: 18px; }.resultDetails .timeLeaderboardColumns { grid-template-columns: 1fr 1fr; }
+  .resultsPanel .resultNavigation { gap: 7px; }.resultsPanel .resultNavigation button { font-size: 11px; padding-inline: 6px; }
+}
+@media (max-width: 430px) {
+  .hudTop { right: 162px; }.hudTile strong { font-size: 20px; }.timeTile strong, .bestTile strong { font-size: 17px; }.positionTile small { font-size: 7px; }
+  .raceNotices { top: 228px; }.lapNotice { min-width: 204px; }.positionNotice { padding: 6px 10px; }.positionNotice strong { font-size: 16px; }
+  .resultStats { gap: 9px; grid-template-columns: 1fr 1fr 1fr; }.resultStats strong { font-size: 19px; }.resultStats > div:last-child strong { font-size: 13px; padding-top: 6px; }
+  .resultHeader { gap: 10px; }.resultPosition { min-width: 61px; padding-left: 10px; }.resultPosition strong { font-size: 37px; }.resultsPanel h1 { font-size: 24px; }
+  .resultDetails .timeLeaderboardColumns { gap: 14px; }.resultDetails .timeLeaderboard li { font-size: 9px; gap: 4px; grid-template-columns: 10px minmax(0, 1fr) auto; }
+}
+@media (max-height: 440px) and (min-width: 550px) {
+  .hudLayer { --map-width: 118px; --hud-inset: 10px; }
+  .hudTop { grid-template-columns: repeat(4, minmax(0, 1fr)); right: 142px; gap: 6px; }
+  .hudTile { padding: 7px 8px; }.hudTile strong { font-size: 20px; }.hudTile small { font-size: 7px; }
+  .graphicsControls { top: 132px; padding: 3px; gap: 1px; }.graphicsControls button { min-height: 22px; font-size: 7px; }
+  .raceNotices { top: 95px; max-width: calc(100vw - 156px); }.lapNotice { min-width: 220px; padding: 7px 10px; }.lapNotice > strong { font-size: 16px; }.lapNotice > span { font-size: 9px; }.positionNotice { padding: 5px 9px; }.positionNotice strong { font-size: 15px; }
+  .speedGauge { bottom: 50px; width: 118px; padding: 7px 10px; }.speedReadout strong { font-size: 29px; }.speedReadout span { font-size: 8px; }.drivingState { font-size: 7px; }
+  .performancePanel { bottom: 50px; right: 10px; max-width: 170px; padding: 5px 7px; }.performancePanel strong { font-size: 10px; }.performancePanel small { font-size: 7px; }
+  .controlsHint { bottom: 9px; width: max-content; max-width: calc(100vw - 20px); font-size: 9px; padding: 6px 10px; gap: 4px 7px; }
+  .startPresentation { gap: 8px; top: 52%; }.startPresentation p { font-size: 12px; }.startPresentation .countdown { font-size: 66px; }.startLights { gap: 9px; padding: 6px 10px; }.startLights i { width: 10px; height: 10px; }.startPresentation > span { font-size: 8px; }
+  .goPresentation { font-size: 75px; top: 52%; }.finishPresentation { top: 49%; }.finishPresentation h1 { font-size: 76px; }.finishPresentation > span { font-size: 10px; }.finishPresentation p { font-size: 17px; }.finishPresentation p strong { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hudLayer *, .hudLayer *::before, .hudLayer *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .goPresentation { animation: none; }
+}
+
+/* Keep the three next-race actions reachable on short result viewports. */
+.resultsPanel .resultNavigation { position: sticky; bottom: -18px; z-index: 2; padding-bottom: 8px; background: #141e22; }
+@media (max-width: 700px) { .resultsPanel .resultNavigation { bottom: -16px; } }

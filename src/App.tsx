@@ -191,6 +191,7 @@ function Hud({
   graphicsQuality,
   leaderboard,
   newRecords,
+  recordSaveFailed,
   soundEnabled,
   onGraphicsQualityChange,
   onSoundToggle,
@@ -203,6 +204,7 @@ function Hud({
   graphicsQuality: GraphicsQuality;
   leaderboard: TimeLeaderboard;
   newRecords: NewLeaderboardRecord[];
+  recordSaveFailed: boolean;
   soundEnabled: boolean;
   onGraphicsQualityChange: (quality: GraphicsQuality) => void;
   onSoundToggle: () => void;
@@ -210,129 +212,136 @@ function Hud({
   onChangeTrack: () => void;
   onRestart: () => void;
 }) {
-  const qualityOptions = qualityOrder;
+  const [positionNotice, setPositionNotice] = useState<{ from: number; to: number; id: number } | null>(null);
+  const [lapNotice, setLapNotice] = useState<{ lap: number; time: number; delta: number | null; best: boolean; final: boolean } | null>(null);
+  const previousPosition = useRef(hud.position);
+  const completedLaps = useRef(0);
+  const personalBest = useRef(leaderboard.lap[0]?.time ?? null);
+  const noticeId = useRef(0);
+  const playerResult = hud.results.find(row => row.isPlayer);
+  const isFinalLap = hud.lap === hud.totalLaps && hud.phase === "race";
+  const showGo = hud.phase === "race" && hud.countdownText === "GO!";
+  const speedRatio = Math.min(hud.speedKmh / 220, 1);
+  const drivingState = hud.offRoad ? "OFF ROAD" : hud.drifting > 0.4 ? "DRIFT" : hud.braking ? "BRAKING" : hud.accelerating ? "ACCELERATING" : "COASTING";
+
+  useEffect(() => {
+    if (hud.phase === "countdown") {
+      previousPosition.current = hud.position;
+      completedLaps.current = 0;
+      personalBest.current = leaderboard.lap[0]?.time ?? null;
+      setPositionNotice(null);
+      setLapNotice(null);
+      return;
+    }
+    if (hud.phase !== "race") return;
+    if (hud.position !== previousPosition.current) {
+      if (hud.timer > 2) setPositionNotice({ from: previousPosition.current, to: hud.position, id: ++noticeId.current });
+      previousPosition.current = hud.position;
+    }
+    if (hud.lapTimes.length > completedLaps.current) {
+      const latestIndex = hud.lapTimes.length - 1;
+      const time = hud.lapTimes[latestIndex];
+      const priorTimes = hud.lapTimes.slice(0, latestIndex);
+      const reference = Math.min(personalBest.current ?? Infinity, ...priorTimes);
+      setLapNotice({ lap: latestIndex + 1, time, delta: Number.isFinite(reference) ? time - reference : null, best: time < reference, final: hud.lap === hud.totalLaps });
+      completedLaps.current = hud.lapTimes.length;
+    }
+  }, [hud.phase, hud.position, hud.timer, hud.lap, hud.lapTimes, hud.totalLaps, leaderboard.lap]);
+
+  useEffect(() => {
+    if (!positionNotice) return;
+    const timeout = window.setTimeout(() => setPositionNotice(null), 1900);
+    return () => window.clearTimeout(timeout);
+  }, [positionNotice]);
+
+  useEffect(() => {
+    if (!lapNotice) return;
+    const timeout = window.setTimeout(() => setLapNotice(null), 3200);
+    return () => window.clearTimeout(timeout);
+  }, [lapNotice]);
 
   return (
-    <div className="hudLayer">
+    <div className={`hudLayer phase-${hud.phase}`} data-race-phase={hud.phase}>
       <TrackMinimap definition={track.definition} cars={hud.mapCars} />
-      <section className="hudTop">
-        <div className="hudTile">
-          <span>Speed</span>
-          <strong>{hud.speedKmh}</strong>
-          <small>km/h</small>
+      <section className="hudTop" aria-label="Race telemetry">
+        <div className="hudTile positionTile">
+          <span>Position</span>
+          <strong>{hud.position}<em> / {hud.totalCars}</em></strong>
+          <small>{hud.position === 1 ? "Leading the field" : "Race for the line"}</small>
         </div>
-        <div className="hudTile">
-          <span>Lap</span>
-          <strong>
-            {hud.lap}/{hud.totalLaps}
-          </strong>
-          <small>
-            CP {hud.checkpoint}/{hud.checkpointTotal}
-          </small>
+        <div className={`hudTile lapTile ${isFinalLap ? "finalLapTile" : ""}`}>
+          <span>{isFinalLap ? "Final lap" : "Lap"}</span>
+          <strong>{hud.lap}<em> / {hud.totalLaps}</em></strong>
+          <small>CP {hud.checkpoint}/{hud.checkpointTotal}</small>
         </div>
-        <div className="hudTile">
-          <span>Time</span>
+        <div className="hudTile timeTile">
+          <span>Race time</span>
           <strong>{formatTime(hud.timer)}</strong>
-          <small>
-            Position {hud.position}/{hud.totalCars}
-          </small>
+          <small>Lap {formatTime(hud.currentLapTime)}</small>
         </div>
-        <div className="hudTile">
-          <span>Best</span>
+        <div className="hudTile bestTile">
+          <span>Best lap</span>
           <strong>{formatOptionalTime(hud.bestLapTime)}</strong>
-          <small>lap time</small>
+          <small>{hud.bestLapTime === null ? "Set your pace" : "This race"}</small>
         </div>
       </section>
 
-      <section className="controlsHint">
-        <span>W/S</span> accelerate/brake
-        <span>A/D</span> steer
-        <span>Space</span> handbrake
-        <span>R</span> reset
+      <section className={`speedGauge ${hud.offRoad ? "surfaceWarning" : ""}`} aria-label="Speed and driving feedback">
+        <div className="drivingState">{drivingState}</div>
+        <div className="speedReadout"><strong>{hud.speedKmh}</strong><span>KM/H</span></div>
+        <div className="speedMeter" aria-hidden="true"><i style={{ transform: `scaleX(${speedRatio})` }} /></div>
       </section>
-
+      <section className="controlsHint"><span>W/S</span> accelerate/brake <span>A/D</span> steer <span>Space</span> handbrake <span>R</span> reset</section>
       <section className="graphicsControls" aria-label="Graphics quality">
-        <button
-          className={soundEnabled ? "activeQuality" : ""}
-          type="button"
-          onClick={onSoundToggle}
-        >
-          Sound
-        </button>
-        {qualityOptions.map((quality) => (
-          <button
-            className={quality === graphicsQuality ? "activeQuality" : ""}
-            key={quality}
-            type="button"
-            onClick={() => onGraphicsQualityChange(quality)}
-          >
-            {quality === "performance" ? "perf" : quality}
-          </button>
-        ))}
+        <button className={soundEnabled ? "activeQuality" : ""} type="button" aria-pressed={soundEnabled} aria-label={soundEnabled ? "Mute sound" : "Enable sound"} onClick={onSoundToggle}>Sound {soundEnabled ? "on" : "off"}</button>
+        {qualityOrder.map(quality => <button className={quality === graphicsQuality ? "activeQuality" : ""} key={quality} type="button" aria-pressed={quality === graphicsQuality} onClick={() => onGraphicsQualityChange(quality)}>{quality === "performance" ? "perf" : quality}</button>)}
       </section>
 
-      {hud.phase === "countdown" && <div className="countdown">{hud.countdownText}</div>}
+      {hud.phase === "countdown" && <div className="startPresentation" aria-live="polite">
+        <p>{track.definition.displayName}</p>
+        <div className="startLights" aria-hidden="true">{[3, 2, 1].map(light => <i className={Number(hud.countdownText) <= light ? "lit" : ""} key={light} />)}</div>
+        <div className="countdown" key={hud.countdownText}>{hud.countdownText}</div>
+        <span>{hud.totalLaps} LAPS · {hud.totalCars} DRIVERS · GET READY</span>
+      </div>}
+      {showGo && <div className="goPresentation" role="status">GO!</div>}
 
-      {hud.phase === "finished" && (
-        <section className="resultsPanel" aria-label="Race results">
-          <h1>Race Complete</h1>
-          <p className="resultTrackName">{track.definition.displayName} · {track.lapCount} laps</p>
-          {newRecords.length > 0 && (
-            <section className="newRecordNotice" aria-label="New top five record">
-              <strong>NEW TOP 5 RECORD{newRecords.length > 1 ? "S" : ""}</strong>
-              {newRecords.map((record) => (
-                <span key={record.category}>{record.playerName} · {record.category} · #{record.rank} · {formatTime(record.time)}</span>
-              ))}
-            </section>
-          )}
-          <div className="resultsList">
-            {hud.results.map((row) => (
-              <div className={row.isPlayer ? "resultRow playerResult" : "resultRow"} key={row.name}>
-                <span className="place">{row.place}</span>
-                <span className="carSwatch" style={{ background: row.color }} />
-                <span className="driverName">{row.name}</span>
-                <span className="resultTime">
-                  {row.finished && row.time !== null
-                    ? `${formatTime(row.time)} / ${formatOptionalTime(row.bestLapTime)}`
-                    : `Best ${formatOptionalTime(row.bestLapTime)}`}
-                </span>
-              </div>
-            ))}
-          </div>
-          <section className="timeLeaderboard" aria-label="Personal top five times">
-            <h2>Personal Top 5</h2>
-            <div className="timeLeaderboardColumns">
-              <div>
-                <h3>Full race</h3>
-                <ol>
-                  {leaderboard.race.length > 0 ? leaderboard.race.map((record) => (
-                    <li className={newRecords.some((newRecord) => newRecord.kind === "race" && newRecord.recordedAt === record.recordedAt) ? "newTopTime" : ""} key={`${record.recordedAt}-${record.time}`}>
-                      <span className="timeRecordName">{record.playerName}</span>
-                      <span>{formatTime(record.time)}</span>
-                    </li>
-                  )) : <li>—</li>}
-                </ol>
-              </div>
-              <div>
-                <h3>Fastest lap</h3>
-                <ol>
-                  {leaderboard.lap.length > 0 ? leaderboard.lap.map((record) => (
-                    <li className={newRecords.some((newRecord) => newRecord.kind === "lap" && newRecord.recordedAt === record.recordedAt) ? "newTopTime" : ""} key={`${record.recordedAt}-${record.time}`}>
-                      <span className="timeRecordName">{record.playerName}</span>
-                      <span>{formatTime(record.time)}</span>
-                    </li>
-                  )) : <li>—</li>}
-                </ol>
-              </div>
-            </div>
-          </section>
-          <div className="resultNavigation" aria-label="Next race">
-            <button type="button" onClick={onRestart}>Race Again</button>
-            <button type="button" onClick={onChangeCar}>Change Car</button>
-            <button type="button" onClick={onChangeTrack}>Change Track</button>
-          </div>
-        </section>
-      )}
+      {hud.phase === "race" && <div className="raceNotices" aria-live="polite" aria-atomic="true">
+        {lapNotice && <div className={`lapNotice ${lapNotice.best ? "personalBestNotice" : ""}`} key={`lap-${lapNotice.lap}`}>
+          <strong>{lapNotice.final ? "FINAL LAP" : lapNotice.best ? "BEST LAP" : `LAP ${lapNotice.lap} COMPLETE`}</strong>
+          <span>{lapNotice.final && lapNotice.best ? "BEST LAP · " : `LAP ${lapNotice.lap} · `}{formatTime(lapNotice.time)}{lapNotice.delta !== null && <b className={lapNotice.delta < 0 ? "fasterSplit" : "slowerSplit"}>{lapNotice.delta < 0 ? "−" : "+"}{Math.abs(lapNotice.delta).toFixed(2)}s</b>}</span>
+        </div>}
+        {positionNotice && <div className={`positionNotice ${positionNotice.to < positionNotice.from ? "positionGain" : "positionLoss"}`} key={positionNotice.id}>
+          <span>{positionNotice.to < positionNotice.from ? "OVERTAKE" : "POSITION"}</span><strong>{positionNotice.from} → {positionNotice.to}</strong>
+        </div>}
+      </div>}
+
+      {hud.phase === "finishing" && <section className="finishPresentation" aria-label="Finish presentation" role="status">
+        <div className="finishFlag" aria-hidden="true" />
+        <span>{playerResult?.place === 1 ? "RACE WINNER" : "CHEQUERED FLAG"}</span>
+        <h1>FINISH</h1>
+        <p><strong>P{playerResult?.place ?? hud.position}</strong> / {hud.totalCars}<i />{formatTime(playerResult?.time ?? hud.timer)}</p>
+      </section>}
+
+      {hud.phase === "finished" && <div className="resultsBackdrop"><section className="resultsPanel" aria-label="Race results">
+        <header className="resultHeader">
+          <div><p className="resultEyebrow">{playerResult?.place === 1 ? "VICTORY" : "RACE COMPLETE"}</p><h1>{playerResult?.place === 1 ? "You take the win." : "Across the line."}</h1><p className="resultTrackName">{track.definition.displayName} · {track.lapCount} laps</p></div>
+          <div className="resultPosition"><span>FINISHED</span><strong>P{playerResult?.place ?? hud.position}</strong><small>OF {hud.totalCars}</small></div>
+        </header>
+        <div className="resultStats"><div><span>Race time</span><strong>{formatOptionalTime(playerResult?.time ?? null)}</strong></div><div><span>Best lap</span><strong>{formatOptionalTime(playerResult?.bestLapTime ?? hud.bestLapTime)}</strong></div><div><span>Driver</span><strong>{playerResult?.name ?? "Driver"}</strong></div></div>
+        {newRecords.length > 0 && <section className="newRecordNotice" aria-label="New top five record">
+          <strong>{newRecords.some(record => record.rank === 1) ? "NEW PERSONAL BEST" : "NEW TOP 5 RECORD"}</strong>
+          <div>{newRecords.map(record => <span key={record.category}>{record.category} · #{record.rank} · {formatTime(record.time)}</span>)}</div>
+          {recordSaveFailed && <small>Storage unavailable — this result is visible for this session only.</small>}
+        </section>}
+        <section className="lapBreakdown" aria-label="Your lap times">{hud.lapTimes.map((time, index) => <div className={time === hud.bestLapTime ? "bestLapSplit" : ""} key={index}><span>LAP {index + 1}{time === hud.bestLapTime && <b>BEST</b>}</span><strong>{formatTime(time)}</strong></div>)}</section>
+        <div className="resultDetails">
+          <section className="classification" aria-label="Final ranking"><h2>Race classification</h2><div className="resultsList">{hud.results.map(row => <div className={`${row.isPlayer ? "resultRow playerResult" : "resultRow"}${row.place === 1 ? " winnerResult" : ""}`} key={row.name}>
+            <span className="place">{row.place}</span><span className="carSwatch" style={{ background: row.color }} /><span className="driverName">{row.name}{row.isPlayer && <small>YOU</small>}</span><span className="resultTime">{row.finished && row.time !== null ? formatTime(row.time) : "Racing"}<small>Best {formatOptionalTime(row.bestLapTime)}</small></span>
+          </div>)}</div></section>
+          <section className="timeLeaderboard" aria-label="Personal top five times"><h2>Personal Top 5</h2><div className="timeLeaderboardColumns">{(["race", "lap"] as const).map(kind => <div key={kind}><h3>{kind === "race" ? "Full race" : "Fastest lap"}</h3><ol>{leaderboard[kind].length > 0 ? leaderboard[kind].map((record, index) => <li className={newRecords.some(newRecord => newRecord.kind === kind && newRecord.recordedAt === record.recordedAt && newRecord.time === record.time) ? "newTopTime" : ""} key={`${record.recordedAt}-${record.time}`}><b>{index + 1}</b><span className="timeRecordName">{record.playerName}</span><span>{formatTime(record.time)}</span></li>) : <li className="noRecords">No records yet</li>}</ol></div>)}</div></section>
+        </div>
+        <div className="resultNavigation" aria-label="Next race"><button type="button" onClick={onRestart}>Race Again</button><button type="button" onClick={onChangeCar}>Change Car</button><button type="button" onClick={onChangeTrack}>Change Track</button></div>
+      </section></div>}
     </div>
   );
 }
@@ -437,6 +446,7 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [leaderboard, setLeaderboard] = useState<TimeLeaderboard>(() => loadTimeLeaderboard(storageKey));
   const [newRecords, setNewRecords] = useState<NewLeaderboardRecord[]>([]);
+  const [recordSaveFailed, setRecordSaveFailed] = useState(false);
   const shellRef = useRef<HTMLElement | null>(null);
   const keyboardCaptureRef = useRef<HTMLInputElement | null>(null);
   const audioRef = useRef<ReturnType<typeof createRaceAudioEngine> | null>(null);
@@ -456,8 +466,9 @@ export default function App() {
   }, [soundEnabled]);
 
   useEffect(() => {
+    audioRef.current?.setActive(raceStarted);
     audioRef.current?.update(hud);
-  }, [hud]);
+  }, [hud, raceStarted]);
 
   useEffect(() => {
     if (hud.phase !== "finished") {
@@ -491,8 +502,10 @@ export default function App() {
     setNewRecords(nextRecords);
     try {
       window.localStorage.setItem(storageKey, JSON.stringify(nextLeaderboard));
+      setRecordSaveFailed(false);
     } catch {
-      // The end-of-race notification remains available even if storage is disabled.
+      setRecordSaveFailed(true);
+      // Preserve the result for this session when persistent storage is unavailable.
     }
   }, [hud.phase, hud.results, leaderboard, playerName, selectedCarId, storageKey]);
 
@@ -537,11 +550,16 @@ export default function App() {
   }, [raceStarted]);
 
   function startRace() {
-    const nextTrack = createRaceTrack(getTrackDefinition(selectedTrackId));
+    const definition = getTrackDefinition(selectedTrackId);
+    // Race Again resets GameRuntime via resetSeed; retain immutable geometry configuration.
+    const nextTrack = activeTrack.definition === definition && activeTrack.lapCount === definition.defaultLapCount
+      ? activeTrack
+      : createRaceTrack(definition);
     setActiveTrack(nextTrack);
     setLeaderboard(loadTimeLeaderboard(leaderboardStorageKey(nextTrack.definition, nextTrack.lapCount)));
     finishedRaceHandledRef.current = false;
     setNewRecords([]);
+    setRecordSaveFailed(false);
     setPerformanceStats(null);
     setHud({ ...defaultHudState, totalLaps: nextTrack.lapCount, checkpointTotal: nextTrack.checkpointTargets.length });
     setResetSeed(seed => seed + 1);
@@ -601,6 +619,7 @@ export default function App() {
           hud={hud}
           leaderboard={leaderboard}
           newRecords={newRecords}
+          recordSaveFailed={recordSaveFailed}
           onGraphicsQualityChange={setGraphicsQuality}
           onSoundToggle={() => setSoundEnabled((enabled) => !enabled)}
           onRestart={startRace}
@@ -622,7 +641,7 @@ export default function App() {
           playerVehicle={selectedCarId}
         />
       )}
-      {raceStarted && performanceStats && (
+      {raceStarted && hud.phase !== "finished" && performanceStats && (
         <aside className="performancePanel" aria-label="Rendering performance">
           <strong className={performanceStats.fps < 28 ? "performanceWarning" : ""}>
             {performanceStats.fps} FPS
